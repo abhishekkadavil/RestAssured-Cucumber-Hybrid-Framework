@@ -1,0 +1,1416 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title></title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@c952cc003431b643d7a73337421ff42b75bac784/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.rawgit.com/extent-framework/extent-github-cdn/7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report standard">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary"></span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Aug 26, 2022 06:02:23 PM</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<a class="dropdown-item" status="fail" href="#"><span>Fail</span><span class="status danger"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Create new user</p>
+            <p class="text-sm">
+              <span>18:02:23 PM</span> / <span>00:00:02:107</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Create new user</h5>
+<span class='badge badge-success'>08.26.2022 18:02:23</span>
+<span class='badge badge-danger'>08.26.2022 18:02:25</span>
+<span class='badge badge-default'>00:00:02:107</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:23 PM</td>
+        <td>
+          URL: https://gorest.co.in/public/v2/users
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:24 PM</td>
+        <td>
+          Request body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:24 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-0'></div>
+ <script>
+  function jsonTreeCreate0() { 
+   document.getElementById('code-block-json-0').innerHTML = JSONTree.create({
+  "name": "Tenali Ramakrishna",
+  "gender": "male",
+  "email": "tenali.ramakrishna1@gmail.com",
+  "status": "active"
+}); 
+  }
+  jsonTreeCreate0();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:24 PM</td>
+        <td>
+          Updated email in request body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:24 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-1'></div>
+ <script>
+  function jsonTreeCreate1() { 
+   document.getElementById('code-block-json-1').innerHTML = JSONTree.create({"name":"Tenali Ramakrishna","gender":"male","email":"Kenneth@gmail.com","status":"active"}); 
+  }
+  jsonTreeCreate1();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:24 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Request hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Content-Type : application/json
+</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:25 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response code</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>201</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:25 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Date=Fri, 26 Aug 2022 12:32:25 GMT
+Content-Type=application/json; charset=utf-8
+Transfer-Encoding=chunked
+Connection=keep-alive
+Cache-Control=max-age=0, private, must-revalidate
+etag=W/"f5b9291d63635f9a6ed41d9b723a87b0"
+location=https://gorest.co.in/public/v2/users/3749
+referrer-policy=strict-origin-when-cross-origin
+vary=Origin
+x-content-type-options=nosniff
+x-download-options=noopen
+x-frame-options=SAMEORIGIN
+x-permitted-cross-domain-policies=none
+x-ratelimit-limit=90
+x-ratelimit-remaining=88
+x-ratelimit-reset=1
+x-request-id=4bddafed-a3d6-4f59-b2b5-f10419c7e94d
+x-runtime=0.068696
+x-xss-protection=0
+CF-Cache-Status=DYNAMIC
+Expect-CT=max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Report-To={"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=EjMB6JD2THcPScm9EFPsx2X0FClpc6btplCwEjQ0Jtq0OaeKT5KBkK%2FeWOPVv9M9c3Q%2FE2g0NIaWr8oW0w1jP0uXPHqwKOPDpE5iYVswtoIyhSYzQDAQ9KVooI8YNOk%3D"}],"group":"cf-nel","max_age":604800}
+NEL={"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server=cloudflare
+CF-RAY=740c970e7fcc2e2e-BOM
+alt-svc=h3=":443"; ma=86400, h3-29=":443"; ma=86400</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:25 PM</td>
+        <td>
+          Response body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:25 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-2'></div>
+ <script>
+  function jsonTreeCreate2() { 
+   document.getElementById('code-block-json-2').innerHTML = JSONTree.create({"id":3749,"name":"Tenali Ramakrishna","email":"Kenneth@gmail.com","gender":"male","status":"active"}); 
+  }
+  jsonTreeCreate2();
+ </script>
+
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Error is thrown when creating a user with existing email id</p>
+            <p class="text-sm">
+              <span>18:02:25 PM</span> / <span>00:00:00:730</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Error is thrown when creating a user with existing email id</h5>
+<span class='badge badge-success'>08.26.2022 18:02:25</span>
+<span class='badge badge-danger'>08.26.2022 18:02:26</span>
+<span class='badge badge-default'>00:00:00:730</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:25 PM</td>
+        <td>
+          URL: https://gorest.co.in/public/v2/users
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:25 PM</td>
+        <td>
+          Request body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:25 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-3'></div>
+ <script>
+  function jsonTreeCreate3() { 
+   document.getElementById('code-block-json-3').innerHTML = JSONTree.create({
+  "name": "Tenali Ramakrishna",
+  "gender": "male",
+  "email": "tenali.ramakrishna1@gmail.com",
+  "status": "active"
+}); 
+  }
+  jsonTreeCreate3();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:25 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Request hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Content-Type : application/json
+</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response code</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>201</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Date=Fri, 26 Aug 2022 12:32:26 GMT
+Content-Type=application/json; charset=utf-8
+Transfer-Encoding=chunked
+Connection=keep-alive
+Cache-Control=max-age=0, private, must-revalidate
+etag=W/"55d6cad8a8fd965f05e45f6e19082231"
+location=https://gorest.co.in/public/v2/users/3750
+referrer-policy=strict-origin-when-cross-origin
+vary=Origin
+x-content-type-options=nosniff
+x-download-options=noopen
+x-frame-options=SAMEORIGIN
+x-permitted-cross-domain-policies=none
+x-ratelimit-limit=90
+x-ratelimit-remaining=89
+x-ratelimit-reset=2
+x-request-id=49bf1664-53dd-4b9d-840b-bc8822ae3262
+x-runtime=0.133842
+x-xss-protection=0
+CF-Cache-Status=DYNAMIC
+Expect-CT=max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Report-To={"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=ZcH0GRGvXykUPhMntNb6v8izPOsXOBRbifIpC1HuLGqinYcPAnlcCLIXIwOeJle%2FvbEs4LiFsCDPXbv%2FxBDkruQ3PQA0edLJhUzy%2Bo126FkbWZAOCZ67uUjkFGVQozs%3D"}],"group":"cf-nel","max_age":604800}
+NEL={"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server=cloudflare
+CF-RAY=740c97115aac856b-BOM
+alt-svc=h3=":443"; ma=86400, h3-29=":443"; ma=86400</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          Response body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-4'></div>
+ <script>
+  function jsonTreeCreate4() { 
+   document.getElementById('code-block-json-4').innerHTML = JSONTree.create({"id":3750,"name":"Tenali Ramakrishna","email":"tenali.ramakrishna1@gmail.com","gender":"male","status":"active"}); 
+  }
+  jsonTreeCreate4();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          URL: https://gorest.co.in/public/v2/users
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          Request body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-5'></div>
+ <script>
+  function jsonTreeCreate5() { 
+   document.getElementById('code-block-json-5').innerHTML = JSONTree.create({
+  "name": "Tenali Ramakrishna",
+  "gender": "male",
+  "email": "tenali.ramakrishna1@gmail.com",
+  "status": "active"
+}); 
+  }
+  jsonTreeCreate5();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Request hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Content-Type : application/json
+</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response code</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>422</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Date=Fri, 26 Aug 2022 12:32:26 GMT
+Content-Type=application/json; charset=utf-8
+Transfer-Encoding=chunked
+Connection=keep-alive
+Cache-Control=no-cache
+referrer-policy=strict-origin-when-cross-origin
+vary=Origin
+x-content-type-options=nosniff
+x-download-options=noopen
+x-frame-options=SAMEORIGIN
+x-permitted-cross-domain-policies=none
+x-ratelimit-limit=90
+x-ratelimit-remaining=88
+x-ratelimit-reset=2
+x-request-id=b6a6577e-1cfa-4a46-a186-fe3405a623ea
+x-runtime=0.063640
+x-xss-protection=0
+CF-Cache-Status=DYNAMIC
+Expect-CT=max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Report-To={"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=22qKGRhUmnYWPP40ZbGBD9eKGaPqZrN5X8qJ8tn%2BT4MtmvlPMiGbWO7mKicfNSDvhiVbPBKXiaqLkxAdC4RhDCCaSDnDtlRa4UqiBHgItlqugNK%2F2e3pqrAv9cOI2S0%3D"}],"group":"cf-nel","max_age":604800}
+NEL={"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server=cloudflare
+CF-RAY=740c9713fc536eb8-BOM
+alt-svc=h3=":443"; ma=86400, h3-29=":443"; ma=86400</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          Response body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-6'></div>
+ <script>
+  function jsonTreeCreate6() { 
+   document.getElementById('code-block-json-6').innerHTML = JSONTree.create([{"field":"email","message":"has already been taken"}]); 
+  }
+  jsonTreeCreate6();
+ </script>
+
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Create new user and validate response body by ignoring specified fields</p>
+            <p class="text-sm">
+              <span>18:02:26 PM</span> / <span>00:00:00:300</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Create new user and validate response body by ignoring specified fields</h5>
+<span class='badge badge-success'>08.26.2022 18:02:26</span>
+<span class='badge badge-danger'>08.26.2022 18:02:26</span>
+<span class='badge badge-default'>00:00:00:300</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          URL: https://gorest.co.in/public/v2/users
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          Request body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-7'></div>
+ <script>
+  function jsonTreeCreate7() { 
+   document.getElementById('code-block-json-7').innerHTML = JSONTree.create({
+  "name": "Tenali Ramakrishna",
+  "gender": "male",
+  "email": "tenali.ramakrishna1@gmail.com",
+  "status": "active"
+}); 
+  }
+  jsonTreeCreate7();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          Updated email in request body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-8'></div>
+ <script>
+  function jsonTreeCreate8() { 
+   document.getElementById('code-block-json-8').innerHTML = JSONTree.create({"name":"Tenali Ramakrishna","gender":"male","email":"Maryjo@gmail.com","status":"active"}); 
+  }
+  jsonTreeCreate8();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Request hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Content-Type : application/json
+</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response code</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>201</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Date=Fri, 26 Aug 2022 12:32:26 GMT
+Content-Type=application/json; charset=utf-8
+Transfer-Encoding=chunked
+Connection=keep-alive
+Cache-Control=max-age=0, private, must-revalidate
+etag=W/"7ad0fb1bfb87deb7cf7497177dd6aa58"
+location=https://gorest.co.in/public/v2/users/3751
+referrer-policy=strict-origin-when-cross-origin
+vary=Origin
+x-content-type-options=nosniff
+x-download-options=noopen
+x-frame-options=SAMEORIGIN
+x-permitted-cross-domain-policies=none
+x-ratelimit-limit=90
+x-ratelimit-remaining=87
+x-ratelimit-reset=3
+x-request-id=138726ac-6a8c-40e9-b712-98a33fbf8e0e
+x-runtime=0.095368
+x-xss-protection=0
+CF-Cache-Status=DYNAMIC
+Expect-CT=max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Report-To={"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=kHnv6LR2dABLo2EBqHaQNkhbl%2FCwkH1%2FkM%2Fx8S3N03UuHSldGjWOgCT2bCnlniY55pCBBG7%2BCfOg%2BOOZfUA%2F17EM2KUgtztlgvya3XcvRygbWhZR%2Fye094cOymSjYv8%3D"}],"group":"cf-nel","max_age":604800}
+NEL={"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server=cloudflare
+CF-RAY=740c97160a5a84e3-BOM
+alt-svc=h3=":443"; ma=86400, h3-29=":443"; ma=86400</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          Response body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-9'></div>
+ <script>
+  function jsonTreeCreate9() { 
+   document.getElementById('code-block-json-9').innerHTML = JSONTree.create({"id":3751,"name":"Tenali Ramakrishna","email":"Maryjo@gmail.com","gender":"male","status":"active"}); 
+  }
+  jsonTreeCreate9();
+ </script>
+
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Create new user and validate response body for one field only</p>
+            <p class="text-sm">
+              <span>18:02:26 PM</span> / <span>00:00:00:387</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Create new user and validate response body for one field only</h5>
+<span class='badge badge-success'>08.26.2022 18:02:26</span>
+<span class='badge badge-danger'>08.26.2022 18:02:27</span>
+<span class='badge badge-default'>00:00:00:387</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          URL: https://gorest.co.in/public/v2/users
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          Request body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-10'></div>
+ <script>
+  function jsonTreeCreate10() { 
+   document.getElementById('code-block-json-10').innerHTML = JSONTree.create({
+  "name": "Tenali Ramakrishna",
+  "gender": "male",
+  "email": "tenali.ramakrishna1@gmail.com",
+  "status": "active"
+}); 
+  }
+  jsonTreeCreate10();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          Updated email in request body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-11'></div>
+ <script>
+  function jsonTreeCreate11() { 
+   document.getElementById('code-block-json-11').innerHTML = JSONTree.create({"name":"Tenali Ramakrishna","gender":"male","email":"Jessie@gmail.com","status":"active"}); 
+  }
+  jsonTreeCreate11();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:26 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Request hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Content-Type : application/json
+</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response code</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>201</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Date=Fri, 26 Aug 2022 12:32:27 GMT
+Content-Type=application/json; charset=utf-8
+Transfer-Encoding=chunked
+Connection=keep-alive
+Cache-Control=max-age=0, private, must-revalidate
+etag=W/"84bec6dbf570f518557fb095b029c044"
+location=https://gorest.co.in/public/v2/users/3752
+referrer-policy=strict-origin-when-cross-origin
+vary=Origin
+x-content-type-options=nosniff
+x-download-options=noopen
+x-frame-options=SAMEORIGIN
+x-permitted-cross-domain-policies=none
+x-ratelimit-limit=90
+x-ratelimit-remaining=86
+x-ratelimit-reset=4
+x-request-id=829dbc2c-48a0-4454-9931-cffc981513da
+x-runtime=0.118381
+x-xss-protection=0
+CF-Cache-Status=DYNAMIC
+Expect-CT=max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Report-To={"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=l3usog%2BV54DSAdD%2FnSu6uMc2xrwTYjTKFrSMP27RsEip0uOHTg93ZiTRlekatuUKGv9W3%2By360L%2BCeGL%2BL2lPdIWfzd6h9utshESbtNm63IqW3%2FFZntowCWh37R2Pis%3D"}],"group":"cf-nel","max_age":604800}
+NEL={"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server=cloudflare
+CF-RAY=740c97180c30857b-BOM
+alt-svc=h3=":443"; ma=86400, h3-29=":443"; ma=86400</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          Response body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-12'></div>
+ <script>
+  function jsonTreeCreate12() { 
+   document.getElementById('code-block-json-12').innerHTML = JSONTree.create({"id":3752,"name":"Tenali Ramakrishna","email":"Jessie@gmail.com","gender":"male","status":"active"}); 
+  }
+  jsonTreeCreate12();
+ </script>
+
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="5"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Assertion failed when creating a user - Single assertion</p>
+            <p class="text-sm">
+              <span>18:02:27 PM</span> / <span>00:00:00:340</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">Assertion failed when creating a user - Single assertion</h5>
+<span class='badge badge-success'>08.26.2022 18:02:27</span>
+<span class='badge badge-danger'>08.26.2022 18:02:27</span>
+<span class='badge badge-default'>00:00:00:340</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          URL: https://gorest.co.in/public/v2/users
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          Request body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-13'></div>
+ <script>
+  function jsonTreeCreate13() { 
+   document.getElementById('code-block-json-13').innerHTML = JSONTree.create({
+  "name": "Tenali Ramakrishna",
+  "gender": "male",
+  "email": "tenali.ramakrishna1@gmail.com",
+  "status": "active"
+}); 
+  }
+  jsonTreeCreate13();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          Updated email in request body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-14'></div>
+ <script>
+  function jsonTreeCreate14() { 
+   document.getElementById('code-block-json-14').innerHTML = JSONTree.create({"name":"Tenali Ramakrishna","gender":"male","email":"Arlena@gmail.com","status":"active"}); 
+  }
+  jsonTreeCreate14();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Request hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Content-Type : application/json
+</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response code</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>201</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Date=Fri, 26 Aug 2022 12:32:27 GMT
+Content-Type=application/json; charset=utf-8
+Transfer-Encoding=chunked
+Connection=keep-alive
+Cache-Control=max-age=0, private, must-revalidate
+etag=W/"442bed36af003b364316d22bf2e16567"
+location=https://gorest.co.in/public/v2/users/3753
+referrer-policy=strict-origin-when-cross-origin
+vary=Origin
+x-content-type-options=nosniff
+x-download-options=noopen
+x-frame-options=SAMEORIGIN
+x-permitted-cross-domain-policies=none
+x-ratelimit-limit=90
+x-ratelimit-remaining=85
+x-ratelimit-reset=4
+x-request-id=f0004d02-4463-454e-8f28-8ad3ed051209
+x-runtime=0.064583
+x-xss-protection=0
+CF-Cache-Status=DYNAMIC
+Expect-CT=max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Report-To={"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=wT%2FJg6CqwQoiXa8XzWgzQzW0%2BXxBQkfwlH2EyViIXlVirigq4xnGEzwY3K7xSAO9AJwpEx5ydueV2%2FjFrPwCZ0LR7rqvdm9GsAclOBshe5NYCItZ%2BNmgxo8%2FSAILabg%3D"}],"group":"cf-nel","max_age":604800}
+NEL={"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server=cloudflare
+CF-RAY=740c971cef2e8534-BOM
+alt-svc=h3=":443"; ma=86400, h3-29=":443"; ma=86400</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          Response body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-15'></div>
+ <script>
+  function jsonTreeCreate15() { 
+   document.getElementById('code-block-json-15').innerHTML = JSONTree.create({"id":3753,"name":"Tenali Ramakrishna","email":"Arlena@gmail.com","gender":"male","status":"active"}); 
+  }
+  jsonTreeCreate15();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          'CreateUser' should have response body '/createUser/scenario1/output/responseBody.json'
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          java.lang.AssertionError: 
+Unexpected: email
+ ; 
+Unexpected: id
+
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="6"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Assertion failed when creating a user - multiple assertion</p>
+            <p class="text-sm">
+              <span>18:02:27 PM</span> / <span>00:00:00:246</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">Assertion failed when creating a user - multiple assertion</h5>
+<span class='badge badge-success'>08.26.2022 18:02:27</span>
+<span class='badge badge-danger'>08.26.2022 18:02:28</span>
+<span class='badge badge-default'>00:00:00:246</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          URL: https://gorest.co.in/public/v2/users
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          Request body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-16'></div>
+ <script>
+  function jsonTreeCreate16() { 
+   document.getElementById('code-block-json-16').innerHTML = JSONTree.create({
+  "name": "Tenali Ramakrishna",
+  "gender": "male",
+  "email": "tenali.ramakrishna1@gmail.com",
+  "status": "active"
+}); 
+  }
+  jsonTreeCreate16();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          Updated email in request body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-17'></div>
+ <script>
+  function jsonTreeCreate17() { 
+   document.getElementById('code-block-json-17').innerHTML = JSONTree.create({"name":"Tenali Ramakrishna","gender":"male","email":"Harriet@gmail.com","status":"active"}); 
+  }
+  jsonTreeCreate17();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:27 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Request hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Content-Type : application/json
+</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:28 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response code</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>201</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:28 PM</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Response hearders</textarea>
+ </div>
+ <div class='col-md-6'>
+  <textarea readonly class='code-block'>Date=Fri, 26 Aug 2022 12:32:28 GMT
+Content-Type=application/json; charset=utf-8
+Transfer-Encoding=chunked
+Connection=keep-alive
+Cache-Control=max-age=0, private, must-revalidate
+etag=W/"d79cb6a85b04a6f4e802d71e5e607d83"
+location=https://gorest.co.in/public/v2/users/3754
+referrer-policy=strict-origin-when-cross-origin
+vary=Origin
+x-content-type-options=nosniff
+x-download-options=noopen
+x-frame-options=SAMEORIGIN
+x-permitted-cross-domain-policies=none
+x-ratelimit-limit=90
+x-ratelimit-remaining=85
+x-ratelimit-reset=4
+x-request-id=a655d00f-c7c0-40b1-8cc7-4e7163c810b0
+x-runtime=0.056421
+x-xss-protection=0
+CF-Cache-Status=DYNAMIC
+Expect-CT=max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Report-To={"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=6S7BvhM%2F4FmS%2FfwXBT%2Bg%2FyzotyO5Sy%2B7J6KgW5%2F8KITYvoXazorcNjspylEQtEXqMhzLiCccdEVVd7Bpjdcsky3pfno1DQHbL%2BichGhDw9b0OefD9oZMYyKA8K%2F8gaM%3D"}],"group":"cf-nel","max_age":604800}
+NEL={"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server=cloudflare
+CF-RAY=740c971ef8906f00-BOM
+alt-svc=h3=":443"; ma=86400, h3-29=":443"; ma=86400</textarea>
+ </div>
+</div>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:28 PM</td>
+        <td>
+          Response body
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:02:28 PM</td>
+        <td>
+           <div class='json-tree' id='code-block-json-18'></div>
+ <script>
+  function jsonTreeCreate18() { 
+   document.getElementById('code-block-json-18').innerHTML = JSONTree.create({"id":3754,"name":"Tenali Ramakrishna","email":"Harriet@gmail.com","gender":"male","status":"active"}); 
+  }
+  jsonTreeCreate18();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>6:02:28 PM</td>
+        <td>
+          'CreateUser' should have 'name' as 'Tenali'
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>6:02:28 PM</td>
+        <td>
+          java.lang.AssertionError: expected [Tenali] but found [Tenali Ramakrishna]
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Aug 26, 2022 06:02:23 PM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Aug 26, 2022 06:02:28 PM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>4</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>2</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='66%'>
+<b>4</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='33%'><b>2</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='0%'><b>0</b> events passed</small></div>
+<div>
+<small data-tooltip='5%'><b>4</b> events failed,
+<b data-tooltip='%'>66</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"Create new user":2.107,"Error is thrown when creating a user with existing email id":0.73,"Create new user and validate response body by ignoring specified fields":0.3,"Create new user and validate response body for one field only":0.387,"Assertion failed when creating a user - Single assertion":0.34,"Assertion failed when creating a user - multiple assertion":0.246
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 sysenv-container">
+<div class="card">
+<div class="card-header"><p>System/Environment</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>os</td>
+<td>Ubuntu</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 4,
+failParent: 2,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 0,
+failEvents: 4,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 66
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@14e9bb345ef7e2ed3a102f271d84e9f0267c88e7/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

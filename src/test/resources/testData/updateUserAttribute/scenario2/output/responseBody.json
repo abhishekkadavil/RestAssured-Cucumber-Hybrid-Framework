@@ -1,0 +1,63 @@
+[
+  {
+    "name": "Tenali Ramakrishna",
+    "email": "Jamey@gmail.com",
+    "gender": "male",
+    "status": "active"
+  },
+  {
+    "name": "Tenali Ramakrishna",
+    "email": "Corrina@gmail.com",
+    "gender": "male",
+    "status": "active"
+  },
+  {
+    "name": "Tenali Ramakrishna",
+    "email": "Aron@gmail.com",
+    "gender": "male",
+    "status": "active"
+  },
+  {
+    "name": "Tenali Ramakrishna",
+    "email": "Hoyt@gmail.com",
+    "gender": "male",
+    "status": "active"
+  },
+  {
+    "name": "Tenali Ramakrishna",
+    "email": "tenali.ramakrishna@15ce1.com",
+    "gender": "male",
+    "status": "active"
+  },
+  {
+    "name": "Prof. Manisha Bandopadhyay",
+    "email": "manisha_prof_bandopadhyay@mohr.biz",
+    "gender": "male",
+    "status": "active"
+  },
+  {
+    "name": "The Hon. Sharda Pothuvaal",
+    "email": "pothuvaal_hon_sharda_the@hayes.name",
+    "gender": "male",
+    "status": "active"
+  },
+  {
+    "id": 2885,
+    "name": "Dhyaneshwar Devar",
+    "email": "devar_dhyaneshwar@borer.name",
+    "gender": "male",
+    "status": "active"
+  },
+  {
+    "name": "Sloka Nehru MD",
+    "email": "md_sloka_nehru@murazik-rempel.info",
+    "gender": "male",
+    "status": "active"
+  },
+  {
+    "name": "Gov. Bhavani Jha",
+    "email": "gov_bhavani_jha@johns.biz",
+    "gender": "male",
+    "status": "inactive"
+  }
+]
