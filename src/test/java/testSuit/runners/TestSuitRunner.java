@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeClass;
         features = "classpath:features",
         dryRun = false,
         glue = "testSuit.stepDef",
-        tags = "@CreateUserAPI",
+        tags = "@DbOpsAll",
         plugin={"testSuit.utils.TestListener",
                 "rerun:target/failedrerun.txt"
         }

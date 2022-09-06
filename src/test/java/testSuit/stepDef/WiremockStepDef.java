@@ -1,78 +1,44 @@
-package testSuit.utils;
+package testSuit.stepDef;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.client.MappingBuilder;
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.google.inject.Inject;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
+import testSuit.utils.WireMockUtil;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 
-@Slf4j
-@ScenarioScoped
-public class MockerUtility {
+public class WiremockStepDef {
 
     @Inject
-    TestContext testContext;
-
-    /**
-     * Wiremock server
-     */
-    private WireMockServer wireMockServer;
-
-    /**
-     * Map of wiremock wireMockBuilderMap.
-     */
-    Map<String, MappingBuilder> wireMockBuilderMap = new HashMap<>();
-
-    /**
-     * Wiremock port
-     */
-    private String wiremockPort = testContext.getConfigUtil().getWiremockPort();
-
-    @Before
-    public void startWireMock() {
-        log.info("Start wiremock");
-        wireMockServer = new WireMockServer(options().port(Integer.valueOf(wiremockPort)));
-        wireMockServer.start();
-    }
-
-    @After
-    public void stopWireMock() {
-        System.out.println("Wiremock server closed");
-        wireMockServer.stop();
-    }
+    WireMockUtil wireMockUtil;
 
     @Given("create POST mock {string} to URL {string}")
     public void createMockBuilderMapForPost(String mappingName, String url) {
-        wireMockBuilderMap.putIfAbsent(mappingName, post(url));
+        wireMockUtil.wireMockBuilderMap.putIfAbsent(mappingName, post(url));
     }
 
     @Given("create PATCH mock {string} to URL {string}")
-    public void createMockBuilderMapForPatch(String mappingName, String url) { wireMockBuilderMap.putIfAbsent(mappingName, patch(urlEqualTo(url)));
+    public void createMockBuilderMapForPatch(String mappingName, String url) { wireMockUtil.wireMockBuilderMap.putIfAbsent(mappingName, patch(urlEqualTo(url)));
     }
 
     @Given("create GET mock {string} to URL {string}")
     public void createMockBuilderMapForGet(String mappingName, String url) {
-        wireMockBuilderMap.putIfAbsent(mappingName, get(url));
+        wireMockUtil.wireMockBuilderMap.putIfAbsent(mappingName, get(url));
     }
 
     @Given("create DELETE mock {string} to URL {string}")
-    public void createMockBuilderMapForDELETE(String mappingName, String url) { wireMockBuilderMap.putIfAbsent(mappingName, delete(url)); }
+    public void createMockBuilderMapForDELETE(String mappingName, String url) { wireMockUtil.wireMockBuilderMap.putIfAbsent(mappingName, delete(url)); }
 
     @SneakyThrows
     @Given("{string} external call expects json request body {string}")
@@ -81,7 +47,7 @@ public class MockerUtility {
         String requestJson =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+requestBodyPath)));
 
-        wireMockBuilderMap
+        wireMockUtil.wireMockBuilderMap
                 .get(mappingName)
                 .withRequestBody(equalToJson(requestJson, true, true));
 
@@ -94,7 +60,7 @@ public class MockerUtility {
         String request =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/com" +
                         "/integration/step/definition/"+requestBodyPath)));
-        wireMockBuilderMap
+        wireMockUtil.wireMockBuilderMap
                 .get(mappingName)
                 .withRequestBody(equalToXml(request));
 
@@ -106,7 +72,7 @@ public class MockerUtility {
         List<List<String>> rows = table.asLists(String.class);
 
         for (List<String> columns : rows) {
-            wireMockBuilderMap
+            wireMockUtil.wireMockBuilderMap
                     .get(mappingName)
                     .withHeader(columns.get(0), equalTo(columns.get(1)));
 
@@ -120,7 +86,7 @@ public class MockerUtility {
         String responseJson =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+responseBodyPath)));
 
-        wireMockBuilderMap
+        wireMockUtil.wireMockBuilderMap
                 .get(mappingName)
                 .willReturn(new ResponseDefinitionBuilder()
                         .withBody(responseJson)
@@ -136,7 +102,7 @@ public class MockerUtility {
         String response =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/com" +
                         "/integration/step/definition/"+responseBodyPath)));
-        wireMockBuilderMap
+        wireMockUtil.wireMockBuilderMap
                 .get(mappingName)
                 .willReturn(new ResponseDefinitionBuilder()
                         .withBody(response)
@@ -154,14 +120,10 @@ public class MockerUtility {
                 Path.of(System.getProperty("user.dir") + "/src/test/resources/com/integration/step/definition/" + responseBodyPath);
         String responseJson = Files.readString(filePath);
 
-        wireMockBuilderMap
+        wireMockUtil.wireMockBuilderMap
                 .get(mappingName)
                 .willReturn(new ResponseDefinitionBuilder()
                         .withBody(responseJson)
-                        .withHeader("Date", "Mon, 15 Jun 2022 04:33:38 GMT")
-                        .withHeader("Server", "Apache")
-                        .withHeader("Set-Cookie", "")
-                        .withHeader("Connection", "close")
                         .withHeader("Content-Type", "text/html;charset=Shift_JIS")
                         .withStatus(Integer.parseInt(statusCode)));
 
@@ -173,7 +135,7 @@ public class MockerUtility {
 
         String responseJson = "";
 
-        wireMockBuilderMap
+        wireMockUtil.wireMockBuilderMap
                 .get(mappingName)
                 .willReturn(new ResponseDefinitionBuilder()
                         .withBody(responseJson)
@@ -184,7 +146,7 @@ public class MockerUtility {
 
     @Given("Stub {string}")
     public void stub(String mappingName) {
-        stubFor(wireMockBuilderMap.get(mappingName));
+        stubFor(wireMockUtil.wireMockBuilderMap.get(mappingName));
     }
 
 }
