@@ -244,4 +244,20 @@ public class CommonStepDef {
         testContext.getReqBodyContext().put(apiName,newRequestBody);
         testContext.getRequestBuilder().get(apiName).body(newRequestBody);
     }
+
+    @Given("below query parameters for {string}")
+    public void addQueryParamInReq(String apiName, DataTable table) {
+
+        List<List<String>> rows = table.asLists(String.class);
+        String queryParam="";
+
+        for (List<String> columns : rows) {
+            testContext.getRequestBuilder()
+                    .get(apiName)
+                    .queryParam(columns.get(0), columns.get(1));
+            queryParam = queryParam + columns.get(0) +" : " + columns.get(1) + "\n";
+
+        }
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,queryParam);
+    }
 }
