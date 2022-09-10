@@ -4,7 +4,7 @@ Feature: Get user
   @GetUserAPI  @GetUserAPI01 @All
   Scenario: Get user
     #Api setup start
-    Given request 'GetUser' have path '/users/3580'
+    Given request 'GetUser' have path '/users/3739'
     Given request 'GetUser' have following headers
       | Content-Type        | application/json |
     #Api setup end

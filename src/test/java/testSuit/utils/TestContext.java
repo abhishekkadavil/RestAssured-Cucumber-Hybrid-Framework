@@ -1,5 +1,7 @@
 package testSuit.utils;
 
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.client.MappingBuilder;
 import io.cucumber.guice.ScenarioScoped;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -7,6 +9,7 @@ import lombok.Getter;
 import org.aeonbits.owner.ConfigFactory;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @ScenarioScoped
@@ -21,6 +24,16 @@ public class TestContext {
     HashMap<String, RequestSpecification> requestBuilder = new HashMap<>();
 
 //    code related to config reader
-    ConfigUtil configUtil = ConfigFactory.create(ConfigUtil.class);
+    public static ConfigUtil configUtil = ConfigFactory.create(ConfigUtil.class);
+
+    /**
+     * wiremock server
+     */
+    public static WireMockServer wireMockServer;
+
+    /**
+     * Map of wiremock wireMockBuilderMap.
+     */
+    public Map<String, MappingBuilder> wireMockBuilderMap = new HashMap<>();
 
 }

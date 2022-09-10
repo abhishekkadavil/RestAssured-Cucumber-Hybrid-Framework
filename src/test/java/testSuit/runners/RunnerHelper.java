@@ -2,8 +2,10 @@ package testSuit.runners;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.github.tomakehurst.wiremock.WireMockServer;
 import org.aeonbits.owner.ConfigFactory;
 import testSuit.utils.ConfigUtil;
+import testSuit.utils.TestContext;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,10 +25,18 @@ public class RunnerHelper {
         RunnerHelper.extent = new ExtentReports();
         RunnerHelper.extent.attachReporter(RunnerHelper.spark);
         RunnerHelper.extent.setSystemInfo("os", "Ubuntu");
+
+        /**
+         * Wiremock server
+         */
+        TestContext.wireMockServer = new WireMockServer(Integer.parseInt(TestContext.configUtil.getWiremockPort()));
+        TestContext.wireMockServer.start();
     }
 
     public static void afterTestSuit()
     {
+
+        TestContext.wireMockServer.stop();
         RunnerHelper.extent.flush();
     }
 
