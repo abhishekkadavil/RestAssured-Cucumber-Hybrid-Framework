@@ -3,7 +3,7 @@ Feature: Update user attribute
 
   @UpdateUserAttributeAPI  @UpdateUserAttribute01 @All
   Scenario: Update user attribute API
-    Given request 'UpdateUser' have path '/users/3'
+    Given request 'UpdateUser' have path '/users/3739'
     Given request 'UpdateUser' have request body '/updateUserAttribute/scenario1/input/requestBody.json'
     Given request 'UpdateUser' have following headers
       | Content-Type        | application/json |
@@ -40,7 +40,7 @@ Feature: Update user attribute
 
   @UpdateUserAttributeAPI  @UpdateUserAttribute03 @All
   Scenario: Update only one attribute API
-    Given request 'UpdateUser' have path '/users/4'
+    Given request 'UpdateUser' have path '/users/3739'
     Given request 'UpdateUser' have request body '/updateUserAttribute/scenario3/input/requestBody.json'
     Given request 'UpdateUser', put value "male" in path "gender"
     #Given request 'UpdateUser', put context value "female" in path "gender"

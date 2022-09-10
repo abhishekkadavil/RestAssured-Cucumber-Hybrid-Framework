@@ -36,7 +36,7 @@ public class CommonStepDef {
     @Given("request {string} have path {string}")
     public void request_have_path(String reqName, String apiPath) {
         String Url =
-                testContext.getConfigUtil().getProtocol() + "://" + testContext.getConfigUtil().getHost() + apiPath;
+                TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + apiPath;
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO,"URL: "+Url);
 
         RequestSpecification requestSpecification = RestAssured
@@ -68,7 +68,7 @@ public class CommonStepDef {
 
         testContext.getRequestBuilder()
                 .get(apiName)
-                .header("Authorization",testContext.getConfigUtil().getToken());
+                .header("Authorization",TestContext.configUtil.getToken());
 
         for (List<String> columns : rows) {
             testContext.getRequestBuilder()
@@ -201,7 +201,7 @@ public class CommonStepDef {
     @Given("request {string} have context {string} in request path {string}")
     public void requestAddedDeleteUserHaveIdValueInRequestPath(String reqName, String retrievedValue, String apiPath) {
         String Url =
-                testContext.getConfigUtil().getProtocol() + "://" + testContext.getConfigUtil().getHost() + apiPath + "/"+ testContext.getContextValues().get(retrievedValue);
+                TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + apiPath + "/"+ testContext.getContextValues().get(retrievedValue);
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO,"URL: "+Url);
 
         RequestSpecification requestSpecification = RestAssured

@@ -43,7 +43,7 @@
             <version>${cucumber.testng.version}</version>
         </dependency>
 
-<!--    DI -->
+        <!-- DI - Scenarios context    -->
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
@@ -56,7 +56,7 @@
             <version>${cucumber.guice.version}</version>
         </dependency>
 
-
+        <!-- Rest assured library  -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
@@ -91,6 +91,7 @@
             <version>${owner.java8.version}</version>
         </dependency>
 
+        <!-- annotation helper with other helper annotations-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -145,11 +146,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M7</version>
                 <configuration>
-
                     <parallel>methods</parallel>
                     <threadCount>10</threadCount>
-                    <perCoreThreadCount>false</perCoreThreadCount>
-
+                    <perCoreThreadCount>true</perCoreThreadCount>
                 </configuration>
             </plugin>
         </plugins>
