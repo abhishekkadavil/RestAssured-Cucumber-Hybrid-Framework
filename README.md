@@ -3,6 +3,8 @@ RestAssured cucumber hybrid framework template
 
 # Test execution
 
+### Test application: `https://gorest.co.in/`
+
 ## We can execute the test in different ways
 * Locally
   * Through maven
