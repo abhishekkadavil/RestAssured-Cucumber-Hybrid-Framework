@@ -3,7 +3,8 @@ RestAssured cucumber hybrid framework template
 
 # Test execution
 
-### Test application: `https://gorest.co.in/`
+Test application: `https://gorest.co.in/`
+DB setup: `https://github.com/abhishekkadavil/localstack`
 
 ## We can execute the test in different ways
 * Locally
