@@ -27,6 +27,7 @@
         <dbunit.version>2.7.2</dbunit.version>
         <spring.test.dbunit.version>1.3.0</spring.test.dbunit.version>
         <postgres.version>42.2.19</postgres.version>
+        <json.schema.validator>5.2.0</json.schema.validator>
     </properties>
 
     <dependencies>
@@ -61,6 +62,12 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>${io.rest-assured.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>${json.schema.validator}</version>
         </dependency>
 
 <!--        to replace particular json value with respect to json path-->
@@ -147,7 +154,7 @@
                 <version>3.0.0-M7</version>
                 <configuration>
                     <parallel>methods</parallel>
-                    <threadCount>10</threadCount>
+                    <threadCount>1</threadCount>
                     <perCoreThreadCount>true</perCoreThreadCount>
                 </configuration>
             </plugin>

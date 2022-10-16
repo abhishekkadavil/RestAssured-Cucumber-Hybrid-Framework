@@ -3,10 +3,11 @@ Feature: Get user list
 
   @GetUserListAPI  @GetUserListAPI01 @All
   Scenario: Get user list
+    Given start new scenario
     #Api setup start
-    Given request 'GetUserList' have path '/users'
-    Given request 'GetUserList' have following headers
+    Given request have path '/users'
+    Given request have following headers
       | Content-Type        | application/json |
     #Api setup end
-    When I call GET 'GetUserList' request
-    Then 'GetUserList' should have response code '200'
+    When I call GET request
+    Then response code should be '200'

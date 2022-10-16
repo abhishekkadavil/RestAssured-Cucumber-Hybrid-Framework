@@ -32,78 +32,90 @@ Test cases are defined in the Features folder in the form of `.feature` file. We
   @CreateUserAPI  @CreateUser01 @CreateUserAPIPass @All
   Scenario: Create new user
     #Adding request path
-    #Given request '<API name>' have path '<request path>'
-    Given request 'CreateUser' have path '/users'
+    #Given request have path '<request path>'
+    Given request have path '/users'
 
     #Add query parameters for request
-    Given with below query parameters for '<API name>' API
+    Given request have below query parameters
       | employeeID | UQS786980d7 |
 
     #Adding request body from json
-    #Given request '<API name>' have request body '<request body path>'
-    Given request 'CreateUser' have request body '/createUser/scenario1/input/requestBody.json'
+    #Given request have request body '<request body path>'
+    Given request have request body '/createUser/scenario1/input/requestBody.json'
 
     #Updating the body with random data like email
-    Given request 'CreateUser' have random email
+    Given request have random email
 
     #Adding request with headers
-    Given request 'CreateUser' have following headers
+    Given request have following headers
       | Content-Type        | application/json |
 
     #Call post method for the request
-    #When I call (POST||DELETE||GET...etc) 'CreateUser' request
-    When I call POST 'CreateUser' request
+    #When I call (POST||DELETE||GET...etc) request
+    When I call POST request
 
     #Retrive from response and strore it in a variable
     #Given retrieve "<json path>" from "<API name>" response and store it in '<unique key where value to be stored>'
     Given retrieve "id" from "CreateUser" response and store it in 'idValue'
 
     #Put retrieved data in the request path
-    #Given request '<API name>' have context '<unique key where value to be stored>' in request path '<req path>'
-    Given request 'DeleteUser' have context 'idValue' in request path '/users'
+    #Given request have context '<unique key where value to be stored>' in request path '<req path>'
+    Given request have context 'idValue' in request path '/users'
 
     #Put retrieved data in the request body from value defined in the feature file
-    #Given request '<API name>', put value "<value to be added in the request>" in path "<JSON path>"
-    Given request 'UpdateUser', put value "male" in path "gender"
+    #Given put value "<value to be added in the request>" in path "<JSON path>"
+    Given put value "male" in path "gender"
 
     #Put retrieved data in the request body, from value retrived and stored during the execution
-    #Given request '<API name>', put context value "<context key which the value stored during the retierval>" in path "<JSON path>"
-    Given request 'UpdateUser', put context value "female" in path "gender"
+    #Given put context value "<context key which the value stored during the retierval>" in path "<JSON path>"
+    Given put context value "female" in path "gender"
 
 ```
+
 ## API call chaining - Dynamic request creation
-	* Add request value from step - Given request 'UpdateUser', put value "male" in path "gender"
+	* Add request value from step - Given put value "male" in path "gender"
 		* Added API call chaining without context sharing - 
 			* create request
 			* update specific value in the request
-	* Add request value from context - @UpdateUserAttribute03(Given request 'UpdateUser', put context value "female" in path "gender")
+	* Add request value from context - @UpdateUserAttribute03(Given put context value "female" in path "gender")
 		* Added API call chaining with context sharing - 
 			* call a request
 			* extract id from the request
 			* create another request using the retrieved id
-			* Given request 'DeleteUser' have 'idValue' in request path '/users'
-	* Add request url parameter from context - @GetUserAPI02 - Given request 'UpdateUser' have context 'idValue' in request path '/users'
+			* Given request have context 'idValue' in request path '/users'
+	* Add request url parameter from context - @GetUserAPI02 - Given request have context 'idValue' in request path '/users'
 
+## Request specification step bulding logic:
+* Created reqId in TestContext hence sharing is easy between steps. reqId will act as a scenario id key to build request specification map.
+* Generate and put reqId in `@Given("start new scenario")` using `testContext.setReqId(testContext.generateReqId());`
+* What will happen during chaining the request?
+  * We are using `@Given("start new scenario")` when ever we start a scenario. When we are chaining two different APIs in a single scenario, We dont have to use `@Given("start new scenario")` twice i.e we can avoid generating new reqId.  Eg: CreateUser02, CreateUser07. If we have duplicate steps in same scenario the latest step will override the value.
+    That is suppose of we have steps like below
+      ```feature
+        Given request have path '/users'
+        Given request have path '/users/5153'
+      ```
+* During the first step execution request path should be '/users', When ever the second step execute the request path should be '/users/5153'
 
 ## Assertions
 ```feature
 
     #validating response code
-    #Then '<API name>' should have response code '<201||400||200 etc>'
-    Then 'CreateUser' should have response code '201'
+    #Then response code should be '<201||400||200 etc>'
+    Then response code should be '201'
 
     #Validating response body with ignoring all extra fields
-    And 'CreateUser' should have response body '/createUser/scenario1/output/responseBody.json' ignoring all extra fields
+    And response code should be '/createUser/scenario1/output/responseBody.json' ignoring all extra fields
 
     #Validating response body with ignoring specified extra fields
-    And 'CreateUser' should have response body '/createUser/scenario3/output/responseBody.json' ignoring specified fields
+    And response code should be '/createUser/scenario3/output/responseBody.json' ignoring specified fields
     | email | id |
 
     #Validating response body without ignoring all extra fields
-    And 'CreateUser' should have response body '/createUser/scenario2/output/responseBody.json'
+    And response code should be '/createUser/scenario2/output/responseBody.json'
 
     #Validating response body for one field only
-    And 'CreateUser' should have 'name' as 'Tenali Ramakrishna'
+    And response should have 'name' as 'Tenali Ramakrishna'
 
 ```
 
@@ -157,6 +169,12 @@ For creating mocks we are using wiremock.
     Then 'CreateUser' should have response code '201'
     And 'CreateUser' should have response body '/wiremockFeatures/scenario1/output/responseBody.json' ignoring all extra fields
 
+    #Mock support: Added url pattern step to mock
+    Given create GET mock 'mock' to URL pattern '/abc/def'
+
+    #Mock support: Added response with no body
+    Given 'mock' external call status '200'
+
 
 ```
 
@@ -190,6 +208,15 @@ For creating mocks we are using wiremock.
       | user_id |
 
 ```
+
+## Authentication support
+Auth token can be passed from maven command line as well as config file. If the maven token parameter is empty then the token will be fetched from config file.
+* Cookie based
+  * Need to enable `.cookie(testContext.getCookieToken());` in `@Given("request have path {string}")`
+  * Passing token through `maven : mvn clean install -DCookieToken = authToken=saascsacsac`
+* bearer token
+  * Need to enable `.header("Authorization","Bearer " + testContext.getToken());` in `@Given("request have following headers")`
+  * Passing token through maven : `mvn clean install -Dtoken=68623a1c855aebc18cece732e35d920240db7deaeb49d74581729d57ad940987`
 
 # Test reporting:
 
