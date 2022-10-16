@@ -1,10 +1,14 @@
 package testSuit.stepDef;
 
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.CodeLanguage;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.google.inject.Inject;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import lombok.SneakyThrows;
+import testSuit.utils.ReporterFactory;
 import testSuit.utils.TestContext;
 
 import java.nio.file.Files;
@@ -38,6 +42,11 @@ public class WiremockStepDef {
         testContext.wireMockBuilderMap.putIfAbsent(mappingName, get(url));
     }
 
+    @Given("create GET mock {string} to URL pattern {string}")
+    public void createMockMappingsGetPattern(String mappingName, String url) {
+        testContext.wireMockBuilderMap.putIfAbsent(mappingName, get(urlPathMatching(url)));
+    }
+
     @Given("create DELETE mock {string} to URL {string}")
     public void createMockBuilderMapForDELETE(String mappingName, String url) { testContext.wireMockBuilderMap.putIfAbsent(mappingName, delete(url)); }
 
@@ -55,12 +64,24 @@ public class WiremockStepDef {
     }
 
     @SneakyThrows
+    @Given("{string} external call expects contains txt request body {string}")
+    public void matchContainsTxtReqBody(String mappingName, String requestBodyPath) {
+
+        String request =
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources" +
+                        "/testData" + requestBodyPath)));
+        testContext.wireMockBuilderMap
+                .get(mappingName)
+                .withRequestBody(containing(request));
+
+    }
+
+    @SneakyThrows
     @Given("{string} external call expects xml request body {string}")
     public void addXMLRequestBody(String mappingName, String requestBodyPath) {
 
-        String request =
-                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/com" +
-                        "/integration/step/definition/"+requestBodyPath)));
+        String request = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources" +
+                        "/testData" + requestBodyPath)));
         testContext.wireMockBuilderMap
                 .get(mappingName)
                 .withRequestBody(equalToXml(request));

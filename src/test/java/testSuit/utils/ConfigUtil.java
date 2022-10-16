@@ -14,6 +14,9 @@ public interface ConfigUtil extends Config {
     @Key("token")
     String getToken();
 
+    @Key("cookie.token")
+    String getCookieToken();
+
     @Key("wiremock.port")
     String getWiremockPort();
 
