@@ -5,7 +5,8 @@ Feature: Get user
   Scenario: Get user
     Given start new scenario
     #Api setup start
-    Given request have path '/users/5153'
+    Given request have path '/users/4548'
+    * request have bearer token in header
     Given request have following headers
       | Content-Type        | application/json |
     #Api setup end
@@ -17,6 +18,7 @@ Feature: Get user
     Given start new scenario
     #Api setup start
     Given request have path '/users'
+    * request have bearer token in header
     Given request have request body '/getUser/scenario1/input/requestBody.json'
     Given request have random email
     Given request have following headers
@@ -30,6 +32,7 @@ Feature: Get user
 
     #get specific user using above extraction
     Given request have context 'idValue' in request path '/users'
+    * request have bearer token in header
     Given request have following headers
       | Content-Type        | application/json |
     #Api setup end

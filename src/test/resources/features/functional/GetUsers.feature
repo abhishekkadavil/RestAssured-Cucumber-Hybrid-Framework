@@ -6,6 +6,7 @@ Feature: Get user list
     Given start new scenario
     #Api setup start
     Given request have path '/users'
+    * request have bearer token in header
     Given request have following headers
       | Content-Type        | application/json |
     #Api setup end

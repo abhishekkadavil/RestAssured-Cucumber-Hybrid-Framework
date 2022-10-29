@@ -6,6 +6,7 @@ Feature: Delete user
     Given start new scenario
     #Api setup start
     Given request have path '/users'
+    * request have bearer token in header
     Given request have request body '/deleteUser/scenario1/input/requestBody.json'
     #Updating random data in email
     Given request have random email
@@ -19,6 +20,7 @@ Feature: Delete user
     #Api setup start
     #put retrieved data in the request path
     Given request have context 'idValue' in request path '/users'
+    * request have bearer token in header
     Given request have request body '/createUser/scenario1/input/requestBody.json'
     Given request have random email
     Given request have following headers

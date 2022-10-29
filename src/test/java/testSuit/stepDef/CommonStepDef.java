@@ -23,6 +23,7 @@ import testSuit.utils.ReporterFactory;
 import testSuit.utils.RestAssuredLoggingFilter;
 import testSuit.utils.TestContext;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -49,10 +50,20 @@ public class CommonStepDef {
                 .given()
                 .filters(RestAssuredLoggingFilter.getLoggingFilters())
                 .baseUri(Url);
-        // Used to set cookie based authentication
-        //.cookie(testContext.getCookieToken());
 
         testContext.getRequestBuilder().put(testContext.getReqId(), requestSpecification);
+    }
+
+    @Given("request have cookie token")
+    public void request_have_path() {
+        testContext.getRequestBuilder().get(testContext.getReqId()).cookie(testContext.getCookieToken());
+    }
+
+    @Given("request have bearer token in header")
+    public void request_have_bearer_token_in_header() {
+        testContext.getRequestBuilder()
+                .get(testContext.getReqId())
+                .header("Authorization","Bearer " + testContext.getToken());
     }
 
     @SneakyThrows
@@ -73,10 +84,6 @@ public class CommonStepDef {
     public void request_have_following_headers(DataTable requestHeaders) {
         List<List<String>> rows = requestHeaders.asLists(String.class);
         String ReqHearders="";
-
-        testContext.getRequestBuilder()
-                .get(testContext.getReqId())
-                .header("Authorization","Bearer " + testContext.getToken());
 
         for (List<String> columns : rows) {
             testContext.getRequestBuilder()
@@ -166,6 +173,15 @@ public class CommonStepDef {
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+expectedValue)));
         String actualRes = testContext.getResponseContext().get(testContext.getReqId()).body().asString();
         JSONAssert.assertEquals(expectedRes, actualRes, false);
+    }
+
+    @SneakyThrows
+    @Then("response body should be non extensible {string}")
+    public void should_have_response_body_NON_EXTENSIBLE(String expectedValue) {
+        String expectedRes =
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+expectedValue)));
+        String actualRes = testContext.getResponseContext().get(testContext.getReqId()).body().asString();
+        JSONAssert.assertEquals(expectedRes, actualRes, JSONCompareMode.NON_EXTENSIBLE);
     }
 
     @SneakyThrows
@@ -274,5 +290,58 @@ public class CommonStepDef {
         String responseSchema = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+expectedResSchema)));
 
         response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(responseSchema));
+    }
+
+    @Given("request have following string multi part data")
+    public void request_have_following_form_data(DataTable multiPartValues) {
+        List<List<String>> rows = multiPartValues.asLists(String.class);
+        String ReqFormdata="";
+
+        for (List<String> columns : rows) {
+            testContext.getRequestBuilder()
+                    .get(testContext.getReqId())
+                    .multiPart(columns.get(0), columns.get(1));
+            ReqFormdata = ReqFormdata + columns.get(0) +" : " + columns.get(1) + "\n";
+        }
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Request form data", ReqFormdata));
+    }
+
+    @Given("request have following multi part images")
+    public void request_have_following_images_form_data(DataTable imagePath) {
+        List<List<String>> rows = imagePath.asLists(String.class);
+
+        for (List<String> columns : rows) {
+            testContext.getRequestBuilder()
+                    .get(testContext.getReqId())
+                    .multiPart(columns.get(0),
+                            new File(System.getProperty("user.dir")+"/src/test/resources/testData"+columns.get(1)),
+                            "image/gif");
+            ReporterFactory
+                    .getInstance()
+                    .getExtentTest()
+                    .log(Status.INFO,
+                            MarkupHelper
+                                    .createCodeBlock("Request form data :" + columns.get(0),
+                                            System.getProperty("user.dir")+"/src/test/resources/testData"+columns.get(1)));
+        }
+    }
+
+    @Given("request have following multi part files")
+    public void request_have_following_file_form_data(DataTable imagePath) {
+        List<List<String>> rows = imagePath.asLists(String.class);
+
+        for (List<String> columns : rows) {
+            testContext.getRequestBuilder()
+                    .get(testContext.getReqId())
+                    .multiPart(columns.get(0),
+                            new File(System.getProperty("user.dir")+"/src/test/resources/testData/Square-feet-area-1"+columns.get(1)));
+            ReporterFactory
+                    .getInstance()
+                    .getExtentTest()
+                    .log(Status.INFO,
+                            MarkupHelper
+                                    .createCodeBlock("Request form data :" + columns.get(0),
+                                            System.getProperty("user.dir")+"/src/test/resources/testData/Square-feet-area-1"+columns.get(1)));
+        }
     }
 }
