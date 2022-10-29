@@ -6,6 +6,7 @@ Feature: Create user
     Given start new scenario
     #Api setup start
     Given request have path '/users'
+    * request have bearer token in header
     Given request have request body '/createUser/scenario1/input/requestBody.json'
     #Updating random data in email
     Given request have random email
@@ -21,6 +22,7 @@ Feature: Create user
     Given start new scenario
     #Api setup start
     Given request have path '/users'
+    * request have bearer token in header
     Given request have request body '/createUser/scenario2/input/requestBody1.json'
     Given request have following headers
       | Content-Type        | application/json |
@@ -36,6 +38,7 @@ Feature: Create user
     Given start new scenario
     #Api setup start
     Given request have path '/users'
+    * request have bearer token in header
     Given request have request body '/createUser/scenario3/input/requestBody.json'
     Given request have random email
     Given request have following headers
@@ -51,6 +54,7 @@ Feature: Create user
     Given start new scenario
     #Api setup start
     Given request have path '/users'
+    * request have bearer token in header
     Given request have request body '/createUser/scenario4/input/requestBody.json'
     Given request have random email
     Given request have following headers
@@ -65,6 +69,7 @@ Feature: Create user
     Given start new scenario
     #Api setup start
     Given request have path '/users'
+    * request have bearer token in header
     Given request have request body '/createUser/scenario5/input/requestBody.json'
     Given request have random email
     Given request have following headers
@@ -79,6 +84,7 @@ Feature: Create user
     Given start new scenario
     #Api setup start
     Given request have path '/users'
+    * request have bearer token in header
     Given request have request body '/createUser/scenario6/input/requestBody.json'
     Given request have random email
     Given request have following headers
@@ -94,6 +100,7 @@ Feature: Create user
     Given start new scenario
     #Api setup start
     Given request have path '/users'
+    * request have bearer token in header
     Given request have request body '/createUser/scenario2/input/requestBody1.json'
     Given request have following headers
       | Content-Type        | application/json |
@@ -101,6 +108,7 @@ Feature: Create user
     When I call POST request
     #Calling same API second time
     Given request have path '/users'
+    * request have bearer token in header
     Given request have request body '/createUser/scenario2/input/requestBody1.json'
     Given request have following headers
       | Content-Type        | application/json |
@@ -113,6 +121,7 @@ Feature: Create user
     Given start new scenario
     #Api setup start
     Given request have path '/users'
+    * request have bearer token in header
     Given request have request body '/createUser/scenario1/input/requestBody.json'
     #Updating random data in email
     Given request have random email
@@ -123,7 +132,8 @@ Feature: Create user
     Then response code should be '201'
     And response body should be '/createUser/scenario1/output/responseBody.json' ignoring all extra fields
     #Api setup start
-    Given request have path '/users/5153'
+    Given request have path '/users/4548'
+    * request have bearer token in header
     Given request have following headers
       | Content-Type        | application/json |
     #Api setup end

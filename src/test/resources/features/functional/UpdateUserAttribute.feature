@@ -4,7 +4,8 @@ Feature: Update user attribute
   @UpdateUserAttributeAPI  @UpdateUserAttribute01 @All
   Scenario: Update user attribute API
     Given start new scenario
-    Given request have path '/users/5153'
+    Given request have path '/users/4548'
+    * request have bearer token in header
     Given request have request body '/updateUserAttribute/scenario1/input/requestBody.json'
     Given request have following headers
       | Content-Type        | application/json |
@@ -18,6 +19,7 @@ Feature: Update user attribute
     #create user
     #Api setup start
     Given request have path '/users'
+    * request have bearer token in header
     Given request have request body '/updateUserAttribute/scenario2/input/createUserRequestBody.json'
     #Updating random data in email
     Given request have random email
@@ -33,6 +35,7 @@ Feature: Update user attribute
     #update the status of specific user using above extraction
     #Api setup start
     Given request have context 'idValue' in request path '/users'
+    * request have bearer token in header
     Given request have request body '/updateUserAttribute/scenario2/input/updateUserRequestBody.json'
     Given request have following headers
       | Content-Type        | application/json |
@@ -43,7 +46,8 @@ Feature: Update user attribute
   @UpdateUserAttributeAPI  @UpdateUserAttribute03 @All
   Scenario: Update only one attribute API
     Given start new scenario
-    Given request have path '/users/5153'
+    Given request have path '/users/4548'
+    * request have bearer token in header
     * request have request body '/updateUserAttribute/scenario3/input/requestBody.json'
     * put value "male" in path "gender"
     #* request 'UpdateUser', put context value "female" in path "gender"

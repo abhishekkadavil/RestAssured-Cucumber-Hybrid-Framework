@@ -194,6 +194,19 @@ For creating mocks we are using wiremock.
 
 ```
 
+## Authentication support
+Auth token can be passed from maven command line as well as config file. If the maven token parameter is empty then the token will be fetched from config file.
+* Cookie based
+  * Passing token through `maven : mvn clean install -DCookieToken = authToken=saascsacsac`
+  ```feature
+    Given request have cookie token
+  ```
+* bearer token
+  * Passing token through maven : `mvn clean install -Dtoken=68623a1c855aebc18cece732e35d920240db7deaeb49d74581729d57ad940987`
+  ```feature
+    Given request have bearer token in header
+  ```
+
 ## DB Assertion
 ```feature
 
@@ -208,15 +221,6 @@ For creating mocks we are using wiremock.
       | user_id |
 
 ```
-
-## Authentication support
-Auth token can be passed from maven command line as well as config file. If the maven token parameter is empty then the token will be fetched from config file.
-* Cookie based
-  * Need to enable `.cookie(testContext.getCookieToken());` in `@Given("request have path {string}")`
-  * Passing token through `maven : mvn clean install -DCookieToken = authToken=saascsacsac`
-* bearer token
-  * Need to enable `.header("Authorization","Bearer " + testContext.getToken());` in `@Given("request have following headers")`
-  * Passing token through maven : `mvn clean install -Dtoken=68623a1c855aebc18cece732e35d920240db7deaeb49d74581729d57ad940987`
 
 # Test reporting:
 
@@ -256,6 +260,9 @@ All the features which are common in scenario level like **responseContext, reqB
   * pico container - Do not have `@ScenarioScoped` annotation
   * spring - this is complex
 * Why not Cucumber+JUnit - cucumber junit will not allow us to execute scenarios in parallel only feature files in parallel, but TestNG can.
+* Logging - Slf4J
+  * For logging there are multiple loggers are available like log4J, JDK logger etc., so once we implement logging in 
+    our framework it would be difficult to switch from one library to another. But if we use facade API like Slf4J we can do that easily because we are implementing Slf4J interfaces not logging library like log4J directly. ie we are using Slf4J conjunction with logging libraries(log4J etc.).
 
 
 # Feature need to add
