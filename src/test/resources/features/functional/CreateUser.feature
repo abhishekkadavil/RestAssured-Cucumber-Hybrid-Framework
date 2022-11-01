@@ -2,7 +2,8 @@ Feature: Create user
   Create user API scenarios
 
   @CreateUserAPI  @CreateUser01 @CreateUserAPIPass @All
-  Scenario: Create new user
+  Scenario: CreateUser01
+  Create new user
     Given start new scenario
     #Api setup start
     Given request have path '/users'
@@ -18,7 +19,8 @@ Feature: Create user
     And response body should be '/createUser/scenario1/output/responseBody.json' ignoring all extra fields
 
   @CreateUserAPI  @CreateUser02 @CreateUserAPIPass @All
-  Scenario: Error is thrown when creating a user with existing email id
+  Scenario: CreateUser02
+  Error is thrown when creating a user with existing email id (Calling same API second time)
     Given start new scenario
     #Api setup start
     Given request have path '/users'
@@ -34,7 +36,8 @@ Feature: Create user
     And response body should be '/createUser/scenario2/output/responseBody.json'
 
   @CreateUserAPI  @CreateUser03 @CreateUserAPIPass @All
-  Scenario: Create new user and validate response body by ignoring specified fields
+  Scenario: CreateUser03
+  Create new user and validate response body by ignoring specified fields
     Given start new scenario
     #Api setup start
     Given request have path '/users'
@@ -50,7 +53,8 @@ Feature: Create user
     | email | id |
 
   @CreateUserAPI  @CreateUser04 @CreateUserAPIPass @All
-  Scenario: Create new user and validate response body for one field only
+  Scenario: CreateUser04
+  Create new user and validate response body for one field only
     Given start new scenario
     #Api setup start
     Given request have path '/users'
@@ -65,7 +69,8 @@ Feature: Create user
     And response should have 'name' as 'Tenali Ramakrishna'
 
   @CreateUserAPI  @CreateUser05 @CreateUserAPIFail @All
-  Scenario: Assertion failed when creating a user - Single assertion
+  Scenario: CreateUser05
+  Assertion failed when creating a user - Single assertion
     Given start new scenario
     #Api setup start
     Given request have path '/users'
@@ -80,7 +85,8 @@ Feature: Create user
     And response body should be '/createUser/scenario1/output/responseBody.json'
 
   @CreateUserAPI  @CreateUser06 @CreateUserAPIFail @All
-  Scenario: Assertion failed when creating a user - multiple assertion
+  Scenario: CreateUser06
+  Assertion failed when creating a user - multiple assertion
     Given start new scenario
     #Api setup start
     Given request have path '/users'
@@ -96,7 +102,8 @@ Feature: Create user
     And response should have 'gender' as 'female'
 
   @CreateUserAPI  @CreateUser07 @CreateUserAPIPass @All
-  Scenario: Calling request twice
+  Scenario: CreateUser07
+  Calling request twice
     Given start new scenario
     #Api setup start
     Given request have path '/users'
@@ -117,7 +124,8 @@ Feature: Create user
     And response body should be '/createUser/scenario2/output/responseBody.json'
 
   @CreateUserAPI  @CreateUser08 @CreateUserAPIPass @All
-  Scenario: Calling two different request
+  Scenario: CreateUser08
+  Calling two different request
     Given start new scenario
     #Api setup start
     Given request have path '/users'
@@ -132,7 +140,7 @@ Feature: Create user
     Then response code should be '201'
     And response body should be '/createUser/scenario1/output/responseBody.json' ignoring all extra fields
     #Api setup start
-    Given request have path '/users/4548'
+    Given request have path '/users/4705'
     * request have bearer token in header
     Given request have following headers
       | Content-Type        | application/json |

@@ -2,7 +2,8 @@ Feature: Delete user
   Delete user API scenarios
 
   @DeleteUserAPI  @DeleteUser01 @All
-  Scenario: Delete user
+  Scenario: DeleteUser01:
+  Delete user
     Given start new scenario
     #Api setup start
     Given request have path '/users'

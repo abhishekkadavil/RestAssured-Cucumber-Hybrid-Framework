@@ -28,6 +28,8 @@
         <spring.test.dbunit.version>1.3.0</spring.test.dbunit.version>
         <postgres.version>42.2.19</postgres.version>
         <json.schema.validator>5.2.0</json.schema.validator>
+        <log4j.core.version>2.19.0</log4j.core.version>
+        <log4j.slf4j.impl.version>2.19.0</log4j.slf4j.impl.version>
     </properties>
 
     <dependencies>
@@ -136,6 +138,21 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgres.version}</version>
+        </dependency>
+
+<!--        Logging         -->
+        <!-- log4j -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.core.version}</version>
+        </dependency>
+
+        <!-- SLF4J Bridge -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.slf4j.impl.version}</version>
         </dependency>
 
 <!--        <dependency>-->

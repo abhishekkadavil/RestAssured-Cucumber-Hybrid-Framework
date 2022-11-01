@@ -14,20 +14,20 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.skyscreamer.jsonassert.Customization;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.skyscreamer.jsonassert.comparator.CustomComparator;
 import org.testng.Assert;
-import testSuit.utils.ReporterFactory;
-import testSuit.utils.RestAssuredLoggingFilter;
-import testSuit.utils.TestContext;
+import testSuit.utils.*;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+@Slf4j
 public class CommonStepDef {
 
     @Inject
@@ -48,7 +48,7 @@ public class CommonStepDef {
 
         RequestSpecification requestSpecification = RestAssured
                 .given()
-                .filters(RestAssuredLoggingFilter.getLoggingFilters())
+                .filters(new RALoggerUtil())
                 .baseUri(Url);
 
         testContext.getRequestBuilder().put(testContext.getReqId(), requestSpecification);
@@ -226,7 +226,7 @@ public class CommonStepDef {
 
         RequestSpecification requestSpecification = RestAssured
                 .given()
-                .filters(RestAssuredLoggingFilter.getLoggingFilters())
+                .filters(new RALoggerUtil())
                 .baseUri(Url);
 
         testContext.getRequestBuilder().put(testContext.getReqId(), requestSpecification);
