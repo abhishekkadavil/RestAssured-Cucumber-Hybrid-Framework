@@ -2,7 +2,8 @@ Feature: Get user list
   Get user list API scenarios
 
   @GetUserListAPI  @GetUserListAPI01 @All
-  Scenario: Get user list
+  Scenario: GetUserListAPI01
+  Get user list
     Given start new scenario
     #Api setup start
     Given request have path '/users'

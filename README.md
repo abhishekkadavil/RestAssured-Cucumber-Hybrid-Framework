@@ -85,7 +85,7 @@ Test cases are defined in the Features folder in the form of `.feature` file. We
 			* Given request have context 'idValue' in request path '/users'
 	* Add request url parameter from context - @GetUserAPI02 - Given request have context 'idValue' in request path '/users'
 
-## Request specification step bulding logic:
+## Request specification step building logic:
 * Created reqId in TestContext hence sharing is easy between steps. reqId will act as a scenario id key to build request specification map.
 * Generate and put reqId in `@Given("start new scenario")` using `testContext.setReqId(testContext.generateReqId());`
 * What will happen during chaining the request?
@@ -105,14 +105,14 @@ Test cases are defined in the Features folder in the form of `.feature` file. We
     Then response code should be '201'
 
     #Validating response body with ignoring all extra fields
-    And response code should be '/createUser/scenario1/output/responseBody.json' ignoring all extra fields
+    And response body should be '/createUser/scenario1/output/responseBody.json' ignoring all extra fields
 
     #Validating response body with ignoring specified extra fields
-    And response code should be '/createUser/scenario3/output/responseBody.json' ignoring specified fields
+    And response body should be '/createUser/scenario3/output/responseBody.json' ignoring specified fields
     | email | id |
 
     #Validating response body without ignoring all extra fields
-    And response code should be '/createUser/scenario2/output/responseBody.json'
+    And response body should be '/createUser/scenario2/output/responseBody.json'
 
     #Validating response body for one field only
     And response should have 'name' as 'Tenali Ramakrishna'

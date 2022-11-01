@@ -2,10 +2,11 @@ Feature: Get user
   Get user API scenarios
 
   @GetUserAPI  @GetUserAPI01 @All
-  Scenario: Get user
+  Scenario: GetUserAPI01
+  Get user
     Given start new scenario
     #Api setup start
-    Given request have path '/users/4548'
+    Given request have path '/users/4705'
     * request have bearer token in header
     Given request have following headers
       | Content-Type        | application/json |
@@ -14,7 +15,8 @@ Feature: Get user
     Then response code should be '200'
 
   @GetUserAPI  @GetUserAPI02 @All
-  Scenario: Create new user and retrieve the created user
+  Scenario: GetUserAPI02
+  Create new user and retrieve the created user
     Given start new scenario
     #Api setup start
     Given request have path '/users'
