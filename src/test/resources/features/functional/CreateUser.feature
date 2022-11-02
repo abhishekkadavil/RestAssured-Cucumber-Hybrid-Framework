@@ -140,7 +140,7 @@ Feature: Create user
     Then response code should be '201'
     And response body should be '/createUser/scenario1/output/responseBody.json' ignoring all extra fields
     #Api setup start
-    Given request have path '/users/4705'
+    Given request have path '/users/4519'
     * request have bearer token in header
     Given request have following headers
       | Content-Type        | application/json |

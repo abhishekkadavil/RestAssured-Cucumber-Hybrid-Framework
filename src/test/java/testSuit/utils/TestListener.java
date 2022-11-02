@@ -2,7 +2,9 @@ package testSuit.utils;
 
 import io.cucumber.plugin.ConcurrentEventListener;
 import io.cucumber.plugin.event.*;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class TestListener implements ConcurrentEventListener {
     @Override
     public void setEventPublisher(EventPublisher publisher) {
@@ -29,6 +31,8 @@ public class TestListener implements ConcurrentEventListener {
                 //Failed step reporting
                 ReporterFactory.getInstance().getExtentTest().log(com.aventstack.extentreports.Status.FAIL, stepName);
                 ReporterFactory.getInstance().getExtentTest().log(com.aventstack.extentreports.Status.FAIL, result.getError().toString());
+                log.error(stepName);
+                log.error(result.getError().toString());
             }
         }
     }
