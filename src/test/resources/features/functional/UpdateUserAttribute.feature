@@ -5,7 +5,7 @@ Feature: Update user attribute
   Scenario: UpdateUserAttribute01
   Update user attribute API
     Given start new scenario
-    Given request have path '/users/4705'
+    Given request have path '/users/4519'
     * request have bearer token in header
     Given request have request body '/updateUserAttribute/scenario1/input/requestBody.json'
     Given request have following headers
@@ -49,7 +49,7 @@ Feature: Update user attribute
   Scenario: UpdateUserAttribute03
   Update only one attribute API
     Given start new scenario
-    Given request have path '/users/4705'
+    Given request have path '/users/4519'
     * request have bearer token in header
     * request have request body '/updateUserAttribute/scenario3/input/requestBody.json'
     * put value "male" in path "gender"

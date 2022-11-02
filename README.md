@@ -69,6 +69,18 @@ Test cases are defined in the Features folder in the form of `.feature` file. We
     #Put retrieved data in the request body, from value retrived and stored during the execution
     #Given put context value "<context key which the value stored during the retierval>" in path "<JSON path>"
     Given put context value "female" in path "gender"
+    
+    # multi part data handling
+    # request have following string multi part data
+    * request have following string multi part data
+      | projectId     | 2                        |
+      | awardName     | Builder of the Year 2022 |
+    # request have following multi part images
+    * request have following multi part images
+      | projectAwardPhoto | /Builder/Project/Award/Upload-Award/TC01/input/img1.png |
+    # request have following multi part files
+    * request have following multi part files
+      | projectDocument | /Builder/Project/Documents/Upload-Project-Document/TC01/input/TestPDFfile.pdf |
 
 ```
 
