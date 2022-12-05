@@ -20,6 +20,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import static io.restassured.RestAssured.config;
+import static io.restassured.config.ParamConfig.UpdateStrategy.REPLACE;
+import static io.restassured.config.ParamConfig.paramConfig;
+
 @Slf4j
 public class CommonStepDef {
 
@@ -266,5 +270,51 @@ public class CommonStepDef {
                                     .createCodeBlock("Request form data :" + columns.get(0),
                                             System.getProperty("user.dir")+"/src/test/resources/testData/Square-feet-area-1"+columns.get(1)));
         }
+    }
+
+    @Given("request get following multi parameter from context")
+    public void request_get_following_multi_parameter_from_context(DataTable contextDataTable) {
+
+        String formKey="";
+        String formValue="";
+
+        String formdata="";
+
+        List<List<String>> rows = contextDataTable.asLists(String.class);
+
+        for (List<String> columns : rows) {
+
+            formKey = columns.get(0);
+            formValue = testContext.getContextValues().get(columns.get(1));
+
+            testContext.getRequestBuilder()
+                    .get(testContext.getReqId())
+                    .multiPart(formKey, formValue);
+            formdata = formdata + formKey +" : " + formValue + "\n";
+        }
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Request formdata", formdata));
+    }
+
+    @Given("put {string} in context value {string}")
+    public void put_value_in_context_value_token_in_token(String value, String contextKey) {
+        testContext.getContextValues().put(contextKey,value);
+        log.info("put value " + value + " in " + contextKey);
+    }
+
+    @Given("request replace below query parameters")
+    public void replaceQueryParamInReq(DataTable table) {
+
+        List<List<String>> rows = table.asLists(String.class);
+        String queryParam="";
+
+        for (List<String> columns : rows) {
+            testContext.getRequestBuilder()
+                    .get(testContext.getReqId())
+                    .config(config().paramConfig(paramConfig().queryParamsUpdateStrategy(REPLACE)))
+                    .queryParam(columns.get(0), columns.get(1));
+            queryParam = queryParam + columns.get(0) +" : " + columns.get(1) + "\n";
+
+        }
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,queryParam);
     }
 }
