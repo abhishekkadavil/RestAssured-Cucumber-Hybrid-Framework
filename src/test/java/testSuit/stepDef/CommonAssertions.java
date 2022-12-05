@@ -1,5 +1,6 @@
 package testSuit.stepDef;
 
+import com.aventstack.extentreports.Status;
 import com.google.inject.Inject;
 import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -11,11 +12,14 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.skyscreamer.jsonassert.comparator.CustomComparator;
 import org.testng.Assert;
+import testSuit.utils.ReporterFactory;
 import testSuit.utils.TestContext;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class CommonAssertions {
@@ -30,8 +34,9 @@ public class CommonAssertions {
         Response response = testContext.getResponseContext().get(testContext.getReqId());
 
         String responseSchema = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+expectedResSchema)));
-
         response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(responseSchema));
+
+        ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response schema validation passed");
     }
 
     @Then("response code should be {string}")
@@ -39,6 +44,7 @@ public class CommonAssertions {
         String actualValueResponseStatusCode =
                 String.valueOf(testContext.getResponseContext().get(testContext.getReqId()).getStatusCode());
         Assert.assertEquals(actualValueResponseStatusCode,expectedResCode);
+        ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response code validation passed");
     }
 
     @SneakyThrows
@@ -48,6 +54,8 @@ public class CommonAssertions {
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+expectedValue)));
         String actualRes = testContext.getResponseContext().get(testContext.getReqId()).body().asString();
         JSONAssert.assertEquals(expectedRes, actualRes, false);
+
+        ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response body validation passed");
     }
 
     @SneakyThrows
@@ -57,6 +65,8 @@ public class CommonAssertions {
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+expectedValue)));
         String actualRes = testContext.getResponseContext().get(testContext.getReqId()).body().asString();
         JSONAssert.assertEquals(expectedRes, actualRes, JSONCompareMode.NON_EXTENSIBLE);
+
+        ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response body should be same as in " + expectedValue);
     }
 
     @SneakyThrows
@@ -66,6 +76,7 @@ public class CommonAssertions {
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+expectedValue)));
         String actualRes = testContext.getResponseContext().get(testContext.getReqId()).body().asString();
         JSONAssert.assertEquals(expectedRes, actualRes, true);
+        ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response body validation passed");
     }
 
     @SneakyThrows
@@ -85,11 +96,37 @@ public class CommonAssertions {
 
         JSONAssert.assertEquals(expectedRes, actualRes,
                 new CustomComparator(JSONCompareMode.LENIENT,customizationArray));
+        ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response body validation passed");
     }
 
     @Then("response should have {string} as {string}")
     public void should_have_value_in_path(String jsonpath, String expectedValue) {
         String actualValue = testContext.getResponseContext().get(testContext.getReqId()).then().extract().path(jsonpath).toString();
         Assert.assertEquals(actualValue,expectedValue);
+        ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response field validation passed");
+    }
+
+    @Then("response should have context value {string} in path {string}")
+    public void response_should_have_context_value_in_path(String contextKey, String jsonpath) {
+        String extractedValue = testContext.getResponseContext().get(testContext.getReqId()).then().extract().path(jsonpath).toString();
+        String valueToBeCompared = testContext.getContextValues().get(contextKey);
+        Assert.assertEquals(extractedValue,valueToBeCompared);
+        ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response field validation passed");
+    }
+
+    @Then("response should have context value {string} in array path {string}")
+    public void response_should_have_context_value_in_array_path(String contextKey, String jsonpath) {
+        String valueToBeCompared = testContext.getContextValues().get(contextKey);
+
+        List<?> list =
+                testContext.getResponseContext().get(testContext.getReqId()).then().extract().jsonPath().getList(jsonpath);
+
+        List<String> stringsList = list.stream()
+                .map(object -> Objects.toString(object, null))
+                .collect(Collectors.toList());
+
+        Assert.assertTrue(stringsList.contains(valueToBeCompared));
+        ReporterFactory.getInstance().getExtentTest().log(Status.PASS,
+                "Response have "+ valueToBeCompared +" in json path " + jsonpath);
     }
 }
