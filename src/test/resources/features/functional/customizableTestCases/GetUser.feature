@@ -1,7 +1,7 @@
 Feature: Get user
   Get user API scenarios
 
-  @GetUserAPI  @GetUserAPI01 @All
+  @GetUserAPI  @GetUserAPI01 @Custom_All @All
   Scenario: GetUserAPI01
   Get user
     Given start new scenario
@@ -14,7 +14,7 @@ Feature: Get user
     When I call GET request
     Then response code should be '200'
 
-  @GetUserAPI  @GetUserAPI02 @All
+  @GetUserAPI  @GetUserAPI02 @Custom_All @All
   Scenario: GetUserAPI02
   Create new user and retrieve the created user
     Given start new scenario

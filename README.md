@@ -27,7 +27,10 @@ In any point the execution in framework is start from `runners.TestSuitRunner.ja
 
 # Test case creation
 Test cases are defined in the Features folder in the form of `.feature` file. We can create test case for any API with some predefined steps.
-
+We can create test case in two-way
+* Customisable API test cases - This is long steps and have very much customisable options.
+* API specific test cases - This have shot steps and have to create classes for each API.
+## Customisable API test cases
 ```feature
   @CreateUserAPI  @CreateUser01 @CreateUserAPIPass @All
   Scenario: Create new user
@@ -83,6 +86,23 @@ Test cases are defined in the Features folder in the form of `.feature` file. We
       | projectDocument | /Builder/Project/Documents/Upload-Project-Document/TC01/input/TestPDFfile.pdf |
 
 ```
+## API specific test cases
+Here we have to create specific class for each API eg: [createUserStepDef.java](src%2Ftest%2Fjava%2FtestSuit%2FstepDef%2FapiSpecificSteps%2FcreateUserStepDef.java)
+```feature
+  @E2E  @E2E01 @E2EPass @All_E2E @All
+  Scenario: Create user - API specific method 1
+    Given start new scenario
+    * create user
+
+  @E2E  @E2E02 @E2EPass @All_E2E @All
+  Scenario: Create user - API specific method 2
+    Given start new scenario
+    #Api setup start
+    * start create user api specification
+    * request have request body '/createUser/scenario1/input/requestBody.json'
+    When I call POST request
+    Then response code should be '422'
+```
 
 ## API call chaining - Dynamic request creation
 	* Add request value from step - Given put value "male" in path "gender"
@@ -110,6 +130,7 @@ Test cases are defined in the Features folder in the form of `.feature` file. We
 * During the first step execution request path should be '/users', When ever the second step execute the request path should be '/users/5153'
 
 ## Assertions
+All the assertion common assertion steps are present in [CommonAssertions.java](src%2Ftest%2Fjava%2FtestSuit%2FstepDef%2FCommonAssertions.java)
 ```feature
 
     #validating response code

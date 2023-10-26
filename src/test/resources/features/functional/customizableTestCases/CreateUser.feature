@@ -1,7 +1,7 @@
 Feature: Create user
   Create user API scenarios
 
-  @CreateUserAPI  @CreateUser01 @CreateUserAPIPass @All
+  @CreateUserAPI  @CreateUser01 @CreateUserAPIPass @Custom_All @All
   Scenario: CreateUser01
   Create new user
     Given start new scenario
@@ -18,7 +18,7 @@ Feature: Create user
     Then response code should be '201'
     And response body should be '/createUser/scenario1/output/responseBody.json' ignoring all extra fields
 
-  @CreateUserAPI  @CreateUser02 @CreateUserAPIPass @All
+  @CreateUserAPI  @CreateUser02 @CreateUserAPIPass @Custom_All @All
   Scenario: CreateUser02
   Error is thrown when creating a user with existing email id (Calling same API second time)
     Given start new scenario
@@ -35,7 +35,7 @@ Feature: Create user
     Then response code should be '422'
     And response body should be '/createUser/scenario2/output/responseBody.json'
 
-  @CreateUserAPI  @CreateUser03 @CreateUserAPIPass @All
+  @CreateUserAPI  @CreateUser03 @CreateUserAPIPass @Custom_All @All
   Scenario: CreateUser03
   Create new user and validate response body by ignoring specified fields
     Given start new scenario
@@ -52,7 +52,7 @@ Feature: Create user
     And response body should be '/createUser/scenario3/output/responseBody.json' ignoring specified fields
     | email | id |
 
-  @CreateUserAPI  @CreateUser04 @CreateUserAPIPass @All
+  @CreateUserAPI  @CreateUser04 @CreateUserAPIPass @Custom_All @All
   Scenario: CreateUser04
   Create new user and validate response body for one field only
     Given start new scenario
@@ -68,7 +68,7 @@ Feature: Create user
     Then response code should be '201'
     And response should have 'name' as 'Tenali Ramakrishna'
 
-  @CreateUserAPI  @CreateUser05 @CreateUserAPIFail @All
+  @CreateUserAPI  @CreateUser05 @CreateUserAPIFail @Custom_All @All
   Scenario: CreateUser05
   Assertion failed when creating a user - Single assertion
     Given start new scenario
@@ -84,7 +84,7 @@ Feature: Create user
     Then response code should be '201'
     And response body should be '/createUser/scenario1/output/responseBody.json'
 
-  @CreateUserAPI  @CreateUser06 @CreateUserAPIFail @All
+  @CreateUserAPI  @CreateUser06 @CreateUserAPIFail @Custom_All @All
   Scenario: CreateUser06
   Assertion failed when creating a user - multiple assertion
     Given start new scenario
@@ -101,7 +101,7 @@ Feature: Create user
     And response should have 'name' as 'Tenali'
     And response should have 'gender' as 'female'
 
-  @CreateUserAPI  @CreateUser07 @CreateUserAPIPass @All
+  @CreateUserAPI  @CreateUser07 @CreateUserAPIPass @Custom_All @All
   Scenario: CreateUser07
   Calling request twice
     Given start new scenario
@@ -123,7 +123,7 @@ Feature: Create user
     Then response code should be '422'
     And response body should be '/createUser/scenario2/output/responseBody.json'
 
-  @CreateUserAPI  @CreateUser08 @CreateUserAPIPass @All
+  @CreateUserAPI  @CreateUser08 @CreateUserAPIPass @Custom_All @All
   Scenario: CreateUser08
   Calling two different request
     Given start new scenario

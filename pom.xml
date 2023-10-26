@@ -12,21 +12,21 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <cucumber.version>7.0.0</cucumber.version>
-        <cucumber.testng.version>7.0.0</cucumber.testng.version>
+        <cucumber.testng.version>7.11.0</cucumber.testng.version>
         <google.guice.version>5.1.0</google.guice.version>
         <cucumber.guice.version>7.6.0</cucumber.guice.version>
         <maven.compiler.version>3.6.2</maven.compiler.version>
-        <io.rest-assured.version>4.4.0</io.rest-assured.version>
-        <json.path.version>2.7.0</json.path.version>
-        <extentreports.version>5.0.6</extentreports.version>
+        <io.rest-assured.version>5.3.2</io.rest-assured.version>
+        <json.path.version>2.8.0</json.path.version>
+        <extentreports.version>5.1.1</extentreports.version>
         <jsonassert.version>1.5.0</jsonassert.version>
         <owner.java8.version>1.0.12</owner.java8.version>
         <lombok.version>1.18.24</lombok.version>
         <datafaker.version>1.5.0</datafaker.version>
-        <wiremock.version>2.33.2</wiremock.version>
+        <wiremock.version>3.2.0</wiremock.version>
         <dbunit.version>2.7.2</dbunit.version>
         <spring.test.dbunit.version>1.3.0</spring.test.dbunit.version>
-        <postgres.version>42.2.19</postgres.version>
+        <postgres.version>42.6.0</postgres.version>
         <json.schema.validator>5.2.0</json.schema.validator>
         <log4j.core.version>2.19.0</log4j.core.version>
         <log4j.slf4j.impl.version>2.19.0</log4j.slf4j.impl.version>
@@ -116,8 +116,8 @@
 
         <!-- Wiremock       -->
         <dependency>
-            <groupId>com.github.tomakehurst</groupId>
-            <artifactId>wiremock-jre8</artifactId>
+            <groupId>org.wiremock</groupId>
+            <artifactId>wiremock</artifactId>
             <version>${wiremock.version}</version>
         </dependency>
 
@@ -168,7 +168,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M7</version>
+                <version>3.0.0-M3</version>
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>1</threadCount>

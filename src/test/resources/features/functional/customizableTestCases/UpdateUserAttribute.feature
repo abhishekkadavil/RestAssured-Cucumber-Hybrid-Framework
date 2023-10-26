@@ -1,7 +1,7 @@
 Feature: Update user attribute
   Update user attribute API scenarios
 
-  @UpdateUserAttributeAPI  @UpdateUserAttribute01 @All
+  @UpdateUserAttributeAPI  @UpdateUserAttribute01 @Custom_All @All
   Scenario: UpdateUserAttribute01
   Update user attribute API
     Given start new scenario

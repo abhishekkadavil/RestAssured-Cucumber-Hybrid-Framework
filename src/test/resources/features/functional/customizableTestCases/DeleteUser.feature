@@ -1,7 +1,7 @@
 Feature: Delete user
   Delete user API scenarios
 
-  @DeleteUserAPI  @DeleteUser01 @All
+  @DeleteUserAPI  @DeleteUser01 @Custom_All @All
   Scenario: DeleteUser01:
   Delete user
     Given start new scenario

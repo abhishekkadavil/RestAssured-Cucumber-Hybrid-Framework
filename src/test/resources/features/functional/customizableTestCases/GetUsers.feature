@@ -1,7 +1,7 @@
 Feature: Get user list
   Get user list API scenarios
 
-  @GetUserListAPI  @GetUserListAPI01 @All
+  @GetUserListAPI  @GetUserListAPI01 @Custom_All @All
   Scenario: GetUserListAPI01
   Get user list
     Given start new scenario

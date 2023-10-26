@@ -317,4 +317,9 @@ public class CommonStepDef {
         }
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO,queryParam);
     }
+
+    @Given("put context value {string} in cookie token")
+    public void put_context_value_in_token(String contextKey) {
+        testContext.getRequestBuilder().get(testContext.getReqId()).cookie(testContext.getContextValues().get(contextKey));
+    }
 }
