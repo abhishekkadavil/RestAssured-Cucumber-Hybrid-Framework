@@ -10,7 +10,7 @@ import org.testng.annotations.DataProvider;
         features = "classpath:features",
         dryRun = false,
         glue = "testSuit.stepDef",
-        tags = "@CreateUserAPIPass",
+        tags = "@All",
         plugin={"testSuit.utils.TestListener",
                 "rerun:target/failedrerun.txt"
         }

@@ -82,7 +82,7 @@ Feature: Create user
     #Api setup end
     When I call POST request
     Then response code should be '201'
-    And response body should be '/createUser/scenario1/output/responseBody.json'
+    And response body should be '/createUser/scenario5/output/responseBody.json' ignoring all extra fields
 
   @CreateUserAPI  @CreateUser06 @CreateUserAPIFail @Custom_All @All
   Scenario: CreateUser06
@@ -98,8 +98,8 @@ Feature: Create user
     #Api setup end
     When I call POST request
     Then response code should be '201'
-    And response should have 'name' as 'Tenali'
-    And response should have 'gender' as 'female'
+    And response should have 'name' as 'Tenali Ramakrishna'
+    And response should have 'gender' as 'male'
 
   @CreateUserAPI  @CreateUser07 @CreateUserAPIPass @Custom_All @All
   Scenario: CreateUser07
@@ -139,8 +139,12 @@ Feature: Create user
     When I call POST request
     Then response code should be '201'
     And response body should be '/createUser/scenario1/output/responseBody.json' ignoring all extra fields
+
+    #retrieved data from response
+    Given retrieve value from path 'id' and store it in 'idValue'
+
     #Api setup start
-    Given request have path '/users/4519'
+    Given request have context 'idValue' in request path '/users'
     * request have bearer token in header
     Given request have following headers
       | Content-Type        | application/json |

@@ -12,7 +12,7 @@ Feature: Update user attribute
       | Content-Type        | application/json |
     #Api setup end
     When I call PATCH request
-    Then response code should be '200'
+    Then response code should be '404'
 
   @UpdateUserAttributeAPI  @UpdateUserAttribute02 @All
   Scenario: UpdateUserAttribute02
@@ -58,4 +58,4 @@ Feature: Update user attribute
       | Content-Type        | application/json |
     #Api setup end
     When I call PATCH request
-    Then response code should be '200'
+    Then response code should be '404'

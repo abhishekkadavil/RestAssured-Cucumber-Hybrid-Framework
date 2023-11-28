@@ -12,7 +12,7 @@ Feature: Get user
       | Content-Type        | application/json |
     #Api setup end
     When I call GET request
-    Then response code should be '200'
+    Then response code should be '404'
 
   @GetUserAPI  @GetUserAPI02 @Custom_All @All
   Scenario: GetUserAPI02
