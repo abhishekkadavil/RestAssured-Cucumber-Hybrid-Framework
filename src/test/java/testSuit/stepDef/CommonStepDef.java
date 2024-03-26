@@ -7,8 +7,10 @@ import com.google.inject.Inject;
 import com.jayway.jsonpath.JsonPath;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
+import io.restassured.config.HttpClientConfig;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.SneakyThrows;
@@ -43,10 +45,19 @@ public class CommonStepDef {
                 TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + apiPath;
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO,"URL: "+Url);
 
+        //timeout for
+        RestAssured.config = RestAssured.config()
+                .httpClient(HttpClientConfig.httpClientConfig()
+                        .setParam("http.connection.timeout", 5000)
+                        .setParam("http.socket.timeout", 5000)
+                        .setParam("http.connection-manager.timeout", 5000));
+
         RequestSpecification requestSpecification = RestAssured
                 .given()
                 .filters(new RALoggerUtil())
                 .baseUri(Url);
+
+        testContext.getContextValues().put(ConstUtils.PATH, apiPath);
 
         testContext.getRequestBuilder().put(testContext.getReqId(), requestSpecification);
     }
@@ -70,8 +81,7 @@ public class CommonStepDef {
         String content =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+apiBodyPath)));
 
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,"Request body");
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,MarkupHelper.createCodeBlock(content, CodeLanguage.JSON));
+        testContext.getContextValues().put(ConstUtils.BODY, content);
 
         testContext.getReqBodyContext().put(testContext.getReqId(),content);
         testContext.getRequestBuilder().get(testContext.getReqId()).body(content);
@@ -95,6 +105,9 @@ public class CommonStepDef {
     public void callPOST() {
         response = testContext.getRequestBuilder().get(testContext.getReqId()).post();
         testContext.getResponseContext().put(testContext.getReqId(),response);
+
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,"Request body");
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,MarkupHelper.createCodeBlock(testContext.getContextValues().get(ConstUtils.BODY), CodeLanguage.JSON));
 
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response code",
                 String.valueOf(testContext.getResponseContext().get(testContext.getReqId()).getStatusCode())));
@@ -182,9 +195,6 @@ public class CommonStepDef {
     public void requestUpdateUserPutValueInPath(String value, String path) {
         String newRequestBody = JsonPath.parse(testContext.getReqBodyContext().get(testContext.getReqId())).set(path,value).jsonString();
 
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,"Updated Request body");
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,MarkupHelper.createCodeBlock(newRequestBody, CodeLanguage.JSON));
-
         testContext.getReqBodyContext().put(testContext.getReqId(),newRequestBody);
         testContext.getRequestBuilder().get(testContext.getReqId()).body(newRequestBody);
     }
@@ -195,9 +205,6 @@ public class CommonStepDef {
         String newRequestBody =
                 JsonPath.parse(testContext.getReqBodyContext().get(testContext.getReqId())).set(jsonpath,
                         testContext.getContextValues().get(contextKey)).jsonString();
-
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,"Updated Request body");
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,MarkupHelper.createCodeBlock(newRequestBody, CodeLanguage.JSON));
 
         testContext.getReqBodyContext().put(testContext.getReqId(),newRequestBody);
         testContext.getRequestBuilder().get(testContext.getReqId()).body(newRequestBody);
@@ -321,5 +328,52 @@ public class CommonStepDef {
     @Given("put context value {string} in cookie token")
     public void put_context_value_in_token(String contextKey) {
         testContext.getRequestBuilder().get(testContext.getReqId()).cookie(testContext.getContextValues().get(contextKey));
+    }
+
+    @Given("request have context {string} in request path pattern {string}")
+    public void requestAddedDeleteUserHaveIdValueInRequestPathPattern(String retrievedValue, String patternToReplace) {
+
+        String newAPIPath = testContext.getContextValues().get(ConstUtils.PATH).replaceAll(patternToReplace,testContext.getContextValues().get(retrievedValue));
+        testContext.getContextValues().put(ConstUtils.PATH, newAPIPath);
+
+        String Url =
+                TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + newAPIPath;
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "URL: " + Url);
+
+        testContext.getRequestBuilder().get(testContext.getReqId()).baseUri(Url);
+
+    }
+
+    @Then("request have below context query parameters")
+    public void request_have_below_context_query_parameters(DataTable table) {
+        String currentPath = testContext.getContextValues().get(ConstUtils.PATH) + "?";
+        List<List<String>> rows = table.asLists(String.class);
+        String queryParam = "";
+
+        for (List<String> columns : rows) {
+            testContext.getRequestBuilder()
+                    .get(testContext.getReqId())
+                    .queryParam(columns.get(0), testContext.getContextValues().get(columns.get(1)));
+            queryParam = queryParam + columns.get(0) + " : " + testContext.getContextValues().get(columns.get(1)) + "\n";
+            currentPath = currentPath + columns.get(0) + "=" + testContext.getContextValues().get(columns.get(1)) + "&";
+
+        }
+        testContext.getContextValues().put(ConstUtils.PATH, currentPath);
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, queryParam);
+    }
+
+    @Then("add below context value to query parameters")
+    public void add_below_context_value_to_query_parameters(DataTable table) {
+        List<List<String>> rows = table.asLists(String.class);
+        String queryParam = "";
+
+        for (List<String> columns : rows) {
+            testContext.getRequestBuilder()
+                    .get(testContext.getReqId())
+                    .queryParam(columns.get(0), testContext.getContextValues().get(columns.get(1)));
+            queryParam = queryParam + columns.get(0) + " : " + testContext.getContextValues().get(columns.get(1)) + "\n";
+
+        }
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, queryParam);
     }
 }

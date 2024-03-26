@@ -9,7 +9,7 @@ import org.testng.annotations.DataProvider;
         features = "@target/failedrerun.txt",
         monochrome = true,
         dryRun = false,
-        glue = "com.stepDef",
+        glue = "testSuit.stepDef",
         plugin={"com.utils.TestListener",
                 "rerun:target/failedrerun.txt"
         })
