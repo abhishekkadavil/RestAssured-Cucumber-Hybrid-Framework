@@ -35,10 +35,10 @@ Feature: DB operations
   Scenario: 06 Use select query to validate DB table - return 0 row - Fail
     Then validate data exist for select query "select * from users where name = 'abhishek kadavil1'"
 
-  @DbOps07 @DBParallel @DbOpsAll1
+  @DbOps07 @DBParallel @DbOpsAll
   Scenario: 07 Use select query to validate DB table - return 0 row - Success
     Then validate data does not exist for select query "select * from users where name = 'abhishek kadavil1'"
 
-  @DbOps08 @DBParallel @DbOpsAll1
+  @DbOps08 @DBParallel @DbOpsAll
   Scenario: 08 Use select query to validate DB table - return 1 row - Success
     Then validate data does not exist for select query "select * from users where name = 'abhishek kadavil'"
