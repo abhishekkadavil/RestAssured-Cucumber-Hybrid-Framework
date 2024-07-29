@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.dataset.CachedDataSet;
 import org.dbunit.dataset.IDataSet;
@@ -16,8 +17,10 @@ import testSuit.utils.ReporterFactory;
 
 import javax.sql.DataSource;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.List;
 
+@Slf4j
 public class DBOpsStepDef {
 
     private DataSource dataSource = DataSourceFactory.getDataSource();
@@ -99,5 +102,17 @@ public class DBOpsStepDef {
             }
             ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock(sb.toString()));
         }
+    }
+
+    @SneakyThrows
+    @Then("validate data exist for select query {string}")
+    public void validate_data_exist_for_select_query_string(String sqlStatement) {
+        dbOpsUtil.executeSelQueryForDataExist(dataSource, sqlStatement);
+    }
+
+    @SneakyThrows
+    @Then("validate data does not exist for select query {string}")
+    public void validate_data_does_not_exist_for_select_query_string(String sqlStatement) {
+        dbOpsUtil.executeSelQueryForDataNotExist(dataSource, sqlStatement);
     }
 }

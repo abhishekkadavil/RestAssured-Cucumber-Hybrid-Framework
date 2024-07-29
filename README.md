@@ -252,6 +252,14 @@ Auth token can be passed from maven command line as well as config file. If the 
     #  | <column name> |
     Then Expect 'testData/DbOps/scenario1/output/' with ignore columns
       | user_id |
+      
+    #Execute select query to validate data exist in DB
+    #Then validate data exist for select query "<sql query>"
+    Then validate data exist for select query "select * from users where name = 'abhishek kadavil'"
+
+    #Execute select query to validate data does not exist in DB
+    #Then validate data does not exist for select query "<sql query>"
+    Then validate data does not exist for select query "select * from users where name = 'abhishek kadavil1'"
 
 ```
 
