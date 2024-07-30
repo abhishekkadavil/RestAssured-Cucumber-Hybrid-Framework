@@ -260,6 +260,14 @@ Auth token can be passed from maven command line as well as config file. If the 
     #Execute select query to validate data does not exist in DB
     #Then validate data does not exist for select query "<sql query>"
     Then validate data does not exist for select query "select * from users where name = 'abhishek kadavil1'"
+    
+    #Execute select query from file to validate data exist in DB
+    #Then validate data exist for select query from file "<sql file>"
+    Then validate data exist for select query from file "/DbOps/scenario9/SelQuery.sql"
+
+    #Execute select query from file to validate data does not exist in DB
+    #Then validate data does not exist for select query from file "<sql query>"
+    Then validate data does not exist for select query from file "/DbOps/scenario11/SelQuery.sql"
 
 ```
 

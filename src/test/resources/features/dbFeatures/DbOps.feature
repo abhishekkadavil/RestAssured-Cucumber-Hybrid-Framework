@@ -40,5 +40,21 @@ Feature: DB operations
     Then validate data does not exist for select query "select * from users where name = 'abhishek kadavil1'"
 
   @DbOps08 @DBParallel @DbOpsAll
-  Scenario: 08 Use select query to validate DB table - return 1 row - Success
+  Scenario: 08 Use select query to validate DB table - return 1 row - Fail
     Then validate data does not exist for select query "select * from users where name = 'abhishek kadavil'"
+
+  @DbOps09 @DBParallel @DbOpsAll
+  Scenario: 09 Use select query to validate DB table from file - return 1 row - Success
+    Then validate data exist for select query from file "/DbOps/scenario9/SelQuery.sql"
+
+  @DbOps10 @DBParallel @DbOpsAll
+  Scenario: 10 Use select query to validate DB table from file - return 0 row - Fail
+    Then validate data exist for select query from file "/DbOps/scenario10/SelQuery.sql"
+
+  @DbOps11 @DBParallel @DbOpsAll
+  Scenario: 11 Use select query to validate DB table from file - return 0 row - Success
+    Then validate data does not exist for select query from file "/DbOps/scenario11/SelQuery.sql"
+
+  @DbOps12 @DBParallel @DbOpsAll
+  Scenario: 12 Use select query to validate DB table from file - return 1 row - Fail
+    Then validate data does not exist for select query from file "/DbOps/scenario12/SelQuery.sql"

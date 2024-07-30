@@ -17,6 +17,8 @@ import testSuit.utils.ReporterFactory;
 
 import javax.sql.DataSource;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.util.List;
 
@@ -113,6 +115,22 @@ public class DBOpsStepDef {
     @SneakyThrows
     @Then("validate data does not exist for select query {string}")
     public void validate_data_does_not_exist_for_select_query_string(String sqlStatement) {
+        dbOpsUtil.executeSelQueryForDataNotExist(dataSource, sqlStatement);
+    }
+
+    @SneakyThrows
+    @Then("validate data exist for select query from file {string}")
+    public void validate_data_exist_for_select_query_from_file_string(String filePath) {
+        String sqlStatement =
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+filePath)));
+        dbOpsUtil.executeSelQueryForDataExist(dataSource, sqlStatement);
+    }
+
+    @SneakyThrows
+    @Then("validate data does not exist for select query from file {string}")
+    public void validate_data_does_not_exist_for_select_query_from_file_string(String filePath) {
+        String sqlStatement =
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+filePath)));
         dbOpsUtil.executeSelQueryForDataNotExist(dataSource, sqlStatement);
     }
 }
