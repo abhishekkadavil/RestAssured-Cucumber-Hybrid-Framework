@@ -268,6 +268,22 @@ Auth token can be passed from maven command line as well as config file. If the 
     #Execute select query from file to validate data does not exist in DB
     #Then validate data does not exist for select query from file "<sql query>"
     Then validate data does not exist for select query from file "/DbOps/scenario11/SelQuery.sql"
+    
+    #Execute select query to validate data exist in DB with context
+    Then validate data exist for select query '<sql query>' and where condition as a context value '<context value>'
+    Then validate data exist for select query 'select * from users where name = ' and where condition as a context value 'name'
+    
+    #Execute select query to validate data exist in DB with context
+    Then validate data not exist for select query '<sql query>' and where condition as a context value '<context value>'
+    Then validate data not exist for select query 'select * from users where name = ' and where condition as a context value 'name'
+    
+    #Execute select query from file to validate data exist in DB
+    Then validate data exist for select query from file "<sql query>" and context value '<context value>'
+    Then validate data exist for select query from file "/DbOps/scenario18/SelQuery.sql" and context value 'name'
+
+    #Execute select query from file to validate data does not exist in DB
+    Then validate data not exist for select query from file "<sql query>" and context value '<context value>'
+    Then validate data not exist for select query from file "/DbOps/scenario17/SelQuery.sql" and context value 'name'
 
 ```
 

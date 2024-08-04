@@ -58,3 +58,43 @@ Feature: DB operations
   @DbOps12 @DBParallel @DbOpsAll
   Scenario: 12 Use select query to validate DB table from file - return 1 row - Fail
     Then validate data does not exist for select query from file "/DbOps/scenario12/SelQuery.sql"
+
+  @DbOps13 @DBParallel @DbOpsAll
+  Scenario: 13 Use select query and context value to validate DB table - return 1 row - Success
+    * put 'abhishek kadavil' in context value 'name'
+    Then validate data exist for select query 'select * from users where name = ' and where condition as a context value 'name'
+
+  @DbOps14 @DBParallel @DbOpsAll
+  Scenario: 14 Use select query and context value to validate DB table - return 0 row - Fail
+    * put 'abhishek kadavil1' in context value 'name'
+    Then validate data exist for select query 'select * from users where name = ' and where condition as a context value 'name'
+
+  @DbOps15 @DBParallel @DbOpsAll
+  Scenario: 15 Use select query and context value to validate DB table - return 0 row - Success
+    * put 'abhishek kadavil1' in context value 'name'
+    Then validate data not exist for select query 'select * from users where name = ' and where condition as a context value 'name'
+
+  @DbOps16 @DBParallel @DbOpsAll
+  Scenario: 16 Use select query and context value to validate DB table - return 1 row - Fail
+    * put 'abhishek kadavil' in context value 'name'
+    Then validate data not exist for select query 'select * from users where name = ' and where condition as a context value 'name'
+
+  @DbOps17 @DBParallel @DbOpsAll
+  Scenario: 17 Use select query from file and context value to validate DB table - return 1 row - Success
+    * put 'abhishek kadavil' in context value 'name'
+    Then validate data exist for select query from file "/DbOps/scenario17/SelQuery.sql" and context value 'name'
+
+  @DbOps18 @DBParallel @DbOpsAll
+  Scenario: 18 Use select query from file and context value to validate DB table - return 0 row - fail
+    * put 'abhishek kadavil1' in context value 'name'
+    Then validate data exist for select query from file "/DbOps/scenario18/SelQuery.sql" and context value 'name'
+
+  @DbOps19 @DBParallel @DbOpsAll
+  Scenario: 19 Use select query from file and context value to validate DB table - return 0 row - Success
+    * put 'abhishek kadavil1' in context value 'name'
+    Then validate data not exist for select query from file "/DbOps/scenario17/SelQuery.sql" and context value 'name'
+
+  @DbOps20 @DBParallel @DbOpsAll
+  Scenario: 20 Use select query from file and context value to validate DB table - return 1 row - fail
+    * put 'abhishek kadavil' in context value 'name'
+    Then validate data not exist for select query from file "/DbOps/scenario18/SelQuery.sql" and context value 'name'
