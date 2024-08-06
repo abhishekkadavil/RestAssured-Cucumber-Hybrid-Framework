@@ -13,7 +13,7 @@ import org.testng.annotations.DataProvider;
         features = "classpath:features",
         dryRun = false,
         glue = "testSuit.stepDef",
-        tags = "@MockAPIAll",
+        tags = "@All",
         plugin={"testSuit.utils.TestListener",
                 "rerun:target/failedrerun.txt"
         }
