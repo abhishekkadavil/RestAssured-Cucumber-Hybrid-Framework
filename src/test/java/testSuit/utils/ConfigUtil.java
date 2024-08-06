@@ -2,6 +2,9 @@ package testSuit.utils;
 
 import org.aeonbits.owner.Config;
 
+/**
+ * @author Abhishek Kadavil
+ */
 @Config.Sources("file:./src/test/resources/Config.properties")
 public interface ConfigUtil extends Config {
 

@@ -8,6 +8,9 @@ import org.apache.logging.log4j.ThreadContext;
 import testSuit.runners.RunnerHelper;
 import testSuit.utils.ReporterFactory;
 
+/**
+ * @author Abhishek Kadavil
+ */
 @Slf4j
 public class Hooks {
 
@@ -15,7 +18,7 @@ public class Hooks {
     public void beforeScenario(Scenario scenario) {
 
         ThreadContext.put("TC_Name", scenario.getName());
-        log.info(Thread.currentThread().getName()+" --- "+scenario.getName() + " - execution started");
+        log.info(Thread.currentThread().getName() + " --- " + scenario.getName() + " - execution started");
 
         //reporter scenario add
         ExtentTest test = RunnerHelper.extent.createTest(scenario.getName());

@@ -2,31 +2,31 @@ package testSuit.utils;
 
 import com.aventstack.extentreports.ExtentTest;
 
+/**
+ * @author Abhishek Kadavil
+ */
 public class ReporterFactory {
 
-    private ReporterFactory() {	}
+    private ReporterFactory() {
+    }
 
     private static ReporterFactory ReporterFactoryInstance = new ReporterFactory();
 
-    public static ReporterFactory getInstance()
-    {
+    public static ReporterFactory getInstance() {
         return ReporterFactoryInstance;
     }
 
     ThreadLocal<ExtentTest> extentTestList = new ThreadLocal<ExtentTest>();
 
-    public ExtentTest getExtentTest()
-    {
+    public ExtentTest getExtentTest() {
         return extentTestList.get();
     }
 
-    public void setExtentTestList(ExtentTest extentTest)
-    {
+    public void setExtentTestList(ExtentTest extentTest) {
         extentTestList.set(extentTest);
     }
 
-    public void finisheExtentTest()
-    {
+    public void finisheExtentTest() {
         extentTestList.remove();
     }
 

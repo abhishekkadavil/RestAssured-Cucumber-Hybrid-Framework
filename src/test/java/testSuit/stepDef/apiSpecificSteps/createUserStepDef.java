@@ -16,6 +16,9 @@ import testSuit.utils.RALoggerUtil;
 import testSuit.utils.ReporterFactory;
 import testSuit.utils.TestContext;
 
+/**
+ * @author Abhishek Kadavil
+ */
 @Slf4j
 public class createUserStepDef {
 
@@ -38,11 +41,11 @@ public class createUserStepDef {
                 .filters(new RALoggerUtil())
                 .baseUri(Url)
                 .header("Content-Type", "application/json")
-                .header("Authorization","Bearer " + testContext.getToken());
+                .header("Authorization", "Bearer " + testContext.getToken());
 
         testContext.getRequestBuilder().put(testContext.getReqId(), requestSpecification);
 
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,"URL: "+Url);
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "URL: " + Url);
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Request headers", "Content-Type : application/json"));
 
     }
@@ -55,10 +58,10 @@ public class createUserStepDef {
                 TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + "/users";
 
         String value = this.faker.animal().name();
-        String content ="{\n" +
-                "  \"name\": \""+value+"\",\n" +
+        String content = "{\n" +
+                "  \"name\": \"" + value + "\",\n" +
                 "  \"gender\": \"male\",\n" +
-                "  \"email\": \""+value+"@gmail.com"+"\",\n" +
+                "  \"email\": \"" + value + "@gmail.com" + "\",\n" +
                 "  \"status\": \"active\"\n" +
                 "}";
 
@@ -67,16 +70,16 @@ public class createUserStepDef {
                 .filters(new RALoggerUtil())
                 .baseUri(Url)
                 .header("Content-Type", "application/json")
-                .header("Authorization","Bearer " + testContext.getToken())
+                .header("Authorization", "Bearer " + testContext.getToken())
                 .body(content)
                 .post();
 
-        Assert.assertEquals(response.getStatusCode(),201);
-        testContext.getResponseContext().put(testContext.getReqId(),response);
+        Assert.assertEquals(response.getStatusCode(), 201);
+        testContext.getResponseContext().put(testContext.getReqId(), response);
 
 
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,"URL: "+Url);
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,"Request body");
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "URL: " + Url);
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Request body");
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock(content, CodeLanguage.JSON));
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Request headers", "Content-Type : application/json"));
 
@@ -84,15 +87,15 @@ public class createUserStepDef {
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response code",
                 String.valueOf(response.getStatusCode())));
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response hearders", response.getHeaders().toString()));
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,"Response body");
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Response body");
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO,
                 MarkupHelper.createCodeBlock(response.getBody().asString(), CodeLanguage.JSON));
 
 
 //      Retrieve status from response
         String extractedValue = response.then().extract().path("status").toString();
-        testContext.getContextValues().putIfAbsent("status",extractedValue);
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,"Extracted value from response body : " + extractedValue);
+        testContext.getContextValues().putIfAbsent("status", extractedValue);
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Extracted value from response body : " + extractedValue);
         log.info("Extracted value from response body : " + extractedValue);
     }
 }

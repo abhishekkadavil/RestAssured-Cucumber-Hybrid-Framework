@@ -1,9 +1,13 @@
 package testSuit.utils;
 
+import com.aventstack.extentreports.Status;
 import io.cucumber.plugin.ConcurrentEventListener;
 import io.cucumber.plugin.event.*;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * @author Abhishek Kadavil
+ */
 @Slf4j
 public class TestListener implements ConcurrentEventListener {
     @Override
@@ -18,19 +22,18 @@ public class TestListener implements ConcurrentEventListener {
 
     private void handleTestStepFinished(TestStepFinished event) {
 
-        String stepName="";
+        String stepName = "";
 
         if (event.getTestStep() instanceof PickleStepTestStep) {
-            PickleStepTestStep pickleStepTestStep  = (PickleStepTestStep) event.getTestStep();
+            PickleStepTestStep pickleStepTestStep = (PickleStepTestStep) event.getTestStep();
             stepName = pickleStepTestStep.getStep().getText();
 
             Result result = event.getResult();
 
-            if(result.getStatus().name().equalsIgnoreCase("FAILED"))
-            {
+            if (result.getStatus().name().equalsIgnoreCase("FAILED")) {
                 //Failed step reporting
-                ReporterFactory.getInstance().getExtentTest().log(com.aventstack.extentreports.Status.FAIL, stepName);
-                ReporterFactory.getInstance().getExtentTest().log(com.aventstack.extentreports.Status.FAIL, result.getError().toString());
+                ReporterFactory.getInstance().getExtentTest().log(Status.FAIL, stepName);
+                ReporterFactory.getInstance().getExtentTest().log(Status.FAIL, result.getError().toString());
                 log.error(stepName);
                 log.error(result.getError().toString());
             }

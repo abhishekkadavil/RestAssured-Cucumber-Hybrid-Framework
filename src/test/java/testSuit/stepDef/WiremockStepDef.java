@@ -18,6 +18,9 @@ import java.util.List;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
+/**
+ * @author Abhishek Kadavil
+ */
 public class WiremockStepDef {
 
     @Inject
@@ -34,7 +37,8 @@ public class WiremockStepDef {
     }
 
     @Given("create PATCH mock {string} to URL {string}")
-    public void createMockBuilderMapForPatch(String mappingName, String url) { testContext.wireMockBuilderMap.putIfAbsent(mappingName, patch(urlEqualTo(url)));
+    public void createMockBuilderMapForPatch(String mappingName, String url) {
+        testContext.wireMockBuilderMap.putIfAbsent(mappingName, patch(urlEqualTo(url)));
     }
 
     @Given("create GET mock {string} to URL {string}")
@@ -48,14 +52,16 @@ public class WiremockStepDef {
     }
 
     @Given("create DELETE mock {string} to URL {string}")
-    public void createMockBuilderMapForDELETE(String mappingName, String url) { testContext.wireMockBuilderMap.putIfAbsent(mappingName, delete(url)); }
+    public void createMockBuilderMapForDELETE(String mappingName, String url) {
+        testContext.wireMockBuilderMap.putIfAbsent(mappingName, delete(url));
+    }
 
     @SneakyThrows
     @Given("{string} external call expects json request body {string}")
     public void addJsonRequestBody(String mappingName, String requestBodyPath) {
 
         String requestJson =
-                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+requestBodyPath)));
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + requestBodyPath)));
 
         testContext.wireMockBuilderMap
                 .get(mappingName)
@@ -81,7 +87,7 @@ public class WiremockStepDef {
     public void addXMLRequestBody(String mappingName, String requestBodyPath) {
 
         String request = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources" +
-                        "/testData" + requestBodyPath)));
+                "/testData" + requestBodyPath)));
         testContext.wireMockBuilderMap
                 .get(mappingName)
                 .withRequestBody(equalToXml(request));
@@ -106,7 +112,7 @@ public class WiremockStepDef {
     public void getJsonResponseBodyAndStatus(String mappingName, String responseBodyPath, String statusCode) {
 
         String responseJson =
-                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+responseBodyPath)));
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + responseBodyPath)));
 
         testContext.wireMockBuilderMap
                 .get(mappingName)
@@ -122,8 +128,8 @@ public class WiremockStepDef {
     public void getXMLResponseBodyAndStatus(String mappingName, String responseBodyPath, String statusCode) {
 
         String response =
-                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/com" +
-                        "/integration/step/definition/"+responseBodyPath)));
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/com" +
+                        "/integration/step/definition/" + responseBodyPath)));
         testContext.wireMockBuilderMap
                 .get(mappingName)
                 .willReturn(new ResponseDefinitionBuilder()

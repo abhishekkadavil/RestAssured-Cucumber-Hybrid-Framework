@@ -12,6 +12,9 @@ import testSuit.utils.TestContext;
 
 import javax.annotation.Nullable;
 
+/**
+ * @author Abhishek Kadavil
+ */
 public class CreateUserStepDef {
 
     @Inject
@@ -23,10 +26,10 @@ public class CreateUserStepDef {
         String randomEmail = TestContext.faker.name().firstName() + "@gmail.com";
 
         testContext.getReqBodyContext().put(testContext.getReqId(),
-                JsonPath.parse(testContext.getReqBodyContext().get(testContext.getReqId())).set("$.email",randomEmail).jsonString());
-        testContext.getRequestBuilder().get(testContext.getReqId()).body(JsonPath.parse(testContext.getReqBodyContext().get(testContext.getReqId())).set("$.email",randomEmail).jsonString());
+                JsonPath.parse(testContext.getReqBodyContext().get(testContext.getReqId())).set("$.email", randomEmail).jsonString());
+        testContext.getRequestBuilder().get(testContext.getReqId()).body(JsonPath.parse(testContext.getReqBodyContext().get(testContext.getReqId())).set("$.email", randomEmail).jsonString());
 
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO,"Updated email in request body");
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Updated email in request body");
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock(testContext.getReqBodyContext().get(testContext.getReqId()), CodeLanguage.JSON));
 
     }

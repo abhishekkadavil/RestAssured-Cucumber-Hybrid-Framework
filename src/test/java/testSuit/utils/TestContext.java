@@ -14,19 +14,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * @author Abhishek Kadavil
+ */
 @Getter
 @ScenarioScoped
 public class TestContext {
 
-    HashMap<String, Response> responseContext  = new HashMap<>();
+    HashMap<String, Response> responseContext = new HashMap<>();
 
-    HashMap<String, String> reqBodyContext  = new HashMap<>();
+    HashMap<String, String> reqBodyContext = new HashMap<>();
 
-    HashMap<String, String> contextValues  = new HashMap<>();
+    HashMap<String, String> contextValues = new HashMap<>();
 
     HashMap<String, RequestSpecification> requestBuilder = new HashMap<>();
 
-//    code related to config reader
+    //    code related to config reader
     public static ConfigUtil configUtil = ConfigFactory.create(ConfigUtil.class);
 
     /**
@@ -45,8 +48,7 @@ public class TestContext {
     @Setter
     String reqId;
 
-    public String generateReqId()
-    {
+    public String generateReqId() {
         return UUID.randomUUID().toString();
     }
 
@@ -58,13 +60,13 @@ public class TestContext {
     /**
      * Token management
      */
-    public String getCookieToken(){
-        return (System.getProperty("cookieToken")==null) ? configUtil.getCookieToken() :
+    public String getCookieToken() {
+        return (System.getProperty("cookieToken") == null) ? configUtil.getCookieToken() :
                 System.getProperty("cookieToken");
     }
 
-    public String getToken(){
-        return (System.getProperty("token")==null) ? configUtil.getToken() : System.getProperty("token");
+    public String getToken() {
+        return (System.getProperty("token") == null) ? configUtil.getToken() : System.getProperty("token");
     }
 
 }

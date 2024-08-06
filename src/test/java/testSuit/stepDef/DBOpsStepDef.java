@@ -23,6 +23,9 @@ import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.util.List;
 
+/**
+ * @author Abhishek Kadavil
+ */
 @Slf4j
 public class DBOpsStepDef {
 
@@ -126,7 +129,7 @@ public class DBOpsStepDef {
     @Then("validate data exist for select query from file {string}")
     public void validate_data_exist_for_select_query_from_file_string(String filePath) {
         String sqlStatement =
-                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+filePath)));
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + filePath)));
         dbOpsUtil.executeSelQueryForDataExist(dataSource, sqlStatement);
     }
 
@@ -134,7 +137,7 @@ public class DBOpsStepDef {
     @Then("validate data does not exist for select query from file {string}")
     public void validate_data_does_not_exist_for_select_query_from_file_string(String filePath) {
         String sqlStatement =
-                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+filePath)));
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + filePath)));
         dbOpsUtil.executeSelQueryForDataNotExist(dataSource, sqlStatement);
     }
 
@@ -154,7 +157,7 @@ public class DBOpsStepDef {
     @Then("validate data exist for select query from file {string} and context value {string}")
     public void validate_data_exist_for_select_query_from_file_string_and_context_value_string(String filePath, String contextKey) {
         String sqlStatement =
-                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+filePath)));
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + filePath)));
         dbOpsUtil.executeSelQueryForDataExist(dataSource, sqlStatement + "'" + testContext.getContextValues().get(contextKey) + "'");
     }
 
@@ -162,7 +165,7 @@ public class DBOpsStepDef {
     @Then("validate data not exist for select query from file {string} and context value {string}")
     public void validate_data_not_exist_for_select_query_from_file_string_and_context_value_string(String filePath, String contextKey) {
         String sqlStatement =
-                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+filePath)));
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + filePath)));
         dbOpsUtil.executeSelQueryForDataNotExist(dataSource, sqlStatement + "'" + testContext.getContextValues().get(contextKey) + "'");
     }
 }

@@ -5,6 +5,9 @@ import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
 
+/**
+ * @author Abhishek Kadavil
+ */
 public class DataSourceFactory {
 
     @SneakyThrows

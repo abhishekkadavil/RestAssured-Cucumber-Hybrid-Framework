@@ -15,6 +15,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
+/**
+ * @author Abhishek Kadavil
+ */
 @Slf4j
 @ScenarioScoped
 public class RALoggerUtil implements Filter {
@@ -23,47 +26,47 @@ public class RALoggerUtil implements Filter {
 
     private static final String MESSAGE_SEPARATOR = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 
-    public void addToLog( String logMessage ) {
+    public void addToLog(String logMessage) {
         try {
-            byteArrayOutputStream.write( ( logMessage + "\n" ).getBytes() );
-        } catch ( IOException e ) {
+            byteArrayOutputStream.write((logMessage + "\n").getBytes());
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public synchronized void logOutput() {
-        StringBuilder logs = new StringBuilder( byteArrayOutputStream.toString() );
+        StringBuilder logs = new StringBuilder(byteArrayOutputStream.toString());
 
-        log.info(Thread.currentThread().getName()+"\n" + logs.toString().replace("\r", ""));
+        log.info(Thread.currentThread().getName() + "\n" + logs.toString().replace("\r", ""));
 
         byteArrayOutputStream.reset();
     }
 
     @Override
-    public Response filter(FilterableRequestSpecification requestSpec, FilterableResponseSpecification responseSpec, FilterContext ctx ) {
+    public Response filter(FilterableRequestSpecification requestSpec, FilterableResponseSpecification responseSpec, FilterContext ctx) {
 
         Response response = null;
 
         try {
 
             // send the request
-            response = ctx.next( requestSpec, responseSpec );
+            response = ctx.next(requestSpec, responseSpec);
 
-        } catch ( Exception e ) {
-            addToLog( "Could not connect to the environment" );
-            addToLog( e.getMessage() );
-            throw new AssertionError( "Could not connect to the environment" );
+        } catch (Exception e) {
+            addToLog("Could not connect to the environment");
+            addToLog(e.getMessage());
+            throw new AssertionError("Could not connect to the environment");
         } finally {
             // print the request
-            RequestPrinter.print( requestSpec, requestSpec.getMethod(), requestSpec.getURI(), LogDetail.ALL, requestSpec.getConfig().getLogConfig().blacklistedHeaders(), new PrintStream( byteArrayOutputStream ), true );
+            RequestPrinter.print(requestSpec, requestSpec.getMethod(), requestSpec.getURI(), LogDetail.ALL, requestSpec.getConfig().getLogConfig().blacklistedHeaders(), new PrintStream(byteArrayOutputStream), true);
             // add an empty line
-            addToLog( "\n" );
-            if ( response != null ) {
+            addToLog("\n");
+            if (response != null) {
                 // print the response
-                ResponsePrinter.print( response, response, new PrintStream( byteArrayOutputStream ), LogDetail.ALL, true, requestSpec.getConfig().getLogConfig().blacklistedHeaders() );
+                ResponsePrinter.print(response, response, new PrintStream(byteArrayOutputStream), LogDetail.ALL, true, requestSpec.getConfig().getLogConfig().blacklistedHeaders());
             }
             // add the message separator
-            addToLog( MESSAGE_SEPARATOR );
+            addToLog(MESSAGE_SEPARATOR);
 
             // print the log
             logOutput();

@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * @author Abhishek Kadavil
+ */
 @Slf4j
 public class CommonAssertions {
 
@@ -33,7 +36,7 @@ public class CommonAssertions {
 
         Response response = testContext.getResponseContext().get(testContext.getReqId());
 
-        String responseSchema = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+expectedResSchema)));
+        String responseSchema = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + expectedResSchema)));
         response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(responseSchema));
 
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response schema validation passed");
@@ -43,7 +46,7 @@ public class CommonAssertions {
     public void should_have_response_code(String expectedResCode) {
         String actualValueResponseStatusCode =
                 String.valueOf(testContext.getResponseContext().get(testContext.getReqId()).getStatusCode());
-        Assert.assertEquals(actualValueResponseStatusCode,expectedResCode);
+        Assert.assertEquals(actualValueResponseStatusCode, expectedResCode);
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response code validation passed");
     }
 
@@ -51,7 +54,7 @@ public class CommonAssertions {
     @Then("response body should be {string} ignoring all extra fields")
     public void should_have_response_body_with_ignoring_all_extra_fields(String expectedValue) {
         String expectedRes =
-                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+expectedValue)));
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + expectedValue)));
         String actualRes = testContext.getResponseContext().get(testContext.getReqId()).body().asString();
         JSONAssert.assertEquals(expectedRes, actualRes, false);
 
@@ -62,7 +65,7 @@ public class CommonAssertions {
     @Then("response body should be non extensible {string}")
     public void should_have_response_body_NON_EXTENSIBLE(String expectedValue) {
         String expectedRes =
-                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+expectedValue)));
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + expectedValue)));
         String actualRes = testContext.getResponseContext().get(testContext.getReqId()).body().asString();
         JSONAssert.assertEquals(expectedRes, actualRes, JSONCompareMode.NON_EXTENSIBLE);
 
@@ -73,7 +76,7 @@ public class CommonAssertions {
     @Then("response body should be {string}")
     public void should_have_response_body(String expectedValue) {
         String expectedRes =
-                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+expectedValue)));
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + expectedValue)));
         String actualRes = testContext.getResponseContext().get(testContext.getReqId()).body().asString();
         JSONAssert.assertEquals(expectedRes, actualRes, true);
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response body validation passed");
@@ -83,7 +86,7 @@ public class CommonAssertions {
     @Then("response body should be {string} ignoring specified fields")
     public void should_have_response_body_with_ignoring_specified_fields(String expectedValue, List<List<String>> cols) {
         String expectedRes =
-                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/test/resources/testData"+expectedValue)));
+                new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + expectedValue)));
         String actualRes = testContext.getResponseContext().get(testContext.getReqId()).body().asString();
 
         List<String> row = cols.get(0);
@@ -95,14 +98,14 @@ public class CommonAssertions {
         }
 
         JSONAssert.assertEquals(expectedRes, actualRes,
-                new CustomComparator(JSONCompareMode.LENIENT,customizationArray));
+                new CustomComparator(JSONCompareMode.LENIENT, customizationArray));
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response body validation passed");
     }
 
     @Then("response should have {string} as {string}")
     public void should_have_value_in_path(String jsonpath, String expectedValue) {
         String actualValue = testContext.getResponseContext().get(testContext.getReqId()).then().extract().path(jsonpath).toString();
-        Assert.assertEquals(actualValue,expectedValue);
+        Assert.assertEquals(actualValue, expectedValue);
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response field validation passed");
     }
 
@@ -110,7 +113,7 @@ public class CommonAssertions {
     public void response_should_have_context_value_in_path(String contextKey, String jsonpath) {
         String extractedValue = testContext.getResponseContext().get(testContext.getReqId()).then().extract().path(jsonpath).toString();
         String valueToBeCompared = testContext.getContextValues().get(contextKey);
-        Assert.assertEquals(extractedValue,valueToBeCompared);
+        Assert.assertEquals(extractedValue, valueToBeCompared);
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response field validation passed");
     }
 
@@ -127,6 +130,6 @@ public class CommonAssertions {
 
         Assert.assertTrue(stringsList.contains(valueToBeCompared));
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS,
-                "Response have "+ valueToBeCompared +" in json path " + jsonpath);
+                "Response have " + valueToBeCompared + " in json path " + jsonpath);
     }
 }
