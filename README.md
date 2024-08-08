@@ -314,6 +314,9 @@ All the features which are common in scenario level like **responseContext, reqB
   **Configuration:** Configurations for the test suits are done through `com.utils.ConfigUtil` interface which extends `org.aeonbits.owner.Config`. Suit level configuration are done in `TestContext` class.
 
 # Why and why not
+* RestAsssured
+  * +Ve: Want to have more control on the framework
+  * -Ve: Need good programming knowledge  
 * OOPS, used in framework
   * `Runnerhelper` class
 * Design pattern used
