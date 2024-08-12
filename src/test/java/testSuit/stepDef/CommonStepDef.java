@@ -10,6 +10,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
+import io.restassured.config.EncoderConfig;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -18,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import testSuit.utils.*;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -378,5 +381,87 @@ public class CommonStepDef {
 
         }
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, queryParam);
+    }
+
+    @Given("add image from path{string} in aws request")
+    public void add_image_from_path_string_in_aws_request(String imagePath) {
+
+        File imagefile = new File(System.getProperty("user.dir") + "/src/test/resources/testData" + imagePath);
+
+        // Convert the image file to a byte array
+        byte[] imageBytes = null;
+        try (FileInputStream fis = new FileInputStream(imagefile)) {
+            imageBytes = fis.readAllBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        testContext.getRequestBuilder()
+                .get(testContext.getReqId())
+                .config(RestAssured.config().encoderConfig(EncoderConfig.encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false)))
+                .urlEncodingEnabled(false)
+//                .filters(new RALoggerUtil())
+                .header("Content-Type","image/jpeg")
+                .queryParam("X-Amz-Algorithm", "AWS4-HMAC-SHA256")
+                .queryParam("X-Amz-Content-Sha256", "UNSIGNED-PAYLOAD")
+                .queryParam("X-Amz-Credential", "xamzcredential")
+                .queryParam("X-Amz-Date", "xamzdate")
+                .queryParam("X-Amz-Expires", "3600")
+                .queryParam("X-Amz-Signature", "xamzsignature")
+                .queryParam("X-Amz-SignedHeaders", "host")
+                .queryParam("x-amz-acl", "public-read")
+                .queryParam("x-id", "PutObject")
+                .body(imageBytes);
+
+        ReporterFactory
+                .getInstance()
+                .getExtentTest()
+                .log(Status.INFO,
+                        MarkupHelper
+                                .createCodeBlock("Request image :",
+                                        System.getProperty("user.dir") + "/src/test/resources/testData" + imagePath));
+
+
+    }
+
+    @Given("add video from path{string} in aws request")
+    public void add_video_from_path_string_in_aws_request(String videoPath) {
+
+        File imagefile = new File(System.getProperty("user.dir") + "/src/test/resources/testData" + videoPath);
+
+        // Convert the image file to a byte array
+        byte[] videoBytes = null;
+        try (FileInputStream fis = new FileInputStream(imagefile)) {
+            videoBytes = fis.readAllBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        testContext.getRequestBuilder()
+                .get(testContext.getReqId())
+                .config(RestAssured.config().encoderConfig(EncoderConfig.encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false)))
+                .urlEncodingEnabled(false)
+//                .filters(new RALoggerUtil())
+                .header("Content-Type","video/mp4")
+                .queryParam("X-Amz-Algorithm", "AWS4-HMAC-SHA256")
+                .queryParam("X-Amz-Content-Sha256", "UNSIGNED-PAYLOAD")
+                .queryParam("X-Amz-Credential", "xamzcredential")
+                .queryParam("X-Amz-Date", "xamzdate")
+                .queryParam("X-Amz-Expires", "3600")
+                .queryParam("X-Amz-Signature", "xamzsignature")
+                .queryParam("X-Amz-SignedHeaders", "host")
+                .queryParam("x-amz-acl", "public-read")
+                .queryParam("x-id", "PutObject")
+                .body(videoBytes);
+
+        ReporterFactory
+                .getInstance()
+                .getExtentTest()
+                .log(Status.INFO,
+                        MarkupHelper
+                                .createCodeBlock("Request image :",
+                                        System.getProperty("user.dir") + "/src/test/resources/testData" + videoPath));
+
+
     }
 }

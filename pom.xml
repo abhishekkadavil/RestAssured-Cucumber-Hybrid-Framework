@@ -169,6 +169,7 @@
             <build>
                 <plugins>
                     <plugin>
+                        <!-- Included so that we can execute test from command line, but the runner name should be end or start with test-->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>3.2.2</version>
