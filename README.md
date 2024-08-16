@@ -118,8 +118,8 @@ Here we have to create specific class for each API eg: [createUserStepDef.java](
 	* Add request url parameter from context - @GetUserAPI02 - Given request have context 'idValue' in request path '/users'
 
 ## Request specification step building logic:
-* Created reqId in TestContext hence sharing is easy between steps. reqId will act as a scenario id key to build request specification map.
-* Generate and put reqId in `@Given("start new scenario")` using `testContext.setReqId(testContext.generateReqId());`
+* Created reqId in ScenarioContext hence sharing is easy between steps. reqId will act as a scenario id key to build request specification map.
+* Generate and put reqId in `@Given("start new scenario")` using `scenarioContext.setReqId(scenarioContext.generateReqId());`
 * What will happen during chaining the request?
   * We are using `@Given("start new scenario")` when ever we start a scenario. When we are chaining two different APIs in a single scenario, We dont have to use `@Given("start new scenario")` twice i.e we can avoid generating new reqId.  Eg: CreateUser02, CreateUser07. If we have duplicate steps in same scenario the latest step will override the value.
     That is suppose of we have steps like below
@@ -299,19 +299,19 @@ We only have to create test in extend report in the scenario level configuration
 For test step status management are using listener class named `com.utils.TestListener` which implements cucumber plugin `ConcurrentEventListener`. Using this plugin we are managing the status of the test cases by monitoring test steps. We are handling three main status **FAILED, PASSED, SKIPPED**. Since we have all the steps in `stepDef` package, we added request response and other related details to report through the same classes in the package.
 
 # Context sharing
-All the features which are common in scenario level like **responseContext, reqBodyContext, contextValues, requestBuilder, configuration and wiremock server** are done through `com.utils.TestContext`. i.e. During the execution if we want to share the data between steps or scenarios, we need to use TestContext.
-* TestContext is marked with `@ScenarioScoped`, so the class will have separate copy of instance for each scenario
+All the features which are common in scenario level like **responseContext, reqBodyContext, contextValues, requestBuilder, configuration and wiremock server** are done through `com.utils.ScenarioContext`. i.e. During the execution if we want to share the data between steps or scenarios, we need to use ScenarioContext.
+* ScenarioContext is marked with `@ScenarioScoped`, so the class will have separate copy of instance for each scenario
 * We are using google-guice for DI
 
 
 # Other Features
 * Added `google-juice` and `cucumber-juice` for managing the state of class object
 * Added the `@ScenarioScoped`(the object of a class marked this annotation is only created for one scenario and destroyed after the use)
-  * Added functionality of TestContext to accommodate all the common function in a scenario perspective eg: contextValues
+  * Added functionality of ScenarioContext to accommodate all the common function in a scenario perspective eg: contextValues
 * The output of the test execution like response body, status, DB values etc. can be logged in report for the later use, so
   didn't create any other mechanism for that.
   **RestAssuredLoggingFilter:** Adding rest assured logs to console including all the details of request and response.
-  **Configuration:** Configurations for the test suits are done through `com.utils.ConfigUtil` interface which extends `org.aeonbits.owner.Config`. Suit level configuration are done in `TestContext` class.
+  **Configuration:** Configurations for the test suits are done through `com.utils.ConfigUtil` interface which extends `org.aeonbits.owner.Config`. Suit level configuration are done in `ScenarioContext` class.
 
 # Why and why not
 * RestAsssured
