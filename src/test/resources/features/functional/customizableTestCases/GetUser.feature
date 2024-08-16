@@ -1,10 +1,12 @@
 Feature: Get user
   Get user API scenarios
 
+  Background: start scenario
+    Given start new scenario
+
   @GetUserAPI  @GetUserAPI01 @Custom_All @All
   Scenario: GetUserAPI01
   Get user
-    Given start new scenario
     #Api setup start
     Given request have path '/users/4519'
     * request have bearer token in header
@@ -17,7 +19,6 @@ Feature: Get user
   @GetUserAPI  @GetUserAPI02 @Custom_All @All
   Scenario: GetUserAPI02
   Create new user and retrieve the created user
-    Given start new scenario
     #Api setup start
     Given request have path '/users'
     * request have bearer token in header

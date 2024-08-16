@@ -13,7 +13,7 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.skyscreamer.jsonassert.comparator.CustomComparator;
 import org.testng.Assert;
 import testSuit.utils.ReporterFactory;
-import testSuit.utils.TestContext;
+import testSuit.utils.ScenarioContext;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -28,13 +28,13 @@ import java.util.stream.Collectors;
 public class CommonAssertions {
 
     @Inject
-    TestContext testContext;
+    ScenarioContext scenarioContext;
 
     @SneakyThrows
     @Then("should have response schema as {string}")
     public void should_have_response_schema(String expectedResSchema) {
 
-        Response response = testContext.getResponseContext().get(testContext.getReqId());
+        Response response = scenarioContext.getResponseContext().get(scenarioContext.getReqId());
 
         String responseSchema = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + expectedResSchema)));
         response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(responseSchema));
@@ -45,7 +45,7 @@ public class CommonAssertions {
     @Then("response code should be {string}")
     public void should_have_response_code(String expectedResCode) {
         String actualValueResponseStatusCode =
-                String.valueOf(testContext.getResponseContext().get(testContext.getReqId()).getStatusCode());
+                String.valueOf(scenarioContext.getResponseContext().get(scenarioContext.getReqId()).getStatusCode());
         Assert.assertEquals(actualValueResponseStatusCode, expectedResCode);
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response code validation passed");
     }
@@ -55,7 +55,7 @@ public class CommonAssertions {
     public void should_have_response_body_with_ignoring_all_extra_fields(String expectedValue) {
         String expectedRes =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + expectedValue)));
-        String actualRes = testContext.getResponseContext().get(testContext.getReqId()).body().asString();
+        String actualRes = scenarioContext.getResponseContext().get(scenarioContext.getReqId()).body().asString();
         JSONAssert.assertEquals(expectedRes, actualRes, false);
 
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response body validation passed");
@@ -66,7 +66,7 @@ public class CommonAssertions {
     public void should_have_response_body_NON_EXTENSIBLE(String expectedValue) {
         String expectedRes =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + expectedValue)));
-        String actualRes = testContext.getResponseContext().get(testContext.getReqId()).body().asString();
+        String actualRes = scenarioContext.getResponseContext().get(scenarioContext.getReqId()).body().asString();
         JSONAssert.assertEquals(expectedRes, actualRes, JSONCompareMode.NON_EXTENSIBLE);
 
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response body should be same as in " + expectedValue);
@@ -77,7 +77,7 @@ public class CommonAssertions {
     public void should_have_response_body(String expectedValue) {
         String expectedRes =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + expectedValue)));
-        String actualRes = testContext.getResponseContext().get(testContext.getReqId()).body().asString();
+        String actualRes = scenarioContext.getResponseContext().get(scenarioContext.getReqId()).body().asString();
         JSONAssert.assertEquals(expectedRes, actualRes, true);
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response body validation passed");
     }
@@ -87,7 +87,7 @@ public class CommonAssertions {
     public void should_have_response_body_with_ignoring_specified_fields(String expectedValue, List<List<String>> cols) {
         String expectedRes =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + expectedValue)));
-        String actualRes = testContext.getResponseContext().get(testContext.getReqId()).body().asString();
+        String actualRes = scenarioContext.getResponseContext().get(scenarioContext.getReqId()).body().asString();
 
         List<String> row = cols.get(0);
         Customization[] customizationArray = new Customization[row.size()];
@@ -104,25 +104,25 @@ public class CommonAssertions {
 
     @Then("response should have {string} as {string}")
     public void should_have_value_in_path(String jsonpath, String expectedValue) {
-        String actualValue = testContext.getResponseContext().get(testContext.getReqId()).then().extract().path(jsonpath).toString();
+        String actualValue = scenarioContext.getResponseContext().get(scenarioContext.getReqId()).then().extract().path(jsonpath).toString();
         Assert.assertEquals(actualValue, expectedValue);
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response field validation passed");
     }
 
     @Then("response should have context value {string} in path {string}")
     public void response_should_have_context_value_in_path(String contextKey, String jsonpath) {
-        String extractedValue = testContext.getResponseContext().get(testContext.getReqId()).then().extract().path(jsonpath).toString();
-        String valueToBeCompared = testContext.getContextValues().get(contextKey);
+        String extractedValue = scenarioContext.getResponseContext().get(scenarioContext.getReqId()).then().extract().path(jsonpath).toString();
+        String valueToBeCompared = scenarioContext.getContextValues().get(contextKey);
         Assert.assertEquals(extractedValue, valueToBeCompared);
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response field validation passed");
     }
 
     @Then("response should have context value {string} in array path {string}")
     public void response_should_have_context_value_in_array_path(String contextKey, String jsonpath) {
-        String valueToBeCompared = testContext.getContextValues().get(contextKey);
+        String valueToBeCompared = scenarioContext.getContextValues().get(contextKey);
 
         List<?> list =
-                testContext.getResponseContext().get(testContext.getReqId()).then().extract().jsonPath().getList(jsonpath);
+                scenarioContext.getResponseContext().get(scenarioContext.getReqId()).then().extract().jsonPath().getList(jsonpath);
 
         List<String> stringsList = list.stream()
                 .map(object -> Objects.toString(object, null))

@@ -26,7 +26,7 @@ public class TestSuitRunner extends AbstractTestNGCucumberTests {
      * false to execute test sequentially
      */
     @Override
-    @DataProvider(parallel = false)
+    @DataProvider(parallel = true)
     public Object[][] scenarios() {
         return super.scenarios();
     }

@@ -1,10 +1,12 @@
 Feature: Create user
   Create user API scenarios
 
+  Background: start scenario
+    Given start new scenario
+
   @CreateUserAPI  @CreateUser01 @CreateUserAPIPass @Custom_All @All
   Scenario: CreateUser01
   Create new user
-    Given start new scenario
     #Api setup start
     Given request have path '/users'
     * request have bearer token in header
@@ -21,7 +23,6 @@ Feature: Create user
   @CreateUserAPI  @CreateUser02 @CreateUserAPIPass @Custom_All @All
   Scenario: CreateUser02
   Error is thrown when creating a user with existing email id (Calling same API second time)
-    Given start new scenario
     #Api setup start
     Given request have path '/users'
     * request have bearer token in header
@@ -38,7 +39,6 @@ Feature: Create user
   @CreateUserAPI  @CreateUser03 @CreateUserAPIPass @Custom_All @All
   Scenario: CreateUser03
   Create new user and validate response body by ignoring specified fields
-    Given start new scenario
     #Api setup start
     Given request have path '/users'
     * request have bearer token in header
@@ -55,7 +55,6 @@ Feature: Create user
   @CreateUserAPI  @CreateUser04 @CreateUserAPIPass @Custom_All @All
   Scenario: CreateUser04
   Create new user and validate response body for one field only
-    Given start new scenario
     #Api setup start
     Given request have path '/users'
     * request have bearer token in header
@@ -71,7 +70,6 @@ Feature: Create user
   @CreateUserAPI  @CreateUser05 @CreateUserAPIFail @Custom_All @All
   Scenario: CreateUser05
   Assertion failed when creating a user - Single assertion
-    Given start new scenario
     #Api setup start
     Given request have path '/users'
     * request have bearer token in header
@@ -87,7 +85,6 @@ Feature: Create user
   @CreateUserAPI  @CreateUser06 @CreateUserAPIFail @Custom_All @All
   Scenario: CreateUser06
   Assertion failed when creating a user - multiple assertion
-    Given start new scenario
     #Api setup start
     Given request have path '/users'
     * request have bearer token in header
@@ -104,7 +101,6 @@ Feature: Create user
   @CreateUserAPI  @CreateUser07 @CreateUserAPIPass @Custom_All @All
   Scenario: CreateUser07
   Calling request twice
-    Given start new scenario
     #Api setup start
     Given request have path '/users'
     * request have bearer token in header
@@ -126,7 +122,6 @@ Feature: Create user
   @CreateUserAPI  @CreateUser08 @CreateUserAPIPass @Custom_All @All
   Scenario: CreateUser08
   Calling two different request
-    Given start new scenario
     #Api setup start
     Given request have path '/users'
     * request have bearer token in header

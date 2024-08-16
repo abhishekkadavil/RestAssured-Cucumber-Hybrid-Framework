@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 @Getter
 @ScenarioScoped
-public class TestContext {
+public class ScenarioContext {
 
     HashMap<String, Response> responseContext = new HashMap<>();
 

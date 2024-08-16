@@ -1,15 +1,11 @@
 package testSuit.stepDef;
 
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.CodeLanguage;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.google.inject.Inject;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import lombok.SneakyThrows;
-import testSuit.utils.ReporterFactory;
-import testSuit.utils.TestContext;
+import testSuit.utils.ScenarioContext;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,36 +20,36 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 public class WiremockStepDef {
 
     @Inject
-    TestContext testContext;
+    ScenarioContext scenarioContext;
 
     @Given("stub {string}")
     public void stub(String mappingName) {
-        TestContext.wireMockServer.stubFor(testContext.wireMockBuilderMap.get(mappingName));
+        ScenarioContext.wireMockServer.stubFor(scenarioContext.wireMockBuilderMap.get(mappingName));
     }
 
     @Given("create POST mock {string} to URL {string}")
     public void createMockBuilderMapForPost(String mappingName, String url) {
-        testContext.wireMockBuilderMap.putIfAbsent(mappingName, post(url));
+        scenarioContext.wireMockBuilderMap.putIfAbsent(mappingName, post(url));
     }
 
     @Given("create PATCH mock {string} to URL {string}")
     public void createMockBuilderMapForPatch(String mappingName, String url) {
-        testContext.wireMockBuilderMap.putIfAbsent(mappingName, patch(urlEqualTo(url)));
+        scenarioContext.wireMockBuilderMap.putIfAbsent(mappingName, patch(urlEqualTo(url)));
     }
 
     @Given("create GET mock {string} to URL {string}")
     public void createMockBuilderMapForGet(String mappingName, String url) {
-        testContext.wireMockBuilderMap.putIfAbsent(mappingName, get(url));
+        scenarioContext.wireMockBuilderMap.putIfAbsent(mappingName, get(url));
     }
 
     @Given("create GET mock {string} to URL pattern {string}")
     public void createMockMappingsGetPattern(String mappingName, String url) {
-        testContext.wireMockBuilderMap.putIfAbsent(mappingName, get(urlPathMatching(url)));
+        scenarioContext.wireMockBuilderMap.putIfAbsent(mappingName, get(urlPathMatching(url)));
     }
 
     @Given("create DELETE mock {string} to URL {string}")
     public void createMockBuilderMapForDELETE(String mappingName, String url) {
-        testContext.wireMockBuilderMap.putIfAbsent(mappingName, delete(url));
+        scenarioContext.wireMockBuilderMap.putIfAbsent(mappingName, delete(url));
     }
 
     @SneakyThrows
@@ -63,7 +59,7 @@ public class WiremockStepDef {
         String requestJson =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + requestBodyPath)));
 
-        testContext.wireMockBuilderMap
+        scenarioContext.wireMockBuilderMap
                 .get(mappingName)
                 .withRequestBody(equalToJson(requestJson, true, true));
 
@@ -76,7 +72,7 @@ public class WiremockStepDef {
         String request =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources" +
                         "/testData" + requestBodyPath)));
-        testContext.wireMockBuilderMap
+        scenarioContext.wireMockBuilderMap
                 .get(mappingName)
                 .withRequestBody(containing(request));
 
@@ -88,7 +84,7 @@ public class WiremockStepDef {
 
         String request = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources" +
                 "/testData" + requestBodyPath)));
-        testContext.wireMockBuilderMap
+        scenarioContext.wireMockBuilderMap
                 .get(mappingName)
                 .withRequestBody(equalToXml(request));
 
@@ -100,7 +96,7 @@ public class WiremockStepDef {
         List<List<String>> rows = table.asLists(String.class);
 
         for (List<String> columns : rows) {
-            testContext.wireMockBuilderMap
+            scenarioContext.wireMockBuilderMap
                     .get(mappingName)
                     .withHeader(columns.get(0), equalTo(columns.get(1)));
 
@@ -114,7 +110,7 @@ public class WiremockStepDef {
         String responseJson =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + responseBodyPath)));
 
-        testContext.wireMockBuilderMap
+        scenarioContext.wireMockBuilderMap
                 .get(mappingName)
                 .willReturn(new ResponseDefinitionBuilder()
                         .withBody(responseJson)
@@ -130,7 +126,7 @@ public class WiremockStepDef {
         String response =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/com" +
                         "/integration/step/definition/" + responseBodyPath)));
-        testContext.wireMockBuilderMap
+        scenarioContext.wireMockBuilderMap
                 .get(mappingName)
                 .willReturn(new ResponseDefinitionBuilder()
                         .withBody(response)
@@ -148,7 +144,7 @@ public class WiremockStepDef {
                 Path.of(System.getProperty("user.dir") + "/src/test/resources/com/integration/step/definition/" + responseBodyPath);
         String responseJson = Files.readString(filePath);
 
-        testContext.wireMockBuilderMap
+        scenarioContext.wireMockBuilderMap
                 .get(mappingName)
                 .willReturn(new ResponseDefinitionBuilder()
                         .withBody(responseJson)
@@ -163,7 +159,7 @@ public class WiremockStepDef {
 
         String responseJson = "";
 
-        testContext.wireMockBuilderMap
+        scenarioContext.wireMockBuilderMap
                 .get(mappingName)
                 .willReturn(new ResponseDefinitionBuilder()
                         .withBody(responseJson)

@@ -36,19 +36,19 @@ import static io.restassured.config.ParamConfig.paramConfig;
 public class CommonStepDef {
 
     @Inject
-    TestContext testContext;
+    ScenarioContext scenarioContext;
 
     private Response response;
 
     @Given("start new scenario")
     public void newReq() {
-        testContext.setReqId(testContext.generateReqId());
+        scenarioContext.setReqId(scenarioContext.generateReqId());
     }
 
     @Given("request have path {string}")
     public void request_have_path(String apiPath) {
         String Url =
-                TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + apiPath;
+                ScenarioContext.configUtil.getProtocol() + "://" + ScenarioContext.configUtil.getHost() + apiPath;
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "URL: " + Url);
 
         //timeout for
@@ -63,21 +63,21 @@ public class CommonStepDef {
                 .filters(new RALoggerUtil())
                 .baseUri(Url);
 
-        testContext.getContextValues().put(ConstUtils.PATH, apiPath);
+        scenarioContext.getContextValues().put(ConstUtils.PATH, apiPath);
 
-        testContext.getRequestBuilder().put(testContext.getReqId(), requestSpecification);
+        scenarioContext.getRequestBuilder().put(scenarioContext.getReqId(), requestSpecification);
     }
 
     @Given("request have cookie token")
     public void request_have_path() {
-        testContext.getRequestBuilder().get(testContext.getReqId()).cookie(testContext.getCookieToken());
+        scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).cookie(scenarioContext.getCookieToken());
     }
 
     @Given("request have bearer token in header")
     public void request_have_bearer_token_in_header() {
-        testContext.getRequestBuilder()
-                .get(testContext.getReqId())
-                .header("Authorization", "Bearer " + testContext.getToken());
+        scenarioContext.getRequestBuilder()
+                .get(scenarioContext.getReqId())
+                .header("Authorization", "Bearer " + scenarioContext.getToken());
     }
 
     @SneakyThrows
@@ -87,10 +87,10 @@ public class CommonStepDef {
         String content =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + apiBodyPath)));
 
-        testContext.getContextValues().put(ConstUtils.BODY, content);
+        scenarioContext.getContextValues().put(ConstUtils.BODY, content);
 
-        testContext.getReqBodyContext().put(testContext.getReqId(), content);
-        testContext.getRequestBuilder().get(testContext.getReqId()).body(content);
+        scenarioContext.getReqBodyContext().put(scenarioContext.getReqId(), content);
+        scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).body(content);
     }
 
     @Given("request have following headers")
@@ -99,8 +99,8 @@ public class CommonStepDef {
         String ReqHearders = "";
 
         for (List<String> columns : rows) {
-            testContext.getRequestBuilder()
-                    .get(testContext.getReqId())
+            scenarioContext.getRequestBuilder()
+                    .get(scenarioContext.getReqId())
                     .header(columns.get(0), columns.get(1));
             ReqHearders = ReqHearders + columns.get(0) + " : " + columns.get(1) + "\n";
         }
@@ -109,14 +109,14 @@ public class CommonStepDef {
 
     @When("I call POST request")
     public void callPOST() {
-        response = testContext.getRequestBuilder().get(testContext.getReqId()).post();
-        testContext.getResponseContext().put(testContext.getReqId(), response);
+        response = scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).post();
+        scenarioContext.getResponseContext().put(scenarioContext.getReqId(), response);
 
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Request body");
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock(testContext.getContextValues().get(ConstUtils.BODY), CodeLanguage.JSON));
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock(scenarioContext.getContextValues().get(ConstUtils.BODY), CodeLanguage.JSON));
 
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response code",
-                String.valueOf(testContext.getResponseContext().get(testContext.getReqId()).getStatusCode())));
+                String.valueOf(scenarioContext.getResponseContext().get(scenarioContext.getReqId()).getStatusCode())));
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response hearders", response.getHeaders().toString()));
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Response body");
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO,
@@ -125,11 +125,11 @@ public class CommonStepDef {
 
     @When("I call DELETE request")
     public void callDELETE() {
-        response = testContext.getRequestBuilder().get(testContext.getReqId()).delete();
-        testContext.getResponseContext().put(testContext.getReqId(), response);
+        response = scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).delete();
+        scenarioContext.getResponseContext().put(scenarioContext.getReqId(), response);
 
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response code",
-                String.valueOf(testContext.getResponseContext().get(testContext.getReqId()).getStatusCode())));
+                String.valueOf(scenarioContext.getResponseContext().get(scenarioContext.getReqId()).getStatusCode())));
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response hearders", response.getHeaders().toString()));
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Response body");
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO,
@@ -138,11 +138,11 @@ public class CommonStepDef {
 
     @When("I call GET request")
     public void callGET() {
-        response = testContext.getRequestBuilder().get(testContext.getReqId()).get();
-        testContext.getResponseContext().put(testContext.getReqId(), response);
+        response = scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).get();
+        scenarioContext.getResponseContext().put(scenarioContext.getReqId(), response);
 
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response code",
-                String.valueOf(testContext.getResponseContext().get(testContext.getReqId()).getStatusCode())));
+                String.valueOf(scenarioContext.getResponseContext().get(scenarioContext.getReqId()).getStatusCode())));
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response hearders", response.getHeaders().toString()));
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Response body");
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO,
@@ -151,11 +151,11 @@ public class CommonStepDef {
 
     @When("I call PUT request")
     public void callPUT() {
-        response = testContext.getRequestBuilder().get(testContext.getReqId()).put();
-        testContext.getResponseContext().put(testContext.getReqId(), response);
+        response = scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).put();
+        scenarioContext.getResponseContext().put(scenarioContext.getReqId(), response);
 
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response code",
-                String.valueOf(testContext.getResponseContext().get(testContext.getReqId()).getStatusCode())));
+                String.valueOf(scenarioContext.getResponseContext().get(scenarioContext.getReqId()).getStatusCode())));
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response hearders", response.getHeaders().toString()));
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Response body");
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO,
@@ -164,11 +164,11 @@ public class CommonStepDef {
 
     @When("I call PATCH request")
     public void callPATCH() {
-        response = testContext.getRequestBuilder().get(testContext.getReqId()).patch();
-        testContext.getResponseContext().put(testContext.getReqId(), response);
+        response = scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).patch();
+        scenarioContext.getResponseContext().put(scenarioContext.getReqId(), response);
 
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response code",
-                String.valueOf(testContext.getResponseContext().get(testContext.getReqId()).getStatusCode())));
+                String.valueOf(scenarioContext.getResponseContext().get(scenarioContext.getReqId()).getStatusCode())));
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response hearders", response.getHeaders().toString()));
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Response body");
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO,
@@ -178,7 +178,7 @@ public class CommonStepDef {
     @Given("request have context {string} in request path {string}")
     public void requestAddedDeleteUserHaveIdValueInRequestPath(String retrievedValue, String apiPath) {
         String Url =
-                TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + apiPath + "/" + testContext.getContextValues().get(retrievedValue);
+                ScenarioContext.configUtil.getProtocol() + "://" + ScenarioContext.configUtil.getHost() + apiPath + "/" + scenarioContext.getContextValues().get(retrievedValue);
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "URL: " + Url);
 
         RequestSpecification requestSpecification = RestAssured
@@ -186,34 +186,34 @@ public class CommonStepDef {
                 .filters(new RALoggerUtil())
                 .baseUri(Url);
 
-        testContext.getRequestBuilder().put(testContext.getReqId(), requestSpecification);
+        scenarioContext.getRequestBuilder().put(scenarioContext.getReqId(), requestSpecification);
 
     }
 
     @Given("retrieve value from path {string} and store it in {string}")
     public void requestCreateUserRetrieveValueFromPathIdAndStoreItInIdValue(String jsonpath, String contextKey) {
-        String extractedValue = testContext.getResponseContext().get(testContext.getReqId()).then().extract().path(jsonpath).toString();
-        testContext.getContextValues().putIfAbsent(contextKey, extractedValue);
+        String extractedValue = scenarioContext.getResponseContext().get(scenarioContext.getReqId()).then().extract().path(jsonpath).toString();
+        scenarioContext.getContextValues().putIfAbsent(contextKey, extractedValue);
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Extracted value from response body : " + extractedValue);
     }
 
     @Given("put value {string} in path {string}")
     public void requestUpdateUserPutValueInPath(String value, String path) {
-        String newRequestBody = JsonPath.parse(testContext.getReqBodyContext().get(testContext.getReqId())).set(path, value).jsonString();
+        String newRequestBody = JsonPath.parse(scenarioContext.getReqBodyContext().get(scenarioContext.getReqId())).set(path, value).jsonString();
 
-        testContext.getReqBodyContext().put(testContext.getReqId(), newRequestBody);
-        testContext.getRequestBuilder().get(testContext.getReqId()).body(newRequestBody);
+        scenarioContext.getReqBodyContext().put(scenarioContext.getReqId(), newRequestBody);
+        scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).body(newRequestBody);
     }
 
     @Given("put context value {string} in path {string}")
     public void requestUpdateUserPutContextValueInPath(String contextKey, String jsonpath) {
 
         String newRequestBody =
-                JsonPath.parse(testContext.getReqBodyContext().get(testContext.getReqId())).set(jsonpath,
-                        testContext.getContextValues().get(contextKey)).jsonString();
+                JsonPath.parse(scenarioContext.getReqBodyContext().get(scenarioContext.getReqId())).set(jsonpath,
+                        scenarioContext.getContextValues().get(contextKey)).jsonString();
 
-        testContext.getReqBodyContext().put(testContext.getReqId(), newRequestBody);
-        testContext.getRequestBuilder().get(testContext.getReqId()).body(newRequestBody);
+        scenarioContext.getReqBodyContext().put(scenarioContext.getReqId(), newRequestBody);
+        scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).body(newRequestBody);
     }
 
     @Given("request have below query parameters")
@@ -223,8 +223,8 @@ public class CommonStepDef {
         String queryParam = "";
 
         for (List<String> columns : rows) {
-            testContext.getRequestBuilder()
-                    .get(testContext.getReqId())
+            scenarioContext.getRequestBuilder()
+                    .get(scenarioContext.getReqId())
                     .queryParam(columns.get(0), columns.get(1));
             queryParam = queryParam + columns.get(0) + " : " + columns.get(1) + "\n";
 
@@ -238,8 +238,8 @@ public class CommonStepDef {
         String ReqFormdata = "";
 
         for (List<String> columns : rows) {
-            testContext.getRequestBuilder()
-                    .get(testContext.getReqId())
+            scenarioContext.getRequestBuilder()
+                    .get(scenarioContext.getReqId())
                     .multiPart(columns.get(0), columns.get(1));
             ReqFormdata = ReqFormdata + columns.get(0) + " : " + columns.get(1) + "\n";
         }
@@ -251,8 +251,8 @@ public class CommonStepDef {
         List<List<String>> rows = imagePath.asLists(String.class);
 
         for (List<String> columns : rows) {
-            testContext.getRequestBuilder()
-                    .get(testContext.getReqId())
+            scenarioContext.getRequestBuilder()
+                    .get(scenarioContext.getReqId())
                     .multiPart(columns.get(0),
                             new File(System.getProperty("user.dir") + "/src/test/resources/testData" + columns.get(1)),
                             "image/gif");
@@ -271,8 +271,8 @@ public class CommonStepDef {
         List<List<String>> rows = imagePath.asLists(String.class);
 
         for (List<String> columns : rows) {
-            testContext.getRequestBuilder()
-                    .get(testContext.getReqId())
+            scenarioContext.getRequestBuilder()
+                    .get(scenarioContext.getReqId())
                     .multiPart(columns.get(0),
                             new File(System.getProperty("user.dir") + "/src/test/resources/testData/Square-feet-area-1" + columns.get(1)));
             ReporterFactory
@@ -298,10 +298,10 @@ public class CommonStepDef {
         for (List<String> columns : rows) {
 
             formKey = columns.get(0);
-            formValue = testContext.getContextValues().get(columns.get(1));
+            formValue = scenarioContext.getContextValues().get(columns.get(1));
 
-            testContext.getRequestBuilder()
-                    .get(testContext.getReqId())
+            scenarioContext.getRequestBuilder()
+                    .get(scenarioContext.getReqId())
                     .multiPart(formKey, formValue);
             formdata = formdata + formKey + " : " + formValue + "\n";
         }
@@ -310,7 +310,7 @@ public class CommonStepDef {
 
     @Given("put {string} in context value {string}")
     public void put_value_in_context_value_token_in_token(String value, String contextKey) {
-        testContext.getContextValues().put(contextKey, value);
+        scenarioContext.getContextValues().put(contextKey, value);
         log.info("put value " + value + " in " + contextKey);
     }
 
@@ -321,8 +321,8 @@ public class CommonStepDef {
         String queryParam = "";
 
         for (List<String> columns : rows) {
-            testContext.getRequestBuilder()
-                    .get(testContext.getReqId())
+            scenarioContext.getRequestBuilder()
+                    .get(scenarioContext.getReqId())
                     .config(config().paramConfig(paramConfig().queryParamsUpdateStrategy(REPLACE)))
                     .queryParam(columns.get(0), columns.get(1));
             queryParam = queryParam + columns.get(0) + " : " + columns.get(1) + "\n";
@@ -333,38 +333,38 @@ public class CommonStepDef {
 
     @Given("put context value {string} in cookie token")
     public void put_context_value_in_token(String contextKey) {
-        testContext.getRequestBuilder().get(testContext.getReqId()).cookie(testContext.getContextValues().get(contextKey));
+        scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).cookie(scenarioContext.getContextValues().get(contextKey));
     }
 
     @Given("request have context {string} in request path pattern {string}")
     public void requestAddedDeleteUserHaveIdValueInRequestPathPattern(String retrievedValue, String patternToReplace) {
 
-        String newAPIPath = testContext.getContextValues().get(ConstUtils.PATH).replaceAll(patternToReplace, testContext.getContextValues().get(retrievedValue));
-        testContext.getContextValues().put(ConstUtils.PATH, newAPIPath);
+        String newAPIPath = scenarioContext.getContextValues().get(ConstUtils.PATH).replaceAll(patternToReplace, scenarioContext.getContextValues().get(retrievedValue));
+        scenarioContext.getContextValues().put(ConstUtils.PATH, newAPIPath);
 
         String Url =
-                TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + newAPIPath;
+                ScenarioContext.configUtil.getProtocol() + "://" + ScenarioContext.configUtil.getHost() + newAPIPath;
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "URL: " + Url);
 
-        testContext.getRequestBuilder().get(testContext.getReqId()).baseUri(Url);
+        scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).baseUri(Url);
 
     }
 
     @Then("request have below context query parameters")
     public void request_have_below_context_query_parameters(DataTable table) {
-        String currentPath = testContext.getContextValues().get(ConstUtils.PATH) + "?";
+        String currentPath = scenarioContext.getContextValues().get(ConstUtils.PATH) + "?";
         List<List<String>> rows = table.asLists(String.class);
         String queryParam = "";
 
         for (List<String> columns : rows) {
-            testContext.getRequestBuilder()
-                    .get(testContext.getReqId())
-                    .queryParam(columns.get(0), testContext.getContextValues().get(columns.get(1)));
-            queryParam = queryParam + columns.get(0) + " : " + testContext.getContextValues().get(columns.get(1)) + "\n";
-            currentPath = currentPath + columns.get(0) + "=" + testContext.getContextValues().get(columns.get(1)) + "&";
+            scenarioContext.getRequestBuilder()
+                    .get(scenarioContext.getReqId())
+                    .queryParam(columns.get(0), scenarioContext.getContextValues().get(columns.get(1)));
+            queryParam = queryParam + columns.get(0) + " : " + scenarioContext.getContextValues().get(columns.get(1)) + "\n";
+            currentPath = currentPath + columns.get(0) + "=" + scenarioContext.getContextValues().get(columns.get(1)) + "&";
 
         }
-        testContext.getContextValues().put(ConstUtils.PATH, currentPath);
+        scenarioContext.getContextValues().put(ConstUtils.PATH, currentPath);
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, queryParam);
     }
 
@@ -374,10 +374,10 @@ public class CommonStepDef {
         String queryParam = "";
 
         for (List<String> columns : rows) {
-            testContext.getRequestBuilder()
-                    .get(testContext.getReqId())
-                    .queryParam(columns.get(0), testContext.getContextValues().get(columns.get(1)));
-            queryParam = queryParam + columns.get(0) + " : " + testContext.getContextValues().get(columns.get(1)) + "\n";
+            scenarioContext.getRequestBuilder()
+                    .get(scenarioContext.getReqId())
+                    .queryParam(columns.get(0), scenarioContext.getContextValues().get(columns.get(1)));
+            queryParam = queryParam + columns.get(0) + " : " + scenarioContext.getContextValues().get(columns.get(1)) + "\n";
 
         }
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, queryParam);
@@ -396,8 +396,8 @@ public class CommonStepDef {
             e.printStackTrace();
         }
 
-        testContext.getRequestBuilder()
-                .get(testContext.getReqId())
+        scenarioContext.getRequestBuilder()
+                .get(scenarioContext.getReqId())
                 .config(RestAssured.config().encoderConfig(EncoderConfig.encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false)))
                 .urlEncodingEnabled(false)
 //                .filters(new RALoggerUtil())
@@ -437,8 +437,8 @@ public class CommonStepDef {
             e.printStackTrace();
         }
 
-        testContext.getRequestBuilder()
-                .get(testContext.getReqId())
+        scenarioContext.getRequestBuilder()
+                .get(scenarioContext.getReqId())
                 .config(RestAssured.config().encoderConfig(EncoderConfig.encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false)))
                 .urlEncodingEnabled(false)
 //                .filters(new RALoggerUtil())

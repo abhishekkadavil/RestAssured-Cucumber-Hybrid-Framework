@@ -17,6 +17,7 @@ public class Hooks {
     @Before
     public void beforeScenario(Scenario scenario) {
 
+        //log scenario add
         ThreadContext.put("TC_Name", scenario.getName());
         log.info(Thread.currentThread().getName() + " --- " + scenario.getName() + " - execution started");
 

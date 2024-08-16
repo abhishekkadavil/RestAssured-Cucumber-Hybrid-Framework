@@ -14,7 +14,7 @@ import net.datafaker.Faker;
 import org.testng.Assert;
 import testSuit.utils.RALoggerUtil;
 import testSuit.utils.ReporterFactory;
-import testSuit.utils.TestContext;
+import testSuit.utils.ScenarioContext;
 
 /**
  * @author Abhishek Kadavil
@@ -23,7 +23,7 @@ import testSuit.utils.TestContext;
 public class createUserStepDef {
 
     @Inject
-    TestContext testContext;
+    ScenarioContext scenarioContext;
 
     private Response response;
 
@@ -33,7 +33,7 @@ public class createUserStepDef {
     @Given("start create user api specification")
     public void start_create_user_api_specification() {
         String Url =
-                TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + "/users";
+                ScenarioContext.configUtil.getProtocol() + "://" + ScenarioContext.configUtil.getHost() + "/users";
 
 
         RequestSpecification requestSpecification = RestAssured
@@ -41,9 +41,9 @@ public class createUserStepDef {
                 .filters(new RALoggerUtil())
                 .baseUri(Url)
                 .header("Content-Type", "application/json")
-                .header("Authorization", "Bearer " + testContext.getToken());
+                .header("Authorization", "Bearer " + scenarioContext.getToken());
 
-        testContext.getRequestBuilder().put(testContext.getReqId(), requestSpecification);
+        scenarioContext.getRequestBuilder().put(scenarioContext.getReqId(), requestSpecification);
 
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "URL: " + Url);
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Request headers", "Content-Type : application/json"));
@@ -55,7 +55,7 @@ public class createUserStepDef {
 
 //      Request creation
         String Url =
-                TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + "/users";
+                ScenarioContext.configUtil.getProtocol() + "://" + ScenarioContext.configUtil.getHost() + "/users";
 
         String value = this.faker.animal().name();
         String content = "{\n" +
@@ -70,12 +70,12 @@ public class createUserStepDef {
                 .filters(new RALoggerUtil())
                 .baseUri(Url)
                 .header("Content-Type", "application/json")
-                .header("Authorization", "Bearer " + testContext.getToken())
+                .header("Authorization", "Bearer " + scenarioContext.getToken())
                 .body(content)
                 .post();
 
         Assert.assertEquals(response.getStatusCode(), 201);
-        testContext.getResponseContext().put(testContext.getReqId(), response);
+        scenarioContext.getResponseContext().put(scenarioContext.getReqId(), response);
 
 
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "URL: " + Url);
@@ -94,7 +94,7 @@ public class createUserStepDef {
 
 //      Retrieve status from response
         String extractedValue = response.then().extract().path("status").toString();
-        testContext.getContextValues().putIfAbsent("status", extractedValue);
+        scenarioContext.getContextValues().putIfAbsent("status", extractedValue);
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Extracted value from response body : " + extractedValue);
         log.info("Extracted value from response body : " + extractedValue);
     }

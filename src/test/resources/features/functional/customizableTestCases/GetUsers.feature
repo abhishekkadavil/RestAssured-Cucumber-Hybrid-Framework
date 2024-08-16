@@ -1,10 +1,12 @@
 Feature: Get user list
   Get user list API scenarios
 
+  Background: start scenario
+    Given start new scenario
+
   @GetUserListAPI  @GetUserListAPI01 @Custom_All @All
   Scenario: GetUserListAPI01
   Get user list
-    Given start new scenario
     #Api setup start
     Given request have path '/users'
     * request have bearer token in header

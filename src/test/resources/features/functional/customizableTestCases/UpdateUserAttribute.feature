@@ -1,10 +1,12 @@
 Feature: Update user attribute
   Update user attribute API scenarios
 
+  Background: start scenario
+    Given start new scenario
+
   @UpdateUserAttributeAPI  @UpdateUserAttribute01 @Custom_All @All
   Scenario: UpdateUserAttribute01
   Update user attribute API
-    Given start new scenario
     Given request have path '/users/4519'
     * request have bearer token in header
     Given request have request body '/updateUserAttribute/scenario1/input/requestBody.json'
@@ -17,7 +19,6 @@ Feature: Update user attribute
   @UpdateUserAttributeAPI  @UpdateUserAttribute02 @All
   Scenario: UpdateUserAttribute02
   Create user and update its status attribute - API call chaining and read context sharing
-    Given start new scenario
     #create user
     #Api setup start
     Given request have path '/users'
@@ -48,7 +49,6 @@ Feature: Update user attribute
   @UpdateUserAttributeAPI  @UpdateUserAttribute03 @All
   Scenario: UpdateUserAttribute03
   Update only one attribute API
-    Given start new scenario
     Given request have path '/users/4519'
     * request have bearer token in header
     * request have request body '/updateUserAttribute/scenario3/input/requestBody.json'

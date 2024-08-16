@@ -13,9 +13,9 @@ public class DataSourceFactory {
     @SneakyThrows
     public static DataSource getDataSource() {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
-        dataSource.setURL(TestContext.configUtil.getPostgresDbURL());
-        dataSource.setUser(TestContext.configUtil.getPostgresUsername());
-        dataSource.setPassword(TestContext.configUtil.getPostgresPassword());
+        dataSource.setURL(ScenarioContext.configUtil.getPostgresDbURL());
+        dataSource.setUser(ScenarioContext.configUtil.getPostgresUsername());
+        dataSource.setPassword(ScenarioContext.configUtil.getPostgresPassword());
         return dataSource;
     }
 }

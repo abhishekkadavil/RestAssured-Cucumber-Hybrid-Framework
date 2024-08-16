@@ -6,11 +6,8 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.google.inject.Inject;
 import com.jayway.jsonpath.JsonPath;
 import io.cucumber.java.en.Given;
-import net.datafaker.Faker;
 import testSuit.utils.ReporterFactory;
-import testSuit.utils.TestContext;
-
-import javax.annotation.Nullable;
+import testSuit.utils.ScenarioContext;
 
 /**
  * @author Abhishek Kadavil
@@ -18,19 +15,19 @@ import javax.annotation.Nullable;
 public class CreateUserStepDef {
 
     @Inject
-    TestContext testContext;
+    ScenarioContext scenarioContext;
 
     @Given("request have random email")
     public void createUserHaveRandomEmail() {
 
-        String randomEmail = TestContext.faker.name().firstName() + "@gmail.com";
+        String randomEmail = ScenarioContext.faker.name().firstName() + "@gmail.com";
 
-        testContext.getReqBodyContext().put(testContext.getReqId(),
-                JsonPath.parse(testContext.getReqBodyContext().get(testContext.getReqId())).set("$.email", randomEmail).jsonString());
-        testContext.getRequestBuilder().get(testContext.getReqId()).body(JsonPath.parse(testContext.getReqBodyContext().get(testContext.getReqId())).set("$.email", randomEmail).jsonString());
+        scenarioContext.getReqBodyContext().put(scenarioContext.getReqId(),
+                JsonPath.parse(scenarioContext.getReqBodyContext().get(scenarioContext.getReqId())).set("$.email", randomEmail).jsonString());
+        scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).body(JsonPath.parse(scenarioContext.getReqBodyContext().get(scenarioContext.getReqId())).set("$.email", randomEmail).jsonString());
 
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Updated email in request body");
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock(testContext.getReqBodyContext().get(testContext.getReqId()), CodeLanguage.JSON));
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock(scenarioContext.getReqBodyContext().get(scenarioContext.getReqId()), CodeLanguage.JSON));
 
     }
 }
