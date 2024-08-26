@@ -38,6 +38,9 @@ public class CommonStepDef {
     @Inject
     ScenarioContext scenarioContext;
 
+    @Inject
+    TestContext testContext;
+
     private Response response;
 
     @Given("start new scenario")
