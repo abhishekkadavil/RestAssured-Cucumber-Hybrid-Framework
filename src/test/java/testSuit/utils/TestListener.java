@@ -1,9 +1,13 @@
 package testSuit.utils;
 
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import io.cucumber.plugin.ConcurrentEventListener;
 import io.cucumber.plugin.event.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.logging.log4j.ThreadContext;
+import testSuit.runners.RunnerHelper;
 
 /**
  * @author Abhishek Kadavil
@@ -14,6 +18,7 @@ public class TestListener implements ConcurrentEventListener {
     public void setEventPublisher(EventPublisher publisher) {
         publisher.registerHandlerFor(TestCaseFinished.class, this::handleTestCaseFinished);
         publisher.registerHandlerFor(TestStepFinished.class, this::handleTestStepFinished);
+        publisher.registerHandlerFor(TestCaseStarted.class, this::handleTestCaseStarted);
     }
 
     private void handleTestCaseFinished(TestCaseFinished event) {
@@ -38,5 +43,19 @@ public class TestListener implements ConcurrentEventListener {
                 log.error(result.getError().toString());
             }
         }
+    }
+
+    private void handleTestCaseStarted(TestCaseStarted event) {
+
+        String featureName = FilenameUtils.getBaseName(event.getTestCase().getUri().toString());
+        String scenarioName = event.getTestCase().getName();
+
+        // reporter scenario add
+        ExtentTest test = RunnerHelper.extent.createTest(featureName+" :: "+scenarioName);
+        ReporterFactory.getInstance().setExtentTestList(test);
+
+        // log scenario add
+        ThreadContext.put("TC_Name", scenarioName);
+        log.info(Thread.currentThread().getName() + " --- " + scenarioName + " - execution started");
     }
 }
