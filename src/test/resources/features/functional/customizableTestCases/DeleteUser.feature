@@ -22,7 +22,7 @@ Feature: Delete user
     Given retrieve value from path 'id' and store it in 'idValue'
     #Api setup start
     #put retrieved data in the request path
-    Given request have context 'idValue' in request path '/users'
+    Given request have scenario context 'idValue' in request path '/users'
     * request have bearer token in header
     Given request have request body '/createUser/scenario1/input/requestBody.json'
     Given request have random email

@@ -34,7 +34,7 @@ Feature: Get user
     Given retrieve value from path 'id' and store it in 'idValue'
 
     #get specific user using above extraction
-    Given request have context 'idValue' in request path '/users'
+    Given request have scenario context 'idValue' in request path '/users'
     * request have bearer token in header
     Given request have following headers
       | Content-Type        | application/json |

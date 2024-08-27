@@ -37,7 +37,7 @@ Feature: Update user attribute
 
     #update the status of specific user using above extraction
     #Api setup start
-    Given request have context 'idValue' in request path '/users'
+    Given request have scenario context 'idValue' in request path '/users'
     * request have bearer token in header
     Given request have request body '/updateUserAttribute/scenario2/input/updateUserRequestBody.json'
     Given request have following headers
