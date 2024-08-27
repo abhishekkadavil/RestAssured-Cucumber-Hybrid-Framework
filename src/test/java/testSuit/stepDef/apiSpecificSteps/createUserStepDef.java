@@ -4,6 +4,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.CodeLanguage;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.google.inject.Inject;
+import com.jayway.jsonpath.JsonPath;
 import io.cucumber.java.en.Given;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -97,5 +98,19 @@ public class createUserStepDef {
         scenarioContext.getContextValues().putIfAbsent("status", extractedValue);
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Extracted value from response body : " + extractedValue);
         log.info("Extracted value from response body : " + extractedValue);
+    }
+
+    @Given("request have random email")
+    public void createUserHaveRandomEmail() {
+
+        String randomEmail = ScenarioContext.faker.name().firstName() + "@gmail.com";
+
+        scenarioContext.getReqBodyContext().put(scenarioContext.getReqId(),
+                JsonPath.parse(scenarioContext.getReqBodyContext().get(scenarioContext.getReqId())).set("$.email", randomEmail).jsonString());
+        scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).body(JsonPath.parse(scenarioContext.getReqBodyContext().get(scenarioContext.getReqId())).set("$.email", randomEmail).jsonString());
+
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Updated email in request body");
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock(scenarioContext.getReqBodyContext().get(scenarioContext.getReqId()), CodeLanguage.JSON));
+
     }
 }
