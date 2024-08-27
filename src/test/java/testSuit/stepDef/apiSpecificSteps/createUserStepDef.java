@@ -58,7 +58,7 @@ public class createUserStepDef {
         String Url =
                 ScenarioContext.configUtil.getProtocol() + "://" + ScenarioContext.configUtil.getHost() + "/users";
 
-        String value = this.faker.animal().name();
+        String value = this.faker.animal().name()+this.faker.random().hex();
         String content = "{\n" +
                 "  \"name\": \"" + value + "\",\n" +
                 "  \"gender\": \"male\",\n" +
@@ -103,14 +103,11 @@ public class createUserStepDef {
     @Given("request have random email")
     public void createUserHaveRandomEmail() {
 
-        String randomEmail = ScenarioContext.faker.name().firstName() + "@gmail.com";
+        String randomEmail = ScenarioContext.faker.name().firstName()+ faker.random().hex() + "@gmail.com";
 
         scenarioContext.getReqBodyContext().put(scenarioContext.getReqId(),
                 JsonPath.parse(scenarioContext.getReqBodyContext().get(scenarioContext.getReqId())).set("$.email", randomEmail).jsonString());
         scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).body(JsonPath.parse(scenarioContext.getReqBodyContext().get(scenarioContext.getReqId())).set("$.email", randomEmail).jsonString());
-
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Updated email in request body");
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock(scenarioContext.getReqBodyContext().get(scenarioContext.getReqId()), CodeLanguage.JSON));
 
     }
 }
