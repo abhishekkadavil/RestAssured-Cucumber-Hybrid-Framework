@@ -24,7 +24,8 @@ public class RunnerHelper {
         RunnerHelper.spark = new ExtentSparkReporter(System.getProperty("user.dir") + "/Report/" + reportFileName);
         RunnerHelper.extent = new ExtentReports();
         RunnerHelper.extent.attachReporter(RunnerHelper.spark);
-        RunnerHelper.extent.setSystemInfo("os", "Ubuntu");
+        RunnerHelper.extent.setSystemInfo("OS", "Ubuntu");
+        RunnerHelper.extent.setSystemInfo("Tester", "Abhishek Kadavil");
 
         /**
          * Wiremock server
