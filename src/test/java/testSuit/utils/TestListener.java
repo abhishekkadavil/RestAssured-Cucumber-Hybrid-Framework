@@ -50,11 +50,11 @@ public class TestListener implements ConcurrentEventListener {
         String featureName = FilenameUtils.getBaseName(event.getTestCase().getUri().toString());
         String scenarioName = event.getTestCase().getName();
 
-        // reporter scenario add
+        // start reporter with scenario name
         ExtentTest test = RunnerHelper.extent.createTest(featureName+" :: "+scenarioName);
         ReporterFactory.getInstance().setExtentTestList(test);
 
-        // log scenario add
+        // start log with scenario name
         ThreadContext.put("TC_Name", scenarioName);
         log.info(Thread.currentThread().getName() + " --- " + scenarioName + " - execution started");
     }
