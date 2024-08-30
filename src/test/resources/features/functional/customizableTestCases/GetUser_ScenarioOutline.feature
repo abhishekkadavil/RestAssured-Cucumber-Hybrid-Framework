@@ -1,10 +1,11 @@
+@All @AllAPIs @Custom_All @GetUserAPISceOut
 Feature: Get user
   Get user API scenarios
 
   Background: start scenario
     Given start new scenario
 
-  @GetUserAPISceOut @GetUserAPISceOut01 @Custom_All @All
+  @GetUserAPISceOut01
   Scenario Outline: GetUser API test for '<userID>'
   Get user
     #Api setup start

@@ -1,10 +1,11 @@
+@All @AllAPIs @GetUserAPI @Custom_All
 Feature: Get user
   Get user API scenarios
 
   Background: start scenario
     Given start new scenario
 
-  @GetUserAPI  @GetUserAPI01 @Custom_All @All
+  @GetUserAPI01
   Scenario: GetUserAPI01
   Get user
     #Api setup start
@@ -16,7 +17,7 @@ Feature: Get user
     When I call GET request
     Then response code should be '404'
 
-  @GetUserAPI  @GetUserAPI02 @Custom_All @All
+  @GetUserAPI02
   Scenario: GetUserAPI02
   Create new user and retrieve the created user
     #Api setup start

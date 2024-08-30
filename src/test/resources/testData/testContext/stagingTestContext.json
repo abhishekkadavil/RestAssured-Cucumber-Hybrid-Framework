@@ -1,0 +1,10 @@
+{
+  "user1": {
+    "sbid": "11",
+    "username": "username1"
+  },
+  "user2": {
+    "sbid": "22",
+    "username": "username2"
+  }
+}

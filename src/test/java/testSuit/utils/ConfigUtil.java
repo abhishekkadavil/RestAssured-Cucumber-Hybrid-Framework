@@ -17,6 +17,9 @@ public interface ConfigUtil extends Config {
     @Key("token")
     String getToken();
 
+    @Key("testContextEnvPath")
+    String getTestContextEnvPath();
+
     @Key("cookie.token")
     String getCookieToken();
 

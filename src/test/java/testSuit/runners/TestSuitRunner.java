@@ -6,6 +6,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 
+import java.io.IOException;
+
 /**
  * @author Abhishek Kadavil
  */
@@ -13,7 +15,7 @@ import org.testng.annotations.DataProvider;
         features = "classpath:features",
         dryRun = false,
         glue = "testSuit.stepDef",
-        tags = "@All",
+        tags = "@AllAPIs or @AllUTs",
         plugin={"testSuit.utils.TestListener",
                 "rerun:target/failedrerun.txt"
         }
@@ -32,7 +34,7 @@ public class TestSuitRunner extends AbstractTestNGCucumberTests {
     }
 
     @BeforeClass
-    public void beforeClass() {
+    public void beforeClass() throws IOException {
         RunnerHelper.beforeTestSuit();
     }
 

@@ -30,6 +30,7 @@
         <json.schema.validator>5.2.0</json.schema.validator>
         <log4j.core.version>2.19.0</log4j.core.version>
         <log4j.slf4j.impl.version>2.19.0</log4j.slf4j.impl.version>
+        <gson.version>2.11.0</gson.version>
     </properties>
 
     <dependencies>
@@ -155,7 +156,15 @@
             <version>${log4j.slf4j.impl.version}</version>
         </dependency>
 
-<!--        <dependency>-->
+        <!-- used to read data from json for test context[not used for scenario context] -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+
+
+        <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-starter-jdbc</artifactId>-->
 <!--            <version>2.5.5</version>-->

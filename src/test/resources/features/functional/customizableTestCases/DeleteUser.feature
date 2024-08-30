@@ -1,10 +1,11 @@
+@All @AllAPIs @DeleteUserAPI @Custom_All
 Feature: Delete user
   Delete user API scenarios
 
   Background: start scenario
     Given start new scenario
 
-  @DeleteUserAPI  @DeleteUser01 @Custom_All @All
+  @DeleteUser01
   Scenario: DeleteUser01:
   Delete user
     #Api setup start
