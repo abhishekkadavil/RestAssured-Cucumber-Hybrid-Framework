@@ -11,11 +11,11 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import net.datafaker.Faker;
 import org.testng.Assert;
 import testSuit.utils.RALoggerUtil;
 import testSuit.utils.ReporterFactory;
 import testSuit.utils.ScenarioContext;
+import testSuit.utils.TestContext;
 
 /**
  * @author Abhishek Kadavil
@@ -28,13 +28,11 @@ public class createUserStepDef {
 
     private Response response;
 
-    Faker faker = new Faker();
-
     @SneakyThrows
     @Given("start create user api specification")
     public void start_create_user_api_specification() {
         String Url =
-                ScenarioContext.configUtil.getProtocol() + "://" + ScenarioContext.configUtil.getHost() + "/users";
+                TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + "/users";
 
 
         RequestSpecification requestSpecification = RestAssured
@@ -56,9 +54,9 @@ public class createUserStepDef {
 
 //      Request creation
         String Url =
-                ScenarioContext.configUtil.getProtocol() + "://" + ScenarioContext.configUtil.getHost() + "/users";
+                TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + "/users";
 
-        String value = this.faker.animal().name()+this.faker.random().hex();
+        String value = TestContext.faker.animal().name()+TestContext.faker.random().hex();
         String content = "{\n" +
                 "  \"name\": \"" + value + "\",\n" +
                 "  \"gender\": \"male\",\n" +
@@ -103,7 +101,7 @@ public class createUserStepDef {
     @Given("request have random email")
     public void createUserHaveRandomEmail() {
 
-        String randomEmail = ScenarioContext.faker.name().firstName()+ faker.random().hex() + "@gmail.com";
+        String randomEmail = TestContext.faker.name().firstName()+ TestContext.faker.random().hex() + "@gmail.com";
 
         scenarioContext.getReqBodyContext().put(scenarioContext.getReqId(),
                 JsonPath.parse(scenarioContext.getReqBodyContext().get(scenarioContext.getReqId())).set("$.email", randomEmail).jsonString());

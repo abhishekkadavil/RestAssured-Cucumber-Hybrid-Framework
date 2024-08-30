@@ -6,6 +6,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import lombok.SneakyThrows;
 import testSuit.utils.ScenarioContext;
+import testSuit.utils.TestContext;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,7 +25,7 @@ public class WiremockStepDef {
 
     @Given("stub {string}")
     public void stub(String mappingName) {
-        ScenarioContext.wireMockServer.stubFor(scenarioContext.wireMockBuilderMap.get(mappingName));
+        TestContext.wireMockServer.stubFor(scenarioContext.wireMockBuilderMap.get(mappingName));
     }
 
     @Given("create POST mock {string} to URL {string}")

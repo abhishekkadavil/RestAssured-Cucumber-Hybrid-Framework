@@ -3,7 +3,6 @@ package testSuit.runners;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.github.tomakehurst.wiremock.WireMockServer;
-import testSuit.utils.ScenarioContext;
 import testSuit.utils.TestContext;
 
 import java.io.IOException;
@@ -32,18 +31,18 @@ public class RunnerHelper {
         /*
          * Wiremock server
          */
-        ScenarioContext.wireMockServer = new WireMockServer(Integer.parseInt(ScenarioContext.configUtil.getWiremockPort()));
-        ScenarioContext.wireMockServer.start();
+        TestContext.wireMockServer = new WireMockServer(Integer.parseInt(TestContext.configUtil.getWiremockPort()));
+        TestContext.wireMockServer.start();
 
         /*
          * Test context
          */
-        TestContext.readTestContextJSON(System.getProperty("user.dir") + ScenarioContext.configUtil.getTestContextEnvPath());
+        TestContext.readTestContextJSON(System.getProperty("user.dir") + TestContext.configUtil.getTestContextEnvPath());
     }
 
     public static void afterTestSuit() {
 
-        ScenarioContext.wireMockServer.stop();
+        TestContext.wireMockServer.stop();
         RunnerHelper.extent.flush();
     }
 

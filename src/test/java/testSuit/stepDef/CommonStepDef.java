@@ -23,7 +23,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collection;
 import java.util.List;
 
 import static io.restassured.RestAssured.config;
@@ -52,7 +51,7 @@ public class CommonStepDef {
     @Given("request have path {string}")
     public void request_have_path(String apiPath) {
         String Url =
-                ScenarioContext.configUtil.getProtocol() + "://" + ScenarioContext.configUtil.getHost() + apiPath;
+                TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + apiPath;
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "URL: " + Url);
 
         //timeout for
@@ -182,7 +181,7 @@ public class CommonStepDef {
     @Given("request have scenario context {string} in request path {string}")
     public void requestAddedDeleteUserHaveIdValueInRequestPath(String retrievedValue, String apiPath) {
         String Url =
-                ScenarioContext.configUtil.getProtocol() + "://" + ScenarioContext.configUtil.getHost() + apiPath + "/" + scenarioContext.getContextValues().get(retrievedValue);
+                TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + apiPath + "/" + scenarioContext.getContextValues().get(retrievedValue);
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "URL: " + Url);
 
         RequestSpecification requestSpecification = RestAssured
@@ -347,7 +346,7 @@ public class CommonStepDef {
         scenarioContext.getContextValues().put(ConstUtils.PATH, newAPIPath);
 
         String Url =
-                ScenarioContext.configUtil.getProtocol() + "://" + ScenarioContext.configUtil.getHost() + newAPIPath;
+                TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + newAPIPath;
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "URL: " + Url);
 
         scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).baseUri(Url);

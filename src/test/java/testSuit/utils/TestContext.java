@@ -1,7 +1,10 @@
 package testSuit.utils;
 
+import com.github.tomakehurst.wiremock.WireMockServer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import net.datafaker.Faker;
+import org.aeonbits.owner.ConfigFactory;
 import testSuit.pojos.User;
 
 import java.io.FileReader;
@@ -29,4 +32,17 @@ public class TestContext {
     {
         return users.get(userIdToFind);
     }
+
+    /**
+     * wiremock server
+     */
+    public static WireMockServer wireMockServer;
+
+    /**
+     * Faker instance
+     */
+    public static Faker faker = new Faker();
+
+    //    code related to config reader
+    public static ConfigUtil configUtil = ConfigFactory.create(ConfigUtil.class);
 }

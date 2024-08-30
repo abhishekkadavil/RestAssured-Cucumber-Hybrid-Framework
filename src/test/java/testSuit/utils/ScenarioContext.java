@@ -1,14 +1,11 @@
 package testSuit.utils;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.MappingBuilder;
 import io.cucumber.guice.ScenarioScoped;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
 import lombok.Setter;
-import net.datafaker.Faker;
-import org.aeonbits.owner.ConfigFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,14 +26,6 @@ public class ScenarioContext {
 
     HashMap<String, RequestSpecification> requestBuilder = new HashMap<>();
 
-    //    code related to config reader
-    public static ConfigUtil configUtil = ConfigFactory.create(ConfigUtil.class);
-
-    /**
-     * wiremock server
-     */
-    public static WireMockServer wireMockServer;
-
     /**
      * Map of wiremock wireMockBuilderMap.
      */
@@ -53,20 +42,15 @@ public class ScenarioContext {
     }
 
     /**
-     * Faker instance
-     */
-    public static Faker faker = new Faker();
-
-    /**
      * Token management
      */
     public String getCookieToken() {
-        return (System.getProperty("cookieToken") == null) ? configUtil.getCookieToken() :
+        return (System.getProperty("cookieToken") == null) ? TestContext.configUtil.getCookieToken() :
                 System.getProperty("cookieToken");
     }
 
     public String getToken() {
-        return (System.getProperty("token") == null) ? configUtil.getToken() : System.getProperty("token");
+        return (System.getProperty("token") == null) ? TestContext.configUtil.getToken() : System.getProperty("token");
     }
 
 }
