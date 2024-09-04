@@ -66,7 +66,7 @@ public class CommonStepDef {
                 .filters(new RALoggerUtil())
                 .baseUri(Url);
 
-        scenarioContext.getContextValues().put(ConstUtils.PATH, apiPath);
+        scenarioContext.getContextValues().put(ConstUtils.SCENARIO_CONTEXT_REQ_PATH, apiPath);
 
         scenarioContext.getRequestBuilder().put(scenarioContext.getReqId(), requestSpecification);
     }
@@ -89,8 +89,6 @@ public class CommonStepDef {
 
         String content =
                 new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/test/resources/testData" + apiBodyPath)));
-
-        scenarioContext.getContextValues().put(ConstUtils.BODY, content);
 
         scenarioContext.getReqBodyContext().put(scenarioContext.getReqId(), content);
         scenarioContext.getRequestBuilder().get(scenarioContext.getReqId()).body(content);
@@ -116,7 +114,7 @@ public class CommonStepDef {
         scenarioContext.getResponseContext().put(scenarioContext.getReqId(), response);
 
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, "Request body");
-        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock(scenarioContext.getContextValues().get(ConstUtils.BODY), CodeLanguage.JSON));
+        ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock(scenarioContext.getReqBodyContext().get(scenarioContext.getReqId()), CodeLanguage.JSON));
 
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, MarkupHelper.createCodeBlock("Response code",
                 String.valueOf(scenarioContext.getResponseContext().get(scenarioContext.getReqId()).getStatusCode())));
@@ -342,8 +340,8 @@ public class CommonStepDef {
     @Given("request have scenario context {string} in request path pattern {string}")
     public void requestAddedDeleteUserHaveIdValueInRequestPathPattern(String retrievedValue, String patternToReplace) {
 
-        String newAPIPath = scenarioContext.getContextValues().get(ConstUtils.PATH).replaceAll(patternToReplace, scenarioContext.getContextValues().get(retrievedValue));
-        scenarioContext.getContextValues().put(ConstUtils.PATH, newAPIPath);
+        String newAPIPath = scenarioContext.getContextValues().get(ConstUtils.SCENARIO_CONTEXT_REQ_PATH).replaceAll(patternToReplace, scenarioContext.getContextValues().get(retrievedValue));
+        scenarioContext.getContextValues().put(ConstUtils.SCENARIO_CONTEXT_REQ_PATH, newAPIPath);
 
         String Url =
                 TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + newAPIPath;
@@ -355,7 +353,7 @@ public class CommonStepDef {
 
     @Then("request have below scenario context query parameters")
     public void request_have_below_context_query_parameters(DataTable table) {
-        String currentPath = scenarioContext.getContextValues().get(ConstUtils.PATH) + "?";
+        String currentPath = scenarioContext.getContextValues().get(ConstUtils.SCENARIO_CONTEXT_REQ_PATH) + "?";
         List<List<String>> rows = table.asLists(String.class);
         String queryParam = "";
 
@@ -367,7 +365,7 @@ public class CommonStepDef {
             currentPath = currentPath + columns.get(0) + "=" + scenarioContext.getContextValues().get(columns.get(1)) + "&";
 
         }
-        scenarioContext.getContextValues().put(ConstUtils.PATH, currentPath);
+        scenarioContext.getContextValues().put(ConstUtils.SCENARIO_CONTEXT_REQ_PATH, currentPath);
         ReporterFactory.getInstance().getExtentTest().log(Status.INFO, queryParam);
     }
 

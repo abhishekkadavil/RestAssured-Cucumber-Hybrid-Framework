@@ -5,6 +5,5 @@ package testSuit.utils;
  */
 public class ConstUtils {
 
-    public static final String PATH = "PATH";
-    public static final String BODY = "BODY";
+    public static final String SCENARIO_CONTEXT_REQ_PATH = "SCENARIO_CONTEXT_REQ_PATH";
 }
