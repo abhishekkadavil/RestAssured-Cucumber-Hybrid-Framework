@@ -21,7 +21,7 @@ In any point the execution in framework is start from `runners.TestSuitRunner.ja
 * Test API used from `https://gorest.co.in/`
 * **Execution mode(parallel or sequentially):** In scenarios method in `runners.TestSuitRunner.java` class, we can set if the test need to execute parallel or sequentially. Set the parallel flag to true or false.
   * The default test case count can be set from `threadCount` section in `pom` file `maven-surefire-plugin`
-* **Report configuration:** Test report high level(suit level) configured will be done through `@BeforeClass` and `@AfterClass` annotations of TestNG inside TestRunner class. Each scenario wise step will be added to report through `stepDef.Hooks`.
+* **Report configuration:** Test report high level(suit level) configured will be done through `@BeforeClass` and `@AfterClass` annotations of TestNG inside TestRunner class. Each scenario wise step will be added to report through `utils.handleTestCaseStarted`.
 
 **RunnerHelper** class will be shared among `runners.TestRunner` and `runners.FailedTCRunner` class to implement code re-usability.
 
@@ -62,16 +62,16 @@ We can create test case in two-way
     Given retrieve "id" from "CreateUser" response and store it in 'idValue'
 
     #Put retrieved data in the request path
-    #Given request have context '<unique key where value to be stored>' in request path '<req path>'
-    Given request have context 'idValue' in request path '/users'
+    #Given request have scenario context '<unique key where value to be stored>' in request path '<req path>'
+    Given request have scenario context 'idValue' in request path '/users'
 
     #Put retrieved data in the request body from value defined in the feature file
     #Given put value "<value to be added in the request>" in path "<JSON path>"
     Given put value "male" in path "gender"
 
     #Put retrieved data in the request body, from value retrived and stored during the execution
-    #Given put context value "<context key which the value stored during the retierval>" in path "<JSON path>"
-    Given put context value "female" in path "gender"
+    #Given put scenario context value "<context key which the value stored during the retierval>" in path "<JSON path>"
+    Given put scenario context value "female" in path "gender"
     
     # multi part data handling
     # request have following string multi part data
@@ -109,20 +109,20 @@ Here we have to create specific class for each API eg: [createUserStepDef.java](
 		* Added API call chaining without context sharing - 
 			* create request
 			* update specific value in the request
-	* Add request value from context - @UpdateUserAttribute03(Given put context value "female" in path "gender")
-		* Added API call chaining with context sharing - 
+	* Add request value from scenario context - @UpdateUserAttribute03(Given put scenario context value "female" in path "gender")
+		* Added API call chaining with scenario context sharing - 
 			* call a request
 			* extract id from the request
 			* create another request using the retrieved id
-			* Given request have context 'idValue' in request path '/users'
-	* Add request url parameter from context - @GetUserAPI02 - Given request have context 'idValue' in request path '/users'
+			* Given request have scenario context 'idValue' in request path '/users'
+	* Add request url parameter from scenario context - @GetUserAPI02 - Given request have scenario context 'idValue' in request path '/users'
 
 ## Request specification step building logic:
 * Created reqId in ScenarioContext hence sharing is easy between steps. reqId will act as a scenario id key to build request specification map.
 * Generate and put reqId in `@Given("start new scenario")` using `scenarioContext.setReqId(scenarioContext.generateReqId());`
 * What will happen during chaining the request?
-  * We are using `@Given("start new scenario")` when ever we start a scenario. When we are chaining two different APIs in a single scenario, We dont have to use `@Given("start new scenario")` twice i.e we can avoid generating new reqId.  Eg: CreateUser02, CreateUser07. If we have duplicate steps in same scenario the latest step will override the value.
-    That is suppose of we have steps like below
+  * We are using `@Given("start new scenario")` when ever we start a scenario. When we are chaining two different APIs in a single scenario, We don't have to use `@Given("start new scenario")` twice i.e we can avoid generating new reqId.  Eg: CreateUser02, CreateUser07. If we have duplicate steps in same scenario the latest step will override the value.
+    That is, suppose of we have steps like below
       ```feature
         Given request have path '/users'
         Given request have path '/users/5153'
@@ -269,39 +269,71 @@ Auth token can be passed from maven command line as well as config file. If the 
     #Then validate data does not exist for select query from file "<sql query>"
     Then validate data does not exist for select query from file "/DbOps/scenario11/SelQuery.sql"
     
-    #Execute select query to validate data exist in DB with context
-    Then validate data exist for select query '<sql query>' and where condition as a context value '<context value>'
-    Then validate data exist for select query 'select * from users where name = ' and where condition as a context value 'name'
+    #Execute select query to validate data exist in DB with scenario context
+    Then validate data exist for select query '<sql query>' and where condition as a scenario context value '<context value>'
+    Then validate data exist for select query 'select * from users where name = ' and where condition as a scenario context value 'name'
     
-    #Execute select query to validate data exist in DB with context
-    Then validate data not exist for select query '<sql query>' and where condition as a context value '<context value>'
-    Then validate data not exist for select query 'select * from users where name = ' and where condition as a context value 'name'
+    #Execute select query to validate data exist in DB with scenario context
+    Then validate data not exist for select query '<sql query>' and where condition as a scenario context value '<context value>'
+    Then validate data not exist for select query 'select * from users where name = ' and where condition as a scenario context value 'name'
     
     #Execute select query from file to validate data exist in DB
-    Then validate data exist for select query from file "<sql query>" and context value '<context value>'
-    Then validate data exist for select query from file "/DbOps/scenario18/SelQuery.sql" and context value 'name'
+    Then validate data exist for select query from file "<sql query>" and scenario context value '<context value>'
+    Then validate data exist for select query from file "/DbOps/scenario18/SelQuery.sql" and scenario context value 'name'
 
     #Execute select query from file to validate data does not exist in DB
-    Then validate data not exist for select query from file "<sql query>" and context value '<context value>'
-    Then validate data not exist for select query from file "/DbOps/scenario17/SelQuery.sql" and context value 'name'
+    Then validate data not exist for select query from file "<sql query>" and scenario context value '<context value>'
+    Then validate data not exist for select query from file "/DbOps/scenario17/SelQuery.sql" and scenario context value 'name'
 
 ```
 
 # Test reporting:
 
 **Suit level configuration:**
-Test report high level(suit level) configured will be done through `@BeforeClass` and `@AfterClass` annotations of TestNG inside TestRunner class. each scenario wise step will be added to report through `stepDef.Hooks`
+Test report high level(suit level) configured will be done through `@BeforeClass` and `@AfterClass` annotations of TestNG inside TestRunner class.
 
 **Scenario level configuration:**
-We only have to create test in extend report in the scenario level configuration that is done using `@Before`
+Each scenario wise step will be added to report through `handleTestCaseStarted` from `com.utils.TestListener`. We only have to create test in extend report in the scenario level configuration that is done using `handleTestCaseStarted`
 
 **Step level configuration:**
 For test step status management are using listener class named `com.utils.TestListener` which implements cucumber plugin `ConcurrentEventListener`. Using this plugin we are managing the status of the test cases by monitoring test steps. We are handling three main status **FAILED, PASSED, SKIPPED**. Since we have all the steps in `stepDef` package, we added request response and other related details to report through the same classes in the package.
 
+# Test logging:
+Logging is started in `handleTestCaseStarted` from `com.utils.TestListener`. It will start new thread for each test case.
+
 # Context sharing
+Context sharing is almost similar to session management. Currently, The framework support two level of context sharing scenario level and the test level.
+## Scenario context - scenario level context sharing
 All the features which are common in scenario level like **responseContext, reqBodyContext, contextValues, requestBuilder, configuration and wiremock server** are done through `com.utils.ScenarioContext`. i.e. During the execution if we want to share the data between steps or scenarios, we need to use ScenarioContext.
 * ScenarioContext is marked with `@ScenarioScoped`, so the class will have separate copy of instance for each scenario
 * We are using google-guice for DI
+## Test context - test level context sharing
+if we want to manage data between scenarios, we can use this level of context sharing. even though the framework support test level context sharing, Please avoid making the test case depend on each other. As per cucumber documentation they strongly recommend to avoid dependency between scenarios. This level of context sharing is only used if we need to share common data among all the scenarios.
+
+Current test context contain static properties hence we do not need to worry about object management. We are initialising the data for the test context before the execution start, in `RunnerHelper.beforeTestSuit`. after the initialisation, we can access the data through-out the execution. Also after the initialisation we can only read the data from the test context, We cannot set the data once the execution start.
+
+### Why make it static?
+We only have one copy of the class in entire execution, and we do not need to manage state of any property.
+### Why don't we make the test context read and write throughout the program? Why only make it readonly after initialisation?
+Since we are executing our tests in parallel, if we change value of the test context property in middle of the execution, other test cases will be effected by this. 
+
+For example consider below scenario:
+
+* TestA - set test context property USERID as 001
+* TestB - get test context property USERID
+
+if we use test context to support above case, our test case might fail in some execution. Because Our tests execute in parallel and there are chances in TestB execute before TestA. Hence, it will throw null pointer when we are trying to get context property USERID before setting it.
+
+### Note:
+Currently, cucumber does not support setting priority for test scenario's execution. Since cucumber directly not support priority settings, If we design the test case to depends on each other and execute scenarios in parallel, it will cause inconsistency. Hence, I recommend to avoid adding the data into test context during the execution. it is okay to add data before the scenario start and use the same though-out the execution.
+
+**Normal order of execution is determined as follows:**
+* Alphabetically by feature file directory
+* Alphabetically by feature file name
+* Order of scenarios within the feature file
+
+Note: the file name sorting is case-sensitive, so uppercase A is executed before a.
+
 
 
 # Other Features
@@ -321,7 +353,7 @@ All the features which are common in scenario level like **responseContext, reqB
   * `Runnerhelper` class
 * Design pattern used
   * KISS
-  * DI injection in Test context
+  * DI injection in Scenario context
 * Why not use grass hopper extend report plugin - it's not support cucumber 7, It's not that much flexible as I wanted
 * Why use Google guice instead of pico container or spring
   * google guice - can do DI(object creation) with annotations and have `@ScenarioScoped` annotation which will make the state management easy

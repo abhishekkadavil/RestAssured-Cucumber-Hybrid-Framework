@@ -1,10 +1,11 @@
+@All @AllAPIs @Custom_All @CreateUserAPI
 Feature: Create user
   Create user API scenarios
 
   Background: start scenario
     Given start new scenario
 
-  @CreateUserAPI  @CreateUser01 @CreateUserAPIPass @Custom_All @All
+  @CreateUser01 @CreateUserAPIPass
   Scenario: CreateUser01
   Create new user
     #Api setup start
@@ -20,7 +21,7 @@ Feature: Create user
     Then response code should be '201'
     And response body should be '/createUser/scenario1/output/responseBody.json' ignoring all extra fields
 
-  @CreateUserAPI  @CreateUser02 @CreateUserAPIPass @Custom_All @All
+  @CreateUser02 @CreateUserAPIPass
   Scenario: CreateUser02
   Error is thrown when creating a user with existing email id (Calling same API second time)
     #Api setup start
@@ -36,7 +37,7 @@ Feature: Create user
     Then response code should be '422'
     And response body should be '/createUser/scenario2/output/responseBody.json'
 
-  @CreateUserAPI  @CreateUser03 @CreateUserAPIPass @Custom_All @All
+  @CreateUser03 @CreateUserAPIPass
   Scenario: CreateUser03
   Create new user and validate response body by ignoring specified fields
     #Api setup start
@@ -52,7 +53,7 @@ Feature: Create user
     And response body should be '/createUser/scenario3/output/responseBody.json' ignoring specified fields
     | email | id |
 
-  @CreateUserAPI  @CreateUser04 @CreateUserAPIPass @Custom_All @All
+  @CreateUser04 @CreateUserAPIPass
   Scenario: CreateUser04
   Create new user and validate response body for one field only
     #Api setup start
@@ -67,7 +68,7 @@ Feature: Create user
     Then response code should be '201'
     And response should have 'name' as 'Tenali Ramakrishna'
 
-  @CreateUserAPI  @CreateUser05 @CreateUserAPIFail @Custom_All @All
+  @CreateUser05 @CreateUserAPIFail
   Scenario: CreateUser05
   Assertion failed when creating a user - Single assertion
     #Api setup start
@@ -82,7 +83,7 @@ Feature: Create user
     Then response code should be '201'
     And response body should be '/createUser/scenario5/output/responseBody.json' ignoring all extra fields
 
-  @CreateUserAPI  @CreateUser06 @CreateUserAPIFail @Custom_All @All
+  @CreateUser06 @CreateUserAPIFail
   Scenario: CreateUser06
   Assertion failed when creating a user - multiple assertion
     #Api setup start
@@ -98,7 +99,7 @@ Feature: Create user
     And response should have 'name' as 'Tenali Ramakrishna'
     And response should have 'gender' as 'male'
 
-  @CreateUserAPI  @CreateUser07 @CreateUserAPIPass @Custom_All @All
+  @CreateUser07 @CreateUserAPIPass
   Scenario: CreateUser07
   Calling request twice
     #Api setup start
@@ -119,7 +120,7 @@ Feature: Create user
     Then response code should be '422'
     And response body should be '/createUser/scenario2/output/responseBody.json'
 
-  @CreateUserAPI  @CreateUser08 @CreateUserAPIPass @Custom_All @All
+  @CreateUser08 @CreateUserAPIPass
   Scenario: CreateUser08
   Calling two different request
     #Api setup start
@@ -139,7 +140,7 @@ Feature: Create user
     Given retrieve value from path 'id' and store it in 'idValue'
 
     #Api setup start
-    Given request have context 'idValue' in request path '/users'
+    Given request have scenario context 'idValue' in request path '/users'
     * request have bearer token in header
     Given request have following headers
       | Content-Type        | application/json |

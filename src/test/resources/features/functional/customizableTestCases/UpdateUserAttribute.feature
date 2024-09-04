@@ -1,10 +1,11 @@
+@All @AllAPIs @UpdateUserAttributeAPI @Custom_All
 Feature: Update user attribute
   Update user attribute API scenarios
 
   Background: start scenario
     Given start new scenario
 
-  @UpdateUserAttributeAPI  @UpdateUserAttribute01 @Custom_All @All
+  @UpdateUserAttribute01
   Scenario: UpdateUserAttribute01
   Update user attribute API
     Given request have path '/users/4519'
@@ -16,7 +17,7 @@ Feature: Update user attribute
     When I call PATCH request
     Then response code should be '404'
 
-  @UpdateUserAttributeAPI  @UpdateUserAttribute02 @All
+  @UpdateUserAttribute02
   Scenario: UpdateUserAttribute02
   Create user and update its status attribute - API call chaining and read context sharing
     #create user
@@ -37,7 +38,7 @@ Feature: Update user attribute
 
     #update the status of specific user using above extraction
     #Api setup start
-    Given request have context 'idValue' in request path '/users'
+    Given request have scenario context 'idValue' in request path '/users'
     * request have bearer token in header
     Given request have request body '/updateUserAttribute/scenario2/input/updateUserRequestBody.json'
     Given request have following headers
@@ -46,7 +47,7 @@ Feature: Update user attribute
     When I call PATCH request
     Then response code should be '200'
 
-  @UpdateUserAttributeAPI  @UpdateUserAttribute03 @All
+  @UpdateUserAttribute03
   Scenario: UpdateUserAttribute03
   Update only one attribute API
     Given request have path '/users/4519'

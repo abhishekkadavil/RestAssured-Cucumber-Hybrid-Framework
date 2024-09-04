@@ -109,16 +109,16 @@ public class CommonAssertions {
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response field validation passed");
     }
 
-    @Then("response should have context value {string} in path {string}")
-    public void response_should_have_context_value_in_path(String contextKey, String jsonpath) {
+    @Then("response should have scenario context value {string} in path {string}")
+    public void response_should_have_scenario_context_value_in_path(String contextKey, String jsonpath) {
         String extractedValue = scenarioContext.getResponseContext().get(scenarioContext.getReqId()).then().extract().path(jsonpath).toString();
         String valueToBeCompared = scenarioContext.getContextValues().get(contextKey);
         Assert.assertEquals(extractedValue, valueToBeCompared);
         ReporterFactory.getInstance().getExtentTest().log(Status.PASS, "Response field validation passed");
     }
 
-    @Then("response should have context value {string} in array path {string}")
-    public void response_should_have_context_value_in_array_path(String contextKey, String jsonpath) {
+    @Then("response should have scenario context value {string} in array path {string}")
+    public void response_should_have_scenario_context_value_in_array_path(String contextKey, String jsonpath) {
         String valueToBeCompared = scenarioContext.getContextValues().get(contextKey);
 
         List<?> list =

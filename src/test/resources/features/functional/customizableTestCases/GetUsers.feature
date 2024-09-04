@@ -1,10 +1,11 @@
+@All @AllAPIs @GetUserListAPI @Custom_All
 Feature: Get user list
   Get user list API scenarios
 
   Background: start scenario
     Given start new scenario
 
-  @GetUserListAPI  @GetUserListAPI01 @Custom_All @All
+  @GetUserListAPI01
   Scenario: GetUserListAPI01
   Get user list
     #Api setup start

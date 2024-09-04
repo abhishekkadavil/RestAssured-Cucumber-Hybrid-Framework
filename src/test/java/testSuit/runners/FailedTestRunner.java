@@ -6,6 +6,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 
+import java.io.IOException;
+
 /**
  * @author Abhishek Kadavil
  */
@@ -27,7 +29,7 @@ public class FailedTestRunner extends AbstractTestNGCucumberTests {
     }
 
     @BeforeClass
-    public void beforeClass() {
+    public void beforeClass() throws IOException {
         RunnerHelper.beforeTestSuit();
 
     }

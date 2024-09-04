@@ -1,7 +1,8 @@
+@All @MockAPIAll
 Feature: Wiremock actions
   Wiremock actions scenarios
 
-  @MockAPI01 @MockAPIAll
+  @MockAPI01
   Scenario: Create new user
     #mock setup start
     Given create POST mock 'mock' to URL '/users'
@@ -18,7 +19,7 @@ Feature: Wiremock actions
     Then response code should be '201'
     And response body should be '/wiremockFeatures/scenario1/output/responseBody.json' ignoring all extra fields
 
-  @MockAPI02 @MockAPIAll
+  @MockAPI02
   Scenario: Create new user2
     #mock setup start
     Given create POST mock 'mock' to URL '/users'
