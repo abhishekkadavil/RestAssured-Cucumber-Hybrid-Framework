@@ -21,7 +21,7 @@
         <extentreports.version>5.1.1</extentreports.version>
         <jsonassert.version>1.5.0</jsonassert.version>
         <owner.java8.version>1.0.12</owner.java8.version>
-        <lombok.version>1.18.24</lombok.version>
+        <lombok.version>1.18.30</lombok.version>
         <datafaker.version>1.5.0</datafaker.version>
         <wiremock.version>3.2.0</wiremock.version>
         <dbunit.version>2.7.2</dbunit.version>
