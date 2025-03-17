@@ -5,8 +5,8 @@ import com.google.inject.Inject;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import lombok.SneakyThrows;
-import testSuit.utils.ScenarioContext;
-import testSuit.utils.TestContext;
+import testSuit.contexts.ScenarioContext;
+import testSuit.contexts.TestContext;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

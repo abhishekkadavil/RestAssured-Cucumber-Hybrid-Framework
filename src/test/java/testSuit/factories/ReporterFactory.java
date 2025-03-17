@@ -1,4 +1,4 @@
-package testSuit.utils;
+package testSuit.factories;
 
 import com.aventstack.extentreports.ExtentTest;
 

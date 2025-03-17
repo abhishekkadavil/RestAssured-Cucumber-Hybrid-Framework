@@ -13,9 +13,9 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import testSuit.utils.RALoggerUtil;
-import testSuit.utils.ReporterFactory;
-import testSuit.utils.ScenarioContext;
-import testSuit.utils.TestContext;
+import testSuit.factories.ReporterFactory;
+import testSuit.contexts.ScenarioContext;
+import testSuit.contexts.TestContext;
 
 /**
  * @author Abhishek Kadavil
@@ -56,7 +56,7 @@ public class createUserStepDef {
         String Url =
                 TestContext.configUtil.getProtocol() + "://" + TestContext.configUtil.getHost() + "/users";
 
-        String value = TestContext.faker.animal().name()+TestContext.faker.random().hex();
+        String value = TestContext.faker.animal().name().replaceAll("\\s+", "")+TestContext.faker.random().hex();
         String content = "{\n" +
                 "  \"name\": \"" + value + "\",\n" +
                 "  \"gender\": \"male\",\n" +

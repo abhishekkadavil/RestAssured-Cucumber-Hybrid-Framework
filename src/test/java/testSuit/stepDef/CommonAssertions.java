@@ -12,8 +12,8 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.skyscreamer.jsonassert.comparator.CustomComparator;
 import org.testng.Assert;
-import testSuit.utils.ReporterFactory;
-import testSuit.utils.ScenarioContext;
+import testSuit.factories.ReporterFactory;
+import testSuit.contexts.ScenarioContext;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

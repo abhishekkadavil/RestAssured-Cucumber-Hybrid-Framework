@@ -1,4 +1,4 @@
-package testSuit.utils;
+package testSuit.contexts;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.google.gson.Gson;
@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import net.datafaker.Faker;
 import org.aeonbits.owner.ConfigFactory;
 import testSuit.pojos.User;
+import testSuit.utils.ConfigUtil;
 
 import java.io.FileReader;
 import java.io.IOException;

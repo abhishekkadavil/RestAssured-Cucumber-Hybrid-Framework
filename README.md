@@ -1,6 +1,14 @@
 # RestAssured-Cucumber-Hybrid-Framework
 RestAssured cucumber hybrid framework template
 
+## Features
+* Cucumber test case
+* Parallel/sequential execution
+* Execute through maven and java class [TestSuitRunner.java](src/test/java/testSuit/runners/TestSuitRunner.java)
+* Auto/customisable reporting
+* Scenario context
+* Added `@Author` and `@Category` tags in reporting so that we can
+
 # Test execution
 
 * Test application: `https://gorest.co.in/`
@@ -342,7 +350,7 @@ Note: the file name sorting is case-sensitive, so uppercase A is executed before
   * Added functionality of ScenarioContext to accommodate all the common function in a scenario perspective eg: contextValues
 * The output of the test execution like response body, status, DB values etc. can be logged in report for the later use, so
   didn't create any other mechanism for that.
-  **RestAssuredLoggingFilter:** Adding rest assured logs to console including all the details of request and response.
+  **[RALoggerUtil.java](src/test/java/testSuit/utils/RALoggerUtil.java):** Adding rest assured logs to console including all the details of request and response.
   **Configuration:** Configurations for the test suits are done through `com.utils.ConfigUtil` interface which extends `org.aeonbits.owner.Config`. Suit level configuration are done in `ScenarioContext` class.
 
 # Why and why not
