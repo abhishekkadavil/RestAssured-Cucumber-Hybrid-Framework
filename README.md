@@ -6,8 +6,13 @@ RestAssured cucumber hybrid framework template
 * Parallel/sequential execution
 * Execute through maven and java class [TestSuitRunner.java](src/test/java/testSuit/runners/TestSuitRunner.java)
 * Auto/customisable reporting
-* Scenario context
-* Added `@Author` and `@Category` tags in reporting so that we can
+* Scenario context and test context support
+* Configuration support
+* Logging support
+* Wiremock support for mock
+* DB operation support
+* Built in assertion support
+* Added `@Author` and `@Category` tags in reporting so that we can categorise with different parameters. eg: [CreateUser.feature](src/test/resources/features/functional/customizableTestCases/CreateUser.feature)
 
 # Test execution
 
