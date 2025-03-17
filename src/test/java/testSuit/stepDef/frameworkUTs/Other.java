@@ -4,8 +4,8 @@ import com.aventstack.extentreports.Status;
 import io.cucumber.java.en.Given;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
-import testSuit.utils.ReporterFactory;
-import testSuit.utils.TestContext;
+import testSuit.factories.ReporterFactory;
+import testSuit.contexts.TestContext;
 
 /**
  * @author Abhishek Kadavil

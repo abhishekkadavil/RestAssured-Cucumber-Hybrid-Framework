@@ -3,7 +3,7 @@ package testSuit.runners;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.github.tomakehurst.wiremock.WireMockServer;
-import testSuit.utils.TestContext;
+import testSuit.contexts.TestContext;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

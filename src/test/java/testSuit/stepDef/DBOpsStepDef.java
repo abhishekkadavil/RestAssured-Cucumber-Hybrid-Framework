@@ -11,10 +11,10 @@ import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.dataset.CachedDataSet;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
-import testSuit.utils.DataSourceFactory;
+import testSuit.factories.DataSourceFactory;
 import testSuit.utils.DbOpsUtil;
-import testSuit.utils.ReporterFactory;
-import testSuit.utils.ScenarioContext;
+import testSuit.factories.ReporterFactory;
+import testSuit.contexts.ScenarioContext;
 
 import javax.sql.DataSource;
 import java.net.URL;

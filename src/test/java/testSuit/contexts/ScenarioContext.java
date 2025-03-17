@@ -1,4 +1,4 @@
-package testSuit.utils;
+package testSuit.contexts;
 
 import com.github.tomakehurst.wiremock.client.MappingBuilder;
 import io.cucumber.guice.ScenarioScoped;

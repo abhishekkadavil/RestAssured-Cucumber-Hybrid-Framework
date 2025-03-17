@@ -1,7 +1,6 @@
 package testSuit.utils;
 
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import io.cucumber.guice.ScenarioScoped;
 import lombok.SneakyThrows;
@@ -16,7 +15,7 @@ import org.dbunit.dataset.filter.IColumnFilter;
 import org.dbunit.operation.DatabaseOperation;
 import org.dbunit.operation.TransactionOperation;
 import org.testng.Assert;
-import org.xmlunit.util.Convert;
+import testSuit.factories.ReporterFactory;
 
 import javax.sql.DataSource;
 import java.net.URL;

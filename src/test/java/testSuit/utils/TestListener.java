@@ -7,6 +7,7 @@ import io.cucumber.plugin.event.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.ThreadContext;
+import testSuit.factories.ReporterFactory;
 import testSuit.runners.RunnerHelper;
 
 /**

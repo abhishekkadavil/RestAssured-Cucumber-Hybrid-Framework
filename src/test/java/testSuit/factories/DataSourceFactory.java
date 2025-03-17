@@ -1,7 +1,8 @@
-package testSuit.utils;
+package testSuit.factories;
 
 import lombok.SneakyThrows;
 import org.postgresql.ds.PGSimpleDataSource;
+import testSuit.contexts.TestContext;
 
 import javax.sql.DataSource;
 

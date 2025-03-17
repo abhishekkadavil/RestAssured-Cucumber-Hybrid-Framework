@@ -5,6 +5,8 @@ Feature: Create user
   Background: start scenario
     Given start new scenario
 
+  @Author("JohnDoe")
+  @Category("Smoke")
   @CreateUser01 @CreateUserAPIPass
   Scenario: CreateUser01
   Create new user
@@ -21,6 +23,8 @@ Feature: Create user
     Then response code should be '201'
     And response body should be '/createUser/scenario1/output/responseBody.json' ignoring all extra fields
 
+  @Author("JohnDoe")
+  @Category("Smoke")
   @CreateUser02 @CreateUserAPIPass
   Scenario: CreateUser02
   Error is thrown when creating a user with existing email id (Calling same API second time)
@@ -37,6 +41,8 @@ Feature: Create user
     Then response code should be '422'
     And response body should be '/createUser/scenario2/output/responseBody.json'
 
+  @Author("AbhishekKadavil")
+  @Category("Regression")
   @CreateUser03 @CreateUserAPIPass
   Scenario: CreateUser03
   Create new user and validate response body by ignoring specified fields
@@ -53,6 +59,8 @@ Feature: Create user
     And response body should be '/createUser/scenario3/output/responseBody.json' ignoring specified fields
     | email | id |
 
+  @Author("AbhishekKadavil")
+  @Category("Regression")
   @CreateUser04 @CreateUserAPIPass
   Scenario: CreateUser04
   Create new user and validate response body for one field only
