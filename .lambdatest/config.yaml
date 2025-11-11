@@ -1,0 +1,12 @@
+# LambdaTest Configuration
+
+# Project and folder configuration
+project_id: "LambdaTest2025Testathon"
+folder_id: "LambdaTest2025Testathon"
+
+# Test Run configuration
+assignee: Abhishek Kadavil
+environment_id: Staging
+
+# Test URL for automation
+test_url: "https://gorest.co.in/public/v2"
