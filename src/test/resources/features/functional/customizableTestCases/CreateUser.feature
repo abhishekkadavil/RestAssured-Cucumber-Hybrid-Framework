@@ -5,7 +5,7 @@ Feature: Create user
   Background: start scenario
     Given start new scenario
 
-  @Author("JohnDoe")
+  @Author("JohnDoe") @Author("JohnDoe2") 
   @Category("Smoke")
   @CreateUser01 @CreateUserAPIPass
   Scenario: CreateUser01
